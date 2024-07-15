@@ -6,10 +6,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>br.ufscar.dc.dsw</groupId>
-	<artifactId>Livraria</artifactId>
+	<artifactId>Consultas</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>Livraria (v4)</name>
+	<name>Consultas</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
