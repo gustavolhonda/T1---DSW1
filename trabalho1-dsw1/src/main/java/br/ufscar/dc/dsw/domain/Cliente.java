@@ -7,26 +7,39 @@ public class Cliente {
     private String senha;
     private String cpf;
     private String nome;
-    private char sexo;
+    private String telefone;
+    private String sexo;
     private String dataNasc;
 
-    public Cliente(String email, String senha, String cpf, String nome, char sexo, String dataNasc) {
-        this.email = email;
-        this.senha = senha;
-        this.cpf = cpf;
-        this.nome = nome;
-        this.sexo = sexo;
-        this.dataNasc = dataNasc;
+
+    public Cliente(Integer id, String email, String senha, String cpf, String nome, String telefone, String sexo,
+        String dataNasc) {
+      this.id = id;
+      this.email = email;
+      this.senha = senha;
+      this.cpf = cpf;
+      this.nome = nome;
+      this.telefone = telefone;
+      this.sexo = sexo;
+      this.dataNasc = dataNasc;
     }
 
-    public Cliente(Integer id, String email, String senha, String cpf, String nome, char sexo, String dataNasc) {
-        this.id = id;
-        this.email = email;
-        this.senha = senha;
-        this.cpf = cpf;
-        this.nome = nome;
-        this.sexo = sexo;
-        this.dataNasc = dataNasc;
+    public Cliente(String email, String senha, String cpf, String nome, String telefone, String sexo, String dataNasc) {
+      this.email = email;
+      this.senha = senha;
+      this.cpf = cpf;
+      this.nome = nome;
+      this.telefone = telefone;
+      this.sexo = sexo;
+      this.dataNasc = dataNasc;
+    }
+
+    public String getTelefone() {
+      return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+      this.telefone = telefone;
     }
 
     public Integer getId() {
@@ -69,11 +82,11 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public char getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(char sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 

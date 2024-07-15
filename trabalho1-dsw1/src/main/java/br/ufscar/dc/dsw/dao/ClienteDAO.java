@@ -13,20 +13,23 @@ import br.ufscar.dc.dsw.domain.Profissional;
 
 public class ClienteDAO extends GenericDAO {
 
-    public void insert(Livro livro) {
+    public void insert(Cliente cliente) {
 
-        String sql = "INSERT INTO Livro (titulo, autor, ano, preco, editora_id) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Clientes (email, senha, cpf, nome, telefone, sexo, data_nascimento); VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);;
 
             statement = conn.prepareStatement(sql);
-            statement.setString(1, livro.getTitulo());
-            statement.setString(2, livro.getAutor());
-            statement.setInt(3, livro.getAno());
-            statement.setFloat(4, livro.getPreco());
-            statement.setLong(5, livro.getEditora().getId());
+            statement.setString(1, cliente.getEmail());
+            statement.setString(2, cliente.getSenha());
+            statement.setString(3, cliente.getCpf());
+            statement.setString(4, cliente.getNome());
+            statement.setString(5, cliente.getTelefone());
+            statement.setString(6, cliente.getSexo());
+            statement.setString(5, cliente.getDataNasc());
+
             statement.executeUpdate();
 
             statement.close();
@@ -36,11 +39,11 @@ public class ClienteDAO extends GenericDAO {
         }
     }
 
-    public List<Livro> getAll() {
+    public List<Cliente> getAll() {
 
-        List<Livro> listaLivros = new ArrayList<>();
+        List<Cliente> listaClientes = new ArrayList<>();
 
-        String sql = "SELECT * from Livro l, Editora e where l.EDITORA_ID = e.ID order by l.id";
+        String sql = "SELECT * from Cliente c order by c.id";
 
         try {
             Connection conn = this.getConnection();
@@ -48,7 +51,7 @@ public class ClienteDAO extends GenericDAO {
 
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
-                Long id = resultSet.getLong("id");
+                Integer id = resultSet.getInt("id");
                 String titulo = resultSet.getString("titulo");
                 String autor = resultSet.getString("autor");
                 int ano = resultSet.getInt("ano");
@@ -70,14 +73,14 @@ public class ClienteDAO extends GenericDAO {
         return listaLivros;
     }
 
-    public void delete(Livro livro) {
-        String sql = "DELETE FROM Livro where id = ?";
+    public void delete(Cliente cliente) {
+        String sql = "DELETE FROM Clientes where id = ?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setLong(1, livro.getId());
+            statement.setInt(1, cliente.getId());
             statement.executeUpdate();
 
             statement.close();
@@ -87,8 +90,8 @@ public class ClienteDAO extends GenericDAO {
         }
     }
 
-    public void update(Livro livro) {
-        String sql = "UPDATE Livro SET titulo = ?, autor = ?, ano = ?, preco = ?";
+    public void update(Cliente cliente) {
+        String sql = "UPDATE Cliente SET email = ?, autor = ?, ano = ?, preco = ?";
         sql += ", editora_id = ? WHERE id = ?";
 
         try {
