@@ -52,16 +52,15 @@ public class ClienteDAO extends GenericDAO {
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 Integer id = resultSet.getInt("id");
-                String titulo = resultSet.getString("titulo");
-                String autor = resultSet.getString("autor");
-                int ano = resultSet.getInt("ano");
-                float preco = resultSet.getFloat("preco");
-                Long editora_id = resultSet.getLong(6);
-                String cnpj = resultSet.getString("cnpj");
+                String email = resultSet.getString("email");
+                String senha = resultSet.getString("senha");
+                String cpf = resultSet.getString("cpf");
                 String nome = resultSet.getString("nome");
-                Editora editora = new Editora(editora_id, cnpj, nome);
-                Livro livro = new Livro(id, titulo, autor, ano, preco, editora);
-                listaLivros.add(livro);
+                String telefone = resultSet.getString("telefone");
+                String sexo = resultSet.getString("sexo");
+                String dataNasc = resultSet.getString("dataNasc");
+                Cliente cliente = new Cliente(id, email, senha, cpf, nome, telefone, sexo, dataNasc);
+                listaClientes.add(cliente);
             }
 
             resultSet.close();
@@ -70,7 +69,7 @@ public class ClienteDAO extends GenericDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return listaLivros;
+        return listaClientes;
     }
 
     public void delete(Cliente cliente) {
