@@ -18,7 +18,7 @@ public class ClienteDAO extends GenericDAO {
 
         try {
             Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);;
+            PreparedStatement statement = conn.prepareStatement(sql);
 
             statement = conn.prepareStatement(sql);
             statement.setString(1, cliente.getEmail());
