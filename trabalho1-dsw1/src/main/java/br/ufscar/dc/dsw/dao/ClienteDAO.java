@@ -9,13 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ufscar.dc.dsw.domain.Cliente;
-import br.ufscar.dc.dsw.domain.Profissional;
 
 public class ClienteDAO extends GenericDAO {
 
     public void insert(Cliente cliente) {
 
-        String sql = "INSERT INTO Clientes (email, senha, cpf, nome, telefone, sexo, data_nascimento); VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Clientes (email, senha, cpf, nome, telefone, sexo, dataNasc); VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
             Connection conn = this.getConnection();
@@ -88,21 +87,22 @@ public class ClienteDAO extends GenericDAO {
             throw new RuntimeException(e);
         }
     }
-
     public void update(Cliente cliente) {
-        String sql = "UPDATE Cliente SET email = ?, autor = ?, ano = ?, preco = ?";
-        sql += ", editora_id = ? WHERE id = ?";
+        String sql = "UPDATE Cliente SET email = ?, senha = ?, cpf = ?, nome = ?, telefone = ?, sexo = ?, dataNasc= ?";
+        sql += "WHERE id = ?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setString(1, livro.getTitulo());
-            statement.setString(2, livro.getAutor());
-            statement.setInt(3, livro.getAno());
-            statement.setFloat(4, livro.getPreco());
-            statement.setFloat(5, livro.getEditora().getId());
-            statement.setLong(6, livro.getId());
+            statement.setString(1, cliente.getEmail());
+            statement.setString(2, cliente.getSenha());
+            statement.setString(3, cliente.getCpf());
+            statement.setString(4, cliente.getNome());
+            statement.setString(5, cliente.getTelefone());
+            statement.setString(6, cliente.getSexo());
+            statement.setString(7, cliente.getDataNasc());
+            statement.setLong(8, cliente.getId());
             statement.executeUpdate();
 
             statement.close();
@@ -112,27 +112,27 @@ public class ClienteDAO extends GenericDAO {
         }
     }
 
-    public Livro get(Long id) {
-        Livro livro = null;
+    public Cliente get(Integer id) {
+        Cliente cliente = null;
 
-        String sql = "SELECT * from Livro l, Editora e where l.id = ? and l.EDITORA_ID = e.ID";
+        String sql = "SELECT * from Clientes l where l.id = ?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setLong(1, id);
+            statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                String titulo = resultSet.getString("titulo");
-                String autor = resultSet.getString("autor");
-                int ano = resultSet.getInt("ano");
-                float preco = resultSet.getFloat("preco");
+                String email = resultSet.getString("email");
+                String senha = resultSet.getString("senha");
+                String cpf = resultSet.getString("cpf");
+                String nome = resultSet.getString("nome");
+                String telefone = resultSet.getString("telefone");
+                String sexo = resultSet.getString("sexo");
+                String dataNasc = resultSet.getString("dataNasc");
 
-                Long editoraID = resultSet.getLong("editora_id");
-                Editora editora = new EditoraDAO().get(editoraID);
-
-                livro = new Livro(id, titulo, autor, ano, preco, editora);
+                cliente = new Cliente(id, email, senha, cpf, nome, telefone, sexo, dataNasc);
             }
 
             resultSet.close();
@@ -141,10 +141,10 @@ public class ClienteDAO extends GenericDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return livro;
+        return cliente;
     }
-
-    public int countByEditora(Long id) {
+/* 
+    public int countByEditora(Integer id) {
         int contador = 0;
         
         String sql = "SELECT count(*) from Livro l where l.EDITORA_ID = ?";
@@ -167,4 +167,6 @@ public class ClienteDAO extends GenericDAO {
         }
         return contador;
     }
+*/
 }
+    

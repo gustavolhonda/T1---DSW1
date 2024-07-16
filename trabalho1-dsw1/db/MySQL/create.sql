@@ -12,7 +12,7 @@ CREATE TABLE Clientes (
     nome VARCHAR(255) NOT NULL,
     telefone VARCHAR(15) NOT NULL,
     sexo CHAR(1) NOT NULL,
-    data_nascimento DATE NOT NULL
+    dataNasc DATE NOT NULL
 );
 
 CREATE TABLE Profissionais (
