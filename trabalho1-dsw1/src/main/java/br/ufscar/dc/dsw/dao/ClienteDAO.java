@@ -16,11 +16,8 @@ public class ClienteDAO extends GenericDAO {
 
         String sql = "INSERT INTO Clientes (email, senha, cpf, nome, telefone, sexo, dataNasc); VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        try {
-            Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);
+        try (Connection conn = this.getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
 
-            statement = conn.prepareStatement(sql);
             statement.setString(1, cliente.getEmail());
             statement.setString(2, cliente.getSenha());
             statement.setString(3, cliente.getCpf());
@@ -31,8 +28,6 @@ public class ClienteDAO extends GenericDAO {
 
             statement.executeUpdate();
 
-            statement.close();
-            conn.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -44,11 +39,8 @@ public class ClienteDAO extends GenericDAO {
 
         String sql = "SELECT * from Cliente c order by c.id";
 
-        try {
-            Connection conn = this.getConnection();
-            Statement statement = conn.createStatement();
+        try (Connection conn = this.getConnection(); Statement statement = conn.createStatement(); ResultSet resultSet = statement.executeQuery(sql)) {
 
-            ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 Integer id = resultSet.getInt("id");
                 String email = resultSet.getString("email");
@@ -62,9 +54,6 @@ public class ClienteDAO extends GenericDAO {
                 listaClientes.add(cliente);
             }
 
-            resultSet.close();
-            statement.close();
-            conn.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -74,26 +63,21 @@ public class ClienteDAO extends GenericDAO {
     public void delete(Cliente cliente) {
         String sql = "DELETE FROM Clientes where id = ?";
 
-        try {
-            Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);
+        try (Connection conn = this.getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
 
             statement.setInt(1, cliente.getId());
             statement.executeUpdate();
 
-            statement.close();
-            conn.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
     public void update(Cliente cliente) {
         String sql = "UPDATE Cliente SET email = ?, senha = ?, cpf = ?, nome = ?, telefone = ?, sexo = ?, dataNasc= ?";
         sql += "WHERE id = ?";
 
-        try {
-            Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);
+        try (Connection conn = this.getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
 
             statement.setString(1, cliente.getEmail());
             statement.setString(2, cliente.getSenha());
@@ -105,8 +89,6 @@ public class ClienteDAO extends GenericDAO {
             statement.setLong(8, cliente.getId());
             statement.executeUpdate();
 
-            statement.close();
-            conn.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -117,56 +99,53 @@ public class ClienteDAO extends GenericDAO {
 
         String sql = "SELECT * from Clientes l where l.id = ?";
 
-        try {
-            Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);
+        try (Connection conn = this.getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
 
             statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                String email = resultSet.getString("email");
-                String senha = resultSet.getString("senha");
-                String cpf = resultSet.getString("cpf");
-                String nome = resultSet.getString("nome");
-                String telefone = resultSet.getString("telefone");
-                String sexo = resultSet.getString("sexo");
-                String dataNasc = resultSet.getString("dataNasc");
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    String email = resultSet.getString("email");
+                    String senha = resultSet.getString("senha");
+                    String cpf = resultSet.getString("cpf");
+                    String nome = resultSet.getString("nome");
+                    String telefone = resultSet.getString("telefone");
+                    String sexo = resultSet.getString("sexo");
+                    String dataNasc = resultSet.getString("dataNasc");
 
-                cliente = new Cliente(id, email, senha, cpf, nome, telefone, sexo, dataNasc);
+                    cliente = new Cliente(id, email, senha, cpf, nome, telefone, sexo, dataNasc);
+                }
             }
-
-            resultSet.close();
-            statement.close();
-            conn.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return cliente;
     }
-/* 
-    public int countByEditora(Integer id) {
-        int contador = 0;
-        
-        String sql = "SELECT count(*) from Livro l where l.EDITORA_ID = ?";
 
-        try {
-            Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);
+    public Cliente getbyLogin(String login) {
+        Cliente cliente = null;
 
-            statement.setLong(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                contador = resultSet.getInt(1);
+        String sql = "SELECT * from Cliente WHERE login = ?";
+
+        try (Connection conn = this.getConnection(); PreparedStatement statement = conn.prepareStatement(sql)) {
+
+            statement.setString(1, login);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    String email = resultSet.getString("email");
+                    String senha = resultSet.getString("senha");
+                    String cpf = resultSet.getString("cpf");
+                    String nome = resultSet.getString("nome");
+                    String telefone = resultSet.getString("telefone");
+                    String sexo = resultSet.getString("sexo");
+                    String dataNasc = resultSet.getString("dataNasc");
+
+                    cliente = new Cliente(email, senha, cpf, nome, telefone, sexo, dataNasc);
+                }
             }
-
-            resultSet.close();
-            statement.close();
-            conn.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return contador;
+        return cliente;
     }
-*/
+
 }
-    

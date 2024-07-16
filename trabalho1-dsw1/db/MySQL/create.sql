@@ -36,11 +36,7 @@ CREATE TABLE Consultas (
     UNIQUE (cliente_cpf, data_hora)
 );
 
-CREATE TABLE Admin (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    senha VARCHAR(255) NOT NULL
-);
+
 
 
 

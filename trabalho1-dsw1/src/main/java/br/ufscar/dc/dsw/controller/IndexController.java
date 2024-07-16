@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.ufscar.dc.dsw.dao.UsuarioDAO;
-import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw.dao.ClienteDAO;
+import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.util.Erro;
 
 @WebServlet(name = "Index", urlPatterns = { "/index.jsp", "/logout.jsp" })
@@ -31,14 +31,14 @@ public class IndexController extends HttpServlet {
 				erros.add("Senha não informada!");
 			}
 			if (!erros.isExisteErros()) {
-				UsuarioDAO dao = new UsuarioDAO();
-				Usuario usuario = dao.getbyLogin(login);
-				if (usuario != null) {
-					if (usuario.getSenha().equalsIgnoreCase(senha)) {
-						request.getSession().setAttribute("usuarioLogado", usuario);
+				ClienteDAO dao = new ClienteDAO();
+				Cliente cliente = dao.getbyLogin(login);
+				if (cliente != null) {
+					if (cliente.getSenha().equalsIgnoreCase(senha)) {
+						request.getSession().setAttribute("usuarioLogado", cliente);
 						String contextPath = request.getContextPath().replace("/", "");
 						request.getSession().setAttribute("contextPath", contextPath);
-						if (usuario.getPapel().equals("ADMIN")) {
+						if (cliente.getPapel().equals("ADMIN")) {
 							response.sendRedirect("usuarios/");
 						} else {
 							response.sendRedirect("compras/");
