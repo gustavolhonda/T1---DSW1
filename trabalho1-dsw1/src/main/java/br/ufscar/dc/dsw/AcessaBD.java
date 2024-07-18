@@ -12,7 +12,7 @@ public class AcessaBD {
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
             Connection con = (Connection) DriverManager.getConnection(""
-                    + "jdbc:mysql://localhost:3306/Jogadores?serverTimezone=UTC", "root", "aluno");
+                    + "jdbc:mysql://localhost:3306/Consultas?serverTimezone=UTC", "root", "root");
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("select * from Livro");
             while (rs.next()) {
