@@ -4,6 +4,19 @@ create database Consultas;
 
 use Consultas;
 
+CREATE TABLE Usuario (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    cpf VARCHAR(11) UNIQUE NOT NULL,
+    nome VARCHAR(255) NOT NULL,
+    telefone VARCHAR(15),
+    sexo CHAR(1),
+    dataNasc DATE,
+    especialidade VARCHAR(255),
+    tipo ENUM('Cliente', 'Profissional') NOT NULL
+);
+
 CREATE TABLE Clientes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) UNIQUE NOT NULL,
