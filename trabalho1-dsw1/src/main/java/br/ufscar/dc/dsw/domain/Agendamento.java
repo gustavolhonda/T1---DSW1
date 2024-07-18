@@ -2,7 +2,7 @@ package br.ufscar.dc.dsw.domain;
 
 import java.util.Date;
 
-public class Consulta {
+public class Agendamento {
 
     private String cpfCliente;
     private String cpfProfissional;
@@ -10,17 +10,17 @@ public class Consulta {
     private String linkVideoconferencia;
     private Integer id;
 
-    public Consulta(Integer id) {
+    public Agendamento(Integer id) {
         this.id = id;
     }
 
-    public Consulta(String cpfCliente, String cpfProfissional, Date dataHora, Integer id) {
+    public Agendamento(String cpfCliente, String cpfProfissional, Date dataHora, Integer id) {
         this.cpfCliente = cpfCliente;
         this.cpfProfissional = cpfProfissional;
         this.dataHora = dataHora;
     }
 
-    public Consulta(String cpfCliente, String cpfProfissional, Date dataHora, String linkVideoconferencia) {
+    public Agendamento(String cpfCliente, String cpfProfissional, Date dataHora, String linkVideoconferencia) {
         this.cpfCliente = cpfCliente;
         this.cpfProfissional = cpfProfissional;
         this.dataHora = dataHora;
