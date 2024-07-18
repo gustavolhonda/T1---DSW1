@@ -21,6 +21,13 @@
                 </ul>
             </div>
         </c:if>
+        
+        <form action="lista.jsp" method="get">
+            <input type="submit" name="listar" value="Listar_profissionais">
+        </form>
+        
+        <br/>
+
         <form method="post" action="index.jsp">
             <table>
                 <tr>
@@ -39,6 +46,7 @@
                 </tr>
             </table>
         </form>
+        
     </body>
 </fmt:bundle>
 </html>
