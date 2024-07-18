@@ -4,27 +4,28 @@ CREATE DATABASE Consultas;
 
 USE Consultas;
 
-CREATE TABLE Usuario (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    senha VARCHAR(255) NOT NULL,
-    cpf VARCHAR(11) UNIQUE NOT NULL,
-    tipo ENUM('Cliente', 'Profissional', 'Administrador') NOT NULL
+CREATE TABLE usuario (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    senha VARCHAR(100) NOT NULL,
+    cpf VARCHAR(11) NOT NULL UNIQUE,
+    tipo ENUM('administrador', 'cliente', 'profissional') NOT NULL
 );
 
-CREATE TABLE Cliente (
-    id_usuario INT PRIMARY KEY,
-    telefone VARCHAR(15) NOT NULL,
-    sexo CHAR(1) NOT NULL,
-    dataNasc DATE NOT NULL,
-    FOREIGN KEY (id_usuario) REFERENCES Usuario(id) ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE cliente (
+    id_cliente INT PRIMARY KEY,
+    telefone VARCHAR(15),
+    sexo ENUM('M', 'F'),
+    dataNascimento DATE,
+    FOREIGN KEY (id_cliente) REFERENCES usuario(id)
 );
 
-CREATE TABLE Profissional (
-    id_usuario INT PRIMARY KEY,
-    especialidade VARCHAR(255) NOT NULL,
-    FOREIGN KEY (id_usuario) REFERENCES Usuario(id) ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE profissional (
+    id_profissional INT PRIMARY KEY,
+    especialidade VARCHAR(100),
+    curriculo TEXT,
+    FOREIGN KEY (id_profissional) REFERENCES usuario(id)
 );
 
 CREATE TABLE Agendamento (
