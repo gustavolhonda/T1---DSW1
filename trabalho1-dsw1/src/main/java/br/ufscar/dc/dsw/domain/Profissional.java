@@ -2,12 +2,12 @@ package br.ufscar.dc.dsw.domain;
 
 public class Profissional extends Usuario {
 
+    private String especialidade;
+
     public Profissional(String nome, String email, String senha, String cpf, String papel, String especialidade) {
         super(nome, email, senha, cpf, papel);
         this.especialidade = especialidade;
     }
-
-    private String especialidade;
 
 
     public Profissional() {

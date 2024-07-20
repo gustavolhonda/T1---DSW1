@@ -12,13 +12,13 @@ import br.ufscar.dc.dsw.domain.Profissional;
 
 public class UsuarioDAO extends GenericDAO {
 
-    public Usuario getbyLogin(String login) {
+    public Usuario getbyEmail(String email) {
         Usuario usuario = null;
-        String sql = "SELECT * FROM Usuario WHERE login = ?";
+        String sql = "SELECT * FROM Usuario WHERE email = ?";
 
         try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
 
-            stmt.setString(1, login);
+            stmt.setString(1, email);
             try (ResultSet rs = stmt.executeQuery();) {
                 if (rs.next()) {
                     usuario = createUsuarioFromResultSet(rs);
@@ -82,14 +82,14 @@ public class UsuarioDAO extends GenericDAO {
 
             try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    usuario.setId(generatedKeys.getLong(1));
+                    usuario.setId(generatedKeys.getInt(1));
                 } else {
                     throw new SQLException("Creating user failed, no ID obtained.");
                 }
             }
 
             if (usuario instanceof Cliente) {
-                insertCliente((Cliente) usuario);
+                
             } else if (usuario instanceof Profissional) {
                 insertProfissional((Profissional) usuario);
             }
@@ -129,7 +129,7 @@ public class UsuarioDAO extends GenericDAO {
     }
 
     public void update(Usuario usuario) {
-        String sql = "UPDATE Usuario SET login = ?, senha = ?, nome = ?, email = ?, papel = ? WHERE id = ?";
+        String sql = "UPDATE Usuario SET email = ?, senha = ?, nome = ?, email = ?, papel = ? WHERE id = ?";
 
         try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
 
