@@ -31,6 +31,24 @@ public class UsuarioDAO extends GenericDAO {
         return usuario;
     }
 
+    public Usuario get(Integer id) {
+        Usuario usuario = null;
+        String sql = "SELECT * FROM Usuario WHERE id = ?";
+
+        try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
+
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery();) {
+                if (rs.next()) {
+                    usuario = createUsuarioFromResultSet(rs);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return usuario;
+    }
+
     public List<Usuario> getAll() {
         List<Usuario> listaUsuarios = new ArrayList<>();
         String sql = "SELECT * FROM Usuario";
