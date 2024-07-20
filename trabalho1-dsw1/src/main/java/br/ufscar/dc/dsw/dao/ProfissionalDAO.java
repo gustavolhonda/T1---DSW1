@@ -66,14 +66,14 @@ public class ProfissionalDAO extends GenericDAO {
         return listaProfissionais;
     }
 
-    public void delete(Integer id) {
+    public void delete(Profissional profissional) {
         String sql = "DELETE FROM Profissionais where id = ?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setInt(1, id);
+            statement.setInt(1, profissional.getId());
             statement.executeUpdate();
 
             statement.close();

@@ -68,14 +68,14 @@ public class ClienteDAO extends GenericDAO {
         return listaClientes;
     }
 
-    public void delete(Integer id) {
+    public void delete(Cliente cliente) {
         String sql = "DELETE FROM Clientes where id = ?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setInt(1, id);
+            statement.setInt(1, cliente.getId());
             statement.executeUpdate();
 
             statement.close();
