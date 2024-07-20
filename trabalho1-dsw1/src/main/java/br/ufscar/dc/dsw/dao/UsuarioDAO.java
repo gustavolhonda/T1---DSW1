@@ -6,9 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import br.ufscar.dc.dsw.domain.Usuario;
+
 import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Profissional;
+import br.ufscar.dc.dsw.domain.Usuario;
 
 public class UsuarioDAO extends GenericDAO {
 
@@ -49,12 +50,11 @@ public class UsuarioDAO extends GenericDAO {
     public List<Usuario> getProfissional() {
         List<Usuario> listaProfissionais = new ArrayList<>();
         String sql = "SELECT * FROM Usuario WHERE papel = ?";
-    
-        try (Connection conn = this.getConnection(); 
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-             
+
+        try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
             stmt.setString(1, "PROFISSIONAL"); // Define o valor do parâmetro na consulta
-            
+
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     Usuario profissional = createUsuarioFromResultSet(rs);
@@ -66,7 +66,6 @@ public class UsuarioDAO extends GenericDAO {
         }
         return listaProfissionais;
     }
-    
 
     public void insert(Usuario usuario) {
         String sql = "INSERT INTO Usuario (nome, email, senha, cpf, papel) VALUES (?, ?, ?, ?, ?)";
@@ -100,13 +99,14 @@ public class UsuarioDAO extends GenericDAO {
     }
 
     private void insertCliente(Cliente cliente) {
-        String sql = "INSERT INTO Cliente (id, endereco, telefone) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Cliente (id, endereco, telefone) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
 
             stmt.setLong(1, cliente.getId());
-            stmt.setString(2, cliente.getEndereco());
-            stmt.setString(3, cliente.getTelefone());
+            stmt.setString(2, cliente.getTelefone());
+            stmt.setString(3, cliente.getSexo());
+            stmt.setString(4, cliente.getDataNasc());
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -115,7 +115,7 @@ public class UsuarioDAO extends GenericDAO {
     }
 
     private void insertProfissional(Profissional profissional) {
-        String sql = "INSERT INTO Profissional (id, especialidade) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Profissional (id, especialidade, registroProfissional) VALUES (?, ?, ?)";
 
         try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
 
@@ -195,16 +195,20 @@ public class UsuarioDAO extends GenericDAO {
     private Usuario createUsuarioFromResultSet(ResultSet rs) throws SQLException {
         String papel = rs.getString("papel");
         Usuario usuario;
-        if ("CLIENTE".equals(papel)) {
-            usuario = new Cliente();
-            populateCliente((Cliente) usuario, rs.getLong("id"));
-        } else if ("PROFISSIONAL".equals(papel)) {
-            usuario = new Profissional();
-            populateProfissional((Profissional) usuario, rs.getLong("id"));
-        } else {
-            usuario = new Usuario();
+        switch (papel) {
+            case "CLIENTE":
+                usuario = new Cliente();
+                populateCliente((Cliente) usuario, rs.getLong("id"));
+                break;
+            case "PROFISSIONAL":
+                usuario = new Profissional();
+                populateProfissional((Profissional) usuario, rs.getLong("id"));
+                break;
+            default:
+                usuario = new Usuario();
+                break;
         }
-        usuario.setId(rs.getLong("id"));
+        usuario.setId(rs.getInt("id"));
         usuario.setSenha(rs.getString("senha"));
         usuario.setNome(rs.getString("nome"));
         usuario.setEmail(rs.getString("email"));

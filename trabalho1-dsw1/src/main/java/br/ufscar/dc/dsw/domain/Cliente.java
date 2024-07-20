@@ -12,6 +12,9 @@ public class Cliente extends Usuario {
         this.dataNasc = dataNasc;
     }
 
+    public Cliente() {
+    }
+
     public String getTelefone() {
         return telefone;
     }
