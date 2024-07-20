@@ -55,7 +55,7 @@ public class ClienteDAO extends GenericDAO {
                 String telefone = resultSet.getString("telefone");
                 String sexo = resultSet.getString("sexo");
                 String dataNasc = resultSet.getString("dataNasc");
-                Cliente cliente = new Cliente(id, nome, email, senha, cpf, papel,telefone, sexo, dataNasc);
+                Cliente cliente = new Cliente(id, nome, email, senha, cpf, papel, telefone, sexo, dataNasc);
                 listaClientes.add(cliente);
             }
 
@@ -68,14 +68,14 @@ public class ClienteDAO extends GenericDAO {
         return listaClientes;
     }
 
-    public void delete(Cliente cliente) {
+    public void delete(Integer id) {
         String sql = "DELETE FROM Clientes where id = ?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setInt(1, cliente.getId());
+            statement.setInt(1, id);
             statement.executeUpdate();
 
             statement.close();
@@ -84,22 +84,18 @@ public class ClienteDAO extends GenericDAO {
             throw new RuntimeException(e);
         }
     }
+
     public void update(Cliente cliente) {
-        String sql = "UPDATE Cliente SET email = ?, senha = ?, cpf = ?, nome = ?, telefone = ?, sexo = ?, dataNasc= ?";
-        sql += "WHERE id = ?";
+        String sql = "UPDATE Cliente SET telefone = ?, sexo = ?, dataNasc= ? WHERE id = ?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setString(1, cliente.getEmail());
-            statement.setString(2, cliente.getSenha());
-            statement.setString(3, cliente.getCpf());
-            statement.setString(4, cliente.getNome());
-            statement.setString(5, cliente.getTelefone());
-            statement.setString(6, cliente.getSexo());
-            statement.setString(7, cliente.getDataNasc());
-            statement.setLong(8, cliente.getId());
+            statement.setString(1, cliente.getTelefone());
+            statement.setString(2, cliente.getSexo());
+            statement.setString(3, cliente.getDataNasc());
+            statement.setLong(4, cliente.getId());
             statement.executeUpdate();
 
             statement.close();
@@ -140,24 +136,6 @@ public class ClienteDAO extends GenericDAO {
             throw new RuntimeException(e);
         }
         return cliente;
-    }
-
-    private void insertCliente(Cliente cliente) {
-        String sql = "INSERT INTO Cliente (id, telefone, sexo, dataNasc) VALUES (?, ?, ?, ?)";
-
-        try (Connection conn = this.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);) {
-
-            stmt.setInt(1, cliente.getId());
-            stmt.setString(2, cliente.getTelefone());
-            stmt.setString(3, cliente.getSexo());
-            stmt.setString(4, cliente.getDataNasc());
-
-            stmt.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
     
