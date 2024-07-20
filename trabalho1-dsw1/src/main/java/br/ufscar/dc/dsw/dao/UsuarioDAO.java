@@ -200,12 +200,12 @@ public class UsuarioDAO extends GenericDAO {
         }
     }
 
-    public void delete(Integer id) {
+    public void delete(Usuario usuario) {
         String sql = "DELETE FROM Usuario WHERE id = ?";
 
         try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
 
-            stmt.setInt(1, id);
+            stmt.setInt(1, usuario.getId());
             stmt.executeUpdate();
 
         } catch (SQLException e) {
