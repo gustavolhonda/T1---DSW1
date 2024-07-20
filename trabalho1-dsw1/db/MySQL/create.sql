@@ -30,12 +30,12 @@ CREATE TABLE profissional (
 
 CREATE TABLE Agendamento (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    id_cliente INT NOT NULL,
-    id_profissional INT NOT NULL,
+    cpf_cliente INT NOT NULL,
+    cpf_profissional INT NOT NULL,
     data_hora DATETIME NOT NULL,
     link_videoconferencia VARCHAR(255) NOT NULL,
-    FOREIGN KEY (id_cliente) REFERENCES Cliente(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (id_profissional) REFERENCES Profissional(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
-    UNIQUE (id_profissional, data_hora),
-    UNIQUE (id_cliente, data_hora)
+    FOREIGN KEY (cpf_cliente) REFERENCES usuario(cpf) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (cpf_profissional) REFERENCES usuario(cpf) ON DELETE CASCADE ON UPDATE CASCADE,
+    UNIQUE (cpf_profissional, data_hora),
+    UNIQUE (cpf_cliente, data_hora)
 );
