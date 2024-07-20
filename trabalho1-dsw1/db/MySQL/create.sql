@@ -10,7 +10,7 @@ CREATE TABLE usuario (
     email VARCHAR(100) NOT NULL UNIQUE,
     senha VARCHAR(100) NOT NULL,
     cpf VARCHAR(11) NOT NULL UNIQUE,
-    papel ENUM('administrador', 'cliente', 'profissional') NOT NULL
+    papel ENUM('ADMINISTRADOR', 'CLIENTE', 'PROFISSIONAL') NOT NULL
 );
 
 CREATE TABLE cliente (
