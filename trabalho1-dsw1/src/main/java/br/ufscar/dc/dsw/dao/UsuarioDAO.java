@@ -69,14 +69,14 @@ public class UsuarioDAO extends GenericDAO {
     
 
     public void insert(Usuario usuario) {
-        String sql = "INSERT INTO Usuario (login, senha, nome, email, papel) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Usuario (nome, email, senha, cpf, papel) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);) {
 
-            stmt.setString(1, usuario.getLogin());
-            stmt.setString(2, usuario.getSenha());
-            stmt.setString(3, usuario.getNome());
-            stmt.setString(4, usuario.getEmail());
+            stmt.setString(1, usuario.getNome());
+            stmt.setString(2, usuario.getEmail());
+            stmt.setString(3, usuario.getSenha());
+            stmt.setString(4, usuario.getCpf());
             stmt.setString(5, usuario.getPapel());
             stmt.executeUpdate();
 
@@ -115,7 +115,7 @@ public class UsuarioDAO extends GenericDAO {
     }
 
     private void insertProfissional(Profissional profissional) {
-        String sql = "INSERT INTO Profissional (id, especialidade, registroProfissional) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Profissional (id, especialidade) VALUES (?, ?, ?)";
 
         try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
 

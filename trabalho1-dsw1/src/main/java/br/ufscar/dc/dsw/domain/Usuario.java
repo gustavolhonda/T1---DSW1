@@ -1,14 +1,14 @@
 package br.ufscar.dc.dsw.domain;
 
 public class Usuario {
-    private Long id;
+    private Integer id;
     private String nome;
     private String email;
     private String senha;
     private String cpf;
     private String papel; // CLIENTE, PROFISSIONAL, ADMIN
 
-    public Usuario(Long id, String nome, String email, String senha, String cpf, String papel) {
+    public Usuario(Integer id, String nome, String email, String senha, String cpf, String papel) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -29,11 +29,11 @@ public class Usuario {
         //TODO Auto-generated constructor stub
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -55,10 +55,11 @@ public class ClienteDAO extends GenericDAO {
                 String senha = resultSet.getString("senha");
                 String cpf = resultSet.getString("cpf");
                 String nome = resultSet.getString("nome");
+                String papel = resultSet.getString("papel");
                 String telefone = resultSet.getString("telefone");
                 String sexo = resultSet.getString("sexo");
                 String dataNasc = resultSet.getString("dataNasc");
-                Cliente cliente = new Cliente(id, email, senha, cpf, nome, telefone, sexo, dataNasc);
+                Cliente cliente = new Cliente(id, nome, email, senha, cpf, papel,telefone, sexo, dataNasc);
                 listaClientes.add(cliente);
             }
 
@@ -127,12 +128,13 @@ public class ClienteDAO extends GenericDAO {
                 String email = resultSet.getString("email");
                 String senha = resultSet.getString("senha");
                 String cpf = resultSet.getString("cpf");
+                String papel = resultSet.getString("papel");
                 String nome = resultSet.getString("nome");
                 String telefone = resultSet.getString("telefone");
                 String sexo = resultSet.getString("sexo");
                 String dataNasc = resultSet.getString("dataNasc");
 
-                cliente = new Cliente(id, email, senha, cpf, nome, telefone, sexo, dataNasc);
+                cliente = new Cliente(id, nome, email, senha, cpf, papel, telefone, sexo, dataNasc);
             }
 
             resultSet.close();
@@ -145,14 +147,16 @@ public class ClienteDAO extends GenericDAO {
     }
 
     private void insertCliente(Cliente cliente) {
-        String sql = "INSERT INTO Cliente (id, endereco, telefone) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Cliente (id, telefone, sexo, dataNasc) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = this.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);) {
 
-            stmt.setLong(1, cliente.getId());
-            stmt.setString(2, cliente.getEndereco());
-            stmt.setString(3, cliente.getTelefone());
+            stmt.setInt(1, cliente.getId());
+            stmt.setString(2, cliente.getTelefone());
+            stmt.setString(3, cliente.getSexo());
+            stmt.setString(4, cliente.getDataNasc());
+
             stmt.executeUpdate();
 
         } catch (SQLException e) {

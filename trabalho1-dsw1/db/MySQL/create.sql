@@ -17,7 +17,7 @@ CREATE TABLE cliente (
     id_cliente INT PRIMARY KEY,
     telefone VARCHAR(15),
     sexo ENUM('M', 'F'),
-    dataNascimento DATE,
+    dataNasc DATE,
     FOREIGN KEY (id_cliente) REFERENCES usuario(id)
 );
 
