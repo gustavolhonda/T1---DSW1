@@ -97,7 +97,7 @@ public class UsuarioController extends HttpServlet {
 
 	private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Long id = Long.parseLong(request.getParameter("id"));
+		Integer id = Integer.parseInt(request.getParameter("id"));
 		Usuario usuario = dao.get(id);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/usuario/formulario.jsp");
 		request.setAttribute("usuario", usuario);
@@ -108,11 +108,12 @@ public class UsuarioController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		String nome = request.getParameter("nome");
-		String login = request.getParameter("login");
+		String email = request.getParameter("email");
 		String senha = request.getParameter("senha");
+		String cpf = request.getParameter("cpf");
 		String papel = request.getParameter("papel");
 		
-		Usuario usuario = new Usuario(nome, login, senha, papel);
+		Usuario usuario = new Usuario(nome, email, senha, cpf, papel);
 
 		dao.insert(usuario);
 		response.sendRedirect("lista");
@@ -122,20 +123,21 @@ public class UsuarioController extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-		Long id = Long.parseLong(request.getParameter("id"));
+		Integer id = Integer.parseInt(request.getParameter("id"));
 		String nome = request.getParameter("nome");
-		String login = request.getParameter("login");
+		String email = request.getParameter("email");
 		String senha = request.getParameter("senha");
+		String cpf = request.getParameter("cpf");
 		String papel = request.getParameter("papel");
 		
-		Usuario usuario = new Usuario(id, nome, login, senha, papel);
+		Usuario usuario = new Usuario(id, nome, email, senha, cpf, papel);
 
 		dao.update(usuario);
 		response.sendRedirect("lista");
 	}
 
 	private void remove(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Long id = Long.parseLong(request.getParameter("id"));
+		Integer id = Integer.parseInt(request.getParameter("id"));
 
 		Usuario usuario = new Usuario(id);
 		dao.delete(usuario);
