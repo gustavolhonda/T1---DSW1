@@ -8,6 +8,10 @@ public class Usuario {
     private String cpf;
     private String papel; // CLIENTE, PROFISSIONAL, ADMIN
 
+    public Usuario(Integer id) {
+        this.id = id;
+    }
+
     public Usuario(Integer id, String nome, String email, String senha, String cpf, String papel) {
         this.id = id;
         this.nome = nome;
