@@ -16,12 +16,12 @@
 				<fmt:message key="users.welcome" />
 			</h1>
 			<h2>
-			    <a href="/${sessionScope.contextPath}/editoras"> 
-			    	<fmt:message key="publishers.entity" />
+			    <a href="/${sessionScope.contextPath}/profissionais"> 
+			    	<fmt:message key="profissionals.entity" />
 				</a> 
 				&nbsp;&nbsp;&nbsp;
-			    <a href="/${sessionScope.contextPath}/livros"> 
-			    	<fmt:message key="books.entity" />
+			    <a href="/${sessionScope.contextPath}/clientes"> 
+			    	<fmt:message key="clients.entity" />
 				</a> 
 				&nbsp;&nbsp;&nbsp;
 				<a href="${pageContext.request.contextPath}/logout.jsp">
@@ -29,7 +29,7 @@
 				</a>
 				<br/>
 				<br/>
-				<a href="/${sessionScope.contextPath}/usuarios/cadastro"> 
+				<a href="/${sessionScope.contextPath}/usuarios/cadastro"> 	
 					<fmt:message key="users.create" />
 				</a> 
 			</h2>
@@ -40,18 +40,20 @@
 			<table border="1">
 				<tr>
 					<th><fmt:message key="user.ID" /></th>
-					<th><fmt:message key="user.login" /></th>
+					<th><fmt:message key="user.email" /></th>
 					<th><fmt:message key="user.password" /></th>
 					<th><fmt:message key="user.name" /></th>
+					<th><fmt:message key="user.cpf" /></th>
 					<th><fmt:message key="user.role" /></th>
 					<th><fmt:message key="actions.link" /></th>
 				</tr>
 				<c:forEach var="usuario" items="${requestScope.listaUsuarios}">
 					<tr>
 						<td><c:out value="${usuario.id}" /></td>
-						<td><c:out value="${usuario.login}" /></td>
+						<td><c:out value="${usuario.email}" /></td>
 						<td><c:out value="${usuario.senha}" /></td>
 						<td><c:out value="${usuario.nome}" /></td>
+						<td><c:out value="${usuario.cpf}" /></td>
 						<td><c:out value="${usuario.papel}" /></td>
 						<td><a
 							href="/${sessionScope.contextPath}/usuarios/edicao?id=<c:out value='${usuario.id}' />">
