@@ -5,7 +5,11 @@ public class Cliente extends Usuario {
     private String sexo;
     private String dataNasc;
 
-    public Cliente() {
+    public Cliente(String nome, String email, String senha, String cpf, String papel, String telefone, String sexo, String dataNasc) {
+        super(nome, email, senha, cpf, papel);
+        this.telefone = telefone;
+        this.sexo = sexo;
+        this.dataNasc = dataNasc;
     }
 
     public String getTelefone() {
