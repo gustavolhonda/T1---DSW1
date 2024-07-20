@@ -19,7 +19,8 @@ public class Cliente extends Usuario {
         this.dataNasc = dataNasc;
     }
 
-    public Cliente() {
+    public Cliente(Integer id) {
+        super(id);
     }
 
     public String getTelefone() {
