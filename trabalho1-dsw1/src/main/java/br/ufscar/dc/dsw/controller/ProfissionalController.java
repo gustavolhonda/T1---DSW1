@@ -113,7 +113,7 @@ public class ProfissionalController extends HttpServlet {
 		String nome = request.getParameter("nome");
 		String especialidade = request.getParameter("especialidade");
 		
-		Profissional profissional = new Profissional(email, senha, cpf, nome, especialidade);
+		Profissional profissional = new Profissional(nome, email, senha, cpf, nome, especialidade);
 
 		dao.insert(profissional);
 		response.sendRedirect("lista");
@@ -123,7 +123,7 @@ public class ProfissionalController extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-		Interger id = Interger.parseInt(request.getParameter("id"));
+		Integer id = Integer.parseInt(request.getParameter("id"));
 		String email = request.getParameter("email");
 		String senha = request.getParameter("senha");
 		String cpf = request.getParameter("cpf");

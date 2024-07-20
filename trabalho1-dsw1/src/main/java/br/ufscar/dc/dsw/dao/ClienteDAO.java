@@ -143,30 +143,21 @@ public class ClienteDAO extends GenericDAO {
         }
         return cliente;
     }
-/* 
-    public int countByEditora(Integer id) {
-        int contador = 0;
-        
-        String sql = "SELECT count(*) from Livro l where l.EDITORA_ID = ?";
 
-        try {
-            Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);
+    private void insertCliente(Cliente cliente) {
+        String sql = "INSERT INTO Cliente (id, endereco, telefone) VALUES (?, ?, ?)";
 
-            statement.setLong(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                contador = resultSet.getInt(1);
-            }
+        try (Connection conn = this.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);) {
 
-            resultSet.close();
-            statement.close();
-            conn.close();
+            stmt.setLong(1, cliente.getId());
+            stmt.setString(2, cliente.getEndereco());
+            stmt.setString(3, cliente.getTelefone());
+            stmt.executeUpdate();
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return contador;
     }
-*/
 }
     

@@ -1,0 +1,248 @@
+package br.ufscar.dc.dsw.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw.domain.Cliente;
+import br.ufscar.dc.dsw.domain.Profissional;
+
+public class UsuarioDAO extends GenericDAO {
+
+    public Usuario getbyLogin(String login) {
+        Usuario usuario = null;
+        String sql = "SELECT * FROM Usuario WHERE login = ?";
+
+        try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
+
+            stmt.setString(1, login);
+            try (ResultSet rs = stmt.executeQuery();) {
+                if (rs.next()) {
+                    usuario = createUsuarioFromResultSet(rs);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return usuario;
+    }
+
+    public List<Usuario> getAll() {
+        List<Usuario> listaUsuarios = new ArrayList<>();
+        String sql = "SELECT * FROM Usuario";
+
+        try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery();) {
+
+            while (rs.next()) {
+                Usuario usuario = createUsuarioFromResultSet(rs);
+                listaUsuarios.add(usuario);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaUsuarios;
+    }
+
+    public List<Usuario> getProfissional() {
+        List<Usuario> listaProfissionais = new ArrayList<>();
+        String sql = "SELECT * FROM Usuario WHERE papel = ?";
+    
+        try (Connection conn = this.getConnection(); 
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             
+            stmt.setString(1, "PROFISSIONAL"); // Define o valor do parâmetro na consulta
+            
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Usuario profissional = createUsuarioFromResultSet(rs);
+                    listaProfissionais.add(profissional);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaProfissionais;
+    }
+    
+
+    public void insert(Usuario usuario) {
+        String sql = "INSERT INTO Usuario (login, senha, nome, email, papel) VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);) {
+
+            stmt.setString(1, usuario.getLogin());
+            stmt.setString(2, usuario.getSenha());
+            stmt.setString(3, usuario.getNome());
+            stmt.setString(4, usuario.getEmail());
+            stmt.setString(5, usuario.getPapel());
+            stmt.executeUpdate();
+
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    usuario.setId(generatedKeys.getLong(1));
+                } else {
+                    throw new SQLException("Creating user failed, no ID obtained.");
+                }
+            }
+
+            if (usuario instanceof Cliente) {
+                insertCliente((Cliente) usuario);
+            } else if (usuario instanceof Profissional) {
+                insertProfissional((Profissional) usuario);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void insertCliente(Cliente cliente) {
+        String sql = "INSERT INTO Cliente (id, endereco, telefone) VALUES (?, ?, ?)";
+
+        try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
+
+            stmt.setLong(1, cliente.getId());
+            stmt.setString(2, cliente.getEndereco());
+            stmt.setString(3, cliente.getTelefone());
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void insertProfissional(Profissional profissional) {
+        String sql = "INSERT INTO Profissional (id, especialidade, registroProfissional) VALUES (?, ?, ?)";
+
+        try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
+
+            stmt.setLong(1, profissional.getId());
+            stmt.setString(2, profissional.getEspecialidade());
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void update(Usuario usuario) {
+        String sql = "UPDATE Usuario SET login = ?, senha = ?, nome = ?, email = ?, papel = ? WHERE id = ?";
+
+        try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
+
+            stmt.setString(2, usuario.getSenha());
+            stmt.setString(3, usuario.getNome());
+            stmt.setString(4, usuario.getEmail());
+            stmt.setString(5, usuario.getPapel());
+            stmt.setLong(6, usuario.getId());
+            stmt.executeUpdate();
+
+            if (usuario instanceof Cliente) {
+                updateCliente((Cliente) usuario);
+            } else if (usuario instanceof Profissional) {
+                updateProfissional((Profissional) usuario);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void updateCliente(Cliente cliente) {
+        String sql = "UPDATE Cliente SET endereco = ?, telefone = ? WHERE id = ?";
+
+        try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
+
+            stmt.setString(2, cliente.getTelefone());
+            stmt.setLong(3, cliente.getId());
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void updateProfissional(Profissional profissional) {
+        String sql = "UPDATE Profissional SET especialidade = ?, registroProfissional = ? WHERE id = ?";
+
+        try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
+
+            stmt.setString(1, profissional.getEspecialidade());
+            stmt.setLong(3, profissional.getId());
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void delete(Long id) {
+        String sql = "DELETE FROM Usuario WHERE id = ?";
+
+        try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
+
+            stmt.setLong(1, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private Usuario createUsuarioFromResultSet(ResultSet rs) throws SQLException {
+        String papel = rs.getString("papel");
+        Usuario usuario;
+        if ("CLIENTE".equals(papel)) {
+            usuario = new Cliente();
+            populateCliente((Cliente) usuario, rs.getLong("id"));
+        } else if ("PROFISSIONAL".equals(papel)) {
+            usuario = new Profissional();
+            populateProfissional((Profissional) usuario, rs.getLong("id"));
+        } else {
+            usuario = new Usuario();
+        }
+        usuario.setId(rs.getLong("id"));
+        usuario.setSenha(rs.getString("senha"));
+        usuario.setNome(rs.getString("nome"));
+        usuario.setEmail(rs.getString("email"));
+        usuario.setPapel(rs.getString("papel"));
+        return usuario;
+    }
+
+    private void populateCliente(Cliente cliente, Long id) {
+        String sql = "SELECT * FROM Cliente WHERE id = ?";
+
+        try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
+
+            stmt.setLong(1, id);
+            try (ResultSet rs = stmt.executeQuery();) {
+                if (rs.next()) {
+                    cliente.setTelefone(rs.getString("telefone"));
+                    cliente.setSexo(rs.getString("sexo"));
+                    cliente.setDataNasc(rs.getString("dataNascimento"));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void populateProfissional(Profissional profissional, Long id) {
+        String sql = "SELECT * FROM Profissional WHERE id = ?";
+
+        try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
+
+            stmt.setLong(1, id);
+            try (ResultSet rs = stmt.executeQuery();) {
+                if (rs.next()) {
+                    profissional.setEspecialidade(rs.getString("especialidade"));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}

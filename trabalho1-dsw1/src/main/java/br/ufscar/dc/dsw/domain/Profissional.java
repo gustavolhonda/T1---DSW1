@@ -1,67 +1,17 @@
 package br.ufscar.dc.dsw.domain;
 
-public class Profissional {
+public class Profissional extends Usuario {
 
-    private Integer id;
-    private String email;
-    private String senha;
-    private String cpf;
-    private String nome;
+    public Profissional(String nome, String email, String senha, String cpf, String papel, String especialidade) {
+        super(nome, email, senha, cpf, papel);
+        this.especialidade = especialidade;
+    }
+
     private String especialidade;
 
-    public Profissional(Integer id) {
-        this.id = id;
-    }
 
-    public Profissional(String email, String senha, String cpf, String nome, String especialidade) {
-        super();
-        this.email = email;
-        this.senha = senha;
-        this.cpf = cpf;
-        this.nome = nome;
-        this.especialidade = especialidade;
-    }
+    public Profissional() {
 
-    public Profissional(Integer id, String email, String senha, String cpf, String nome, String especialidade) {
-        super();
-        this.id = id;
-        this.email = email;
-        this.senha = senha;
-        this.cpf = cpf;
-        this.nome = nome;
-        this.especialidade = especialidade;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     public String getEspecialidade() {
@@ -70,13 +20,5 @@ public class Profissional {
 
     public void setEspecialidade(String especialidade) {
         this.especialidade = especialidade;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 }
