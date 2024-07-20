@@ -20,11 +20,12 @@ public class Agendamento {
         this.dataHora = dataHora;
     }
 
-    public Agendamento(String cpfCliente, String cpfProfissional, Date dataHora, String linkVideoconferencia) {
+    public Agendamento(String cpfCliente, String cpfProfissional, Date dataHora, String linkVideoconferencia, Integer id) {
         this.cpfCliente = cpfCliente;
         this.cpfProfissional = cpfProfissional;
         this.dataHora = dataHora;
         this.linkVideoconferencia = linkVideoconferencia;
+        this.id = id;
     }
 
     public String getCpfCliente() {
