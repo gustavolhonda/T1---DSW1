@@ -22,6 +22,9 @@ public class Cliente extends Usuario {
     public Cliente(Integer id) {
         super(id);
     }
+    
+    public Cliente() {
+    }
 
     public String getTelefone() {
         return telefone;
