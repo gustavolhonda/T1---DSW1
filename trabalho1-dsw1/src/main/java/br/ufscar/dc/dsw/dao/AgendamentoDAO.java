@@ -2,9 +2,13 @@ package br.ufscar.dc.dsw.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Date;
 
-import br.ufscar.dc.dsw.domain.Agendamento;
+import br.ufscar.dc.dsw.domain.*;
 
 public class AgendamentoDAO extends GenericDAO {
 
@@ -34,4 +38,76 @@ public class AgendamentoDAO extends GenericDAO {
             throw new RuntimeException(e);
         }
     }
+    
+    public List<Agendamento> getAllCliente(Usuario usuario) {
+
+        List<Agendamento> listaAgendamentos = new ArrayList<>();
+
+        String sql = "SELECT * from Agendamento a where a.CPF_CLIENTE = ? order by a.ID";
+
+        try {
+        	Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            
+            statement.setString(1, usuario.getCpf());
+            ResultSet resultSet = statement.executeQuery(); 
+            
+            while (resultSet.next()) {
+                Integer id = resultSet.getInt("id");
+                String cpfCliente = resultSet.getString("cpf_cliente");
+                String cpfProfissional = resultSet.getString("cpf_profissional");
+                String linkVideo = resultSet.getString("link_videoconferencia");
+                Date dataHora = resultSet.getDate("data_hora");
+                //Cliente cliente = new ClienteDAO().getbycpf(cpfCliente);
+                //Profissional profissional = new ProfissionalDAO().getbycpf(cpfProfissional);
+
+                Agendamento agendamento = new Agendamento(cpfCliente, cpfProfissional,dataHora, linkVideo, id);         
+                listaAgendamentos.add(agendamento);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaAgendamentos;
+    }
+
+    public List<Agendamento> getAllProfissional(Usuario usuario) {
+
+        List<Agendamento> listaAgendamentos = new ArrayList<>();
+
+        String sql = "SELECT * from Agendamento a where a.CPF_PROFISSIONAL = ? order by a.ID";
+
+        try {
+        	Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            
+            statement.setString(1, usuario.getCpf());
+            ResultSet resultSet = statement.executeQuery(); 
+            
+            while (resultSet.next()) {
+                Integer id = resultSet.getInt("id");
+                String cpfCliente = resultSet.getString("cpf_cliente");
+                String cpfProfissional = resultSet.getString("cpf_profissional");
+                String linkVideo = resultSet.getString("link_videoconferencia");
+                Date dataHora = resultSet.getDate("data_hora");
+                //Cliente cliente = new ClienteDAO().getbycpf(cpfCliente);
+                //Profissional profissional = new ProfissionalDAO().getbycpf(cpfProfissional);
+
+                Agendamento agendamento = new Agendamento(cpfCliente, cpfProfissional,dataHora, linkVideo, id);         
+                listaAgendamentos.add(agendamento);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaAgendamentos;
+    }
 }
+
+
