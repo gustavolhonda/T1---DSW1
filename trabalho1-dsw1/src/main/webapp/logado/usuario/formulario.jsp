@@ -16,12 +16,12 @@
 				<fmt:message key="users.welcome" />
 			</h1>
 			<h2>
-				<a href="/${sessionScope.contextPath}/editoras"> 
-			    	<fmt:message key="publishers.entity" />
+				<a href="/${sessionScope.contextPath}/profissionais"> 
+			    	<fmt:message key="profissionals.entity" />
 				</a> 
 				&nbsp;&nbsp;&nbsp;
-			    <a href="/${sessionScope.contextPath}/livros"> 
-			    	<fmt:message key="books.entity" />
+			    <a href="/${sessionScope.contextPath}/clientes"> 
+			    	<fmt:message key="clients.entity" />
 				</a> 
 				&nbsp;&nbsp;&nbsp;
 				<a href="${pageContext.request.contextPath}/logout.jsp">
