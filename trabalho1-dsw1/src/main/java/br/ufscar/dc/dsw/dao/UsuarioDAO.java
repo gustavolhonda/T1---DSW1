@@ -88,7 +88,7 @@ public class UsuarioDAO extends GenericDAO {
             }
 
             if (usuario instanceof Cliente) {
-                
+                insertCliente((Cliente) usuario);
             } else if (usuario instanceof Profissional) {
                 insertProfissional((Profissional) usuario);
             }
@@ -99,7 +99,7 @@ public class UsuarioDAO extends GenericDAO {
     }
 
     private void insertCliente(Cliente cliente) {
-        String sql = "INSERT INTO Cliente (id, endereco, telefone) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Cliente (id, telefone, sexo, dataNasc) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
 
@@ -115,7 +115,7 @@ public class UsuarioDAO extends GenericDAO {
     }
 
     private void insertProfissional(Profissional profissional) {
-        String sql = "INSERT INTO Profissional (id, especialidade, registroProfissional) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Profissional (id, especialidade) VALUES (?, ?)";
 
         try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
 
@@ -129,13 +129,14 @@ public class UsuarioDAO extends GenericDAO {
     }
 
     public void update(Usuario usuario) {
-        String sql = "UPDATE Usuario SET email = ?, senha = ?, nome = ?, email = ?, papel = ? WHERE id = ?";
+        String sql = "UPDATE Usuario SET nome= ?, email = ?, senha = ?, cpf = ?, papel = ? WHERE id = ?";
 
         try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
 
-            stmt.setString(2, usuario.getSenha());
-            stmt.setString(3, usuario.getNome());
-            stmt.setString(4, usuario.getEmail());
+            stmt.setString(1, usuario.getNome());
+            stmt.setString(2, usuario.getEmail());
+            stmt.setString(3, usuario.getSenha());
+            stmt.setString(4, usuario.getCpf());
             stmt.setString(5, usuario.getPapel());
             stmt.setLong(6, usuario.getId());
             stmt.executeUpdate();
@@ -152,12 +153,14 @@ public class UsuarioDAO extends GenericDAO {
     }
 
     private void updateCliente(Cliente cliente) {
-        String sql = "UPDATE Cliente SET endereco = ?, telefone = ? WHERE id = ?";
+        String sql = "UPDATE Cliente SET telefone = ?, sexo = ?, dataNasc = ? WHERE id = ?";
 
         try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
 
-            stmt.setString(2, cliente.getTelefone());
-            stmt.setLong(3, cliente.getId());
+            stmt.setString(1, cliente.getTelefone());
+            stmt.setString(2, cliente.getSexo());
+            stmt.setString(3, cliente.getDataNasc());
+            stmt.setInt(4, cliente.getId());
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -166,12 +169,12 @@ public class UsuarioDAO extends GenericDAO {
     }
 
     private void updateProfissional(Profissional profissional) {
-        String sql = "UPDATE Profissional SET especialidade = ?, registroProfissional = ? WHERE id = ?";
+        String sql = "UPDATE Profissional SET especialidade = ? WHERE id = ?";
 
         try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
 
             stmt.setString(1, profissional.getEspecialidade());
-            stmt.setLong(3, profissional.getId());
+            stmt.setLong(2, profissional.getId());
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -179,12 +182,12 @@ public class UsuarioDAO extends GenericDAO {
         }
     }
 
-    public void delete(Long id) {
+    public void delete(Integer id) {
         String sql = "DELETE FROM Usuario WHERE id = ?";
 
         try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
 
-            stmt.setLong(1, id);
+            stmt.setInt(1, id);
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -198,11 +201,11 @@ public class UsuarioDAO extends GenericDAO {
         switch (papel) {
             case "CLIENTE":
                 usuario = new Cliente();
-                populateCliente((Cliente) usuario, rs.getLong("id"));
+                populateCliente((Cliente) usuario, rs.getInt("id"));
                 break;
             case "PROFISSIONAL":
                 usuario = new Profissional();
-                populateProfissional((Profissional) usuario, rs.getLong("id"));
+                populateProfissional((Profissional) usuario, rs.getInt("id"));
                 break;
             default:
                 usuario = new Usuario();
@@ -216,7 +219,7 @@ public class UsuarioDAO extends GenericDAO {
         return usuario;
     }
 
-    private void populateCliente(Cliente cliente, Long id) {
+    private void populateCliente(Cliente cliente, Integer id) {
         String sql = "SELECT * FROM Cliente WHERE id = ?";
 
         try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
@@ -234,7 +237,7 @@ public class UsuarioDAO extends GenericDAO {
         }
     }
 
-    private void populateProfissional(Profissional profissional, Long id) {
+    private void populateProfissional(Profissional profissional, Integer id) {
         String sql = "SELECT * FROM Profissional WHERE id = ?";
 
         try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
