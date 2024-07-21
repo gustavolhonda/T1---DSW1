@@ -18,7 +18,8 @@
 		<input type="hidden" name="id" value="<c:out value='${profissional.id}' />" />
 	</c:if>
 
-	<tr>
+	<c:if test="${profissional == null}">
+		<tr>
 		<td><label for="nome"><fmt:message key="profissionals.name" />
 		</label></td>
 		<td><input type="text" name="nome" size="45" required
@@ -45,7 +46,8 @@
 		<td><input type="text" name="cpf" size="45" required
 			value="<c:out value='${profissional.cpf}' />" /></td>
 	</tr>
-
+	</c:if>
+	
 	<tr>
 		<td><label for="especialidade"><fmt:message key="profissionals.speciality" />
 		</label></td>

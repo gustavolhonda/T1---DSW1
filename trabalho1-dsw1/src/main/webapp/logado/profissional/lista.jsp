@@ -48,6 +48,7 @@
 					<th><fmt:message key="profissionals.cpf" /></th>
 					<th><fmt:message key="profissionals.role" /></th>
 					<th><fmt:message key="profissionals.speciality" /></th>
+					<th><fmt:message key="actions.link" /></th>
 				</tr>
 				<c:forEach var="profissional" items="${requestScope.listaProfissionais}">
 					<tr>
