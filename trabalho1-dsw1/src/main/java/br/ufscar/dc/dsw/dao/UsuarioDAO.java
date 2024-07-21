@@ -238,7 +238,7 @@ public class UsuarioDAO extends GenericDAO {
     }
 
     private void populateCliente(Cliente cliente, Integer id) {
-        String sql = "SELECT * FROM Cliente WHERE id = ?";
+        String sql = "SELECT * FROM Clientes WHERE id_cliente = ?";
 
         try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
 
@@ -247,7 +247,7 @@ public class UsuarioDAO extends GenericDAO {
                 if (rs.next()) {
                     cliente.setTelefone(rs.getString("telefone"));
                     cliente.setSexo(rs.getString("sexo"));
-                    cliente.setDataNasc(rs.getString("dataNascimento"));
+                    cliente.setDataNasc(rs.getString("dataNasc"));
                 }
             }
         } catch (SQLException e) {
@@ -256,7 +256,7 @@ public class UsuarioDAO extends GenericDAO {
     }
 
     private void populateProfissional(Profissional profissional, Integer id) {
-        String sql = "SELECT * FROM Profissional WHERE id = ?";
+        String sql = "SELECT * FROM Profissionais WHERE id_profissional = ?";
 
         try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
 
