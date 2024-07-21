@@ -31,7 +31,7 @@
         <form method="post" action="index.jsp">
             <table>
                 <tr>
-                    <th><fmt:message key="user.login" />:</th>
+                    <th><fmt:message key="user.email" />:</th>
                     <td><input type="text" name="login"
                                value="${param.login}"/></td>
                 </tr>
@@ -46,7 +46,7 @@
                 </tr>
             </table>
         </form>
-        
+
     </body>
 </fmt:bundle>
 </html>
