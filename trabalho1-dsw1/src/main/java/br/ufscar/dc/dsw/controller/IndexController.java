@@ -41,7 +41,7 @@ public class IndexController extends HttpServlet {
                         switch (papel) {
                             case "ADMIN":
                                 request.getSession().setAttribute("usuarioLogado", usuario);
-                                response.sendRedirect("admin/");
+                                response.sendRedirect("usuarios/");
                                 break;
                             case "CLIENTE":
                                 Cliente cliente = new Cliente();
