@@ -231,6 +231,7 @@ public class UsuarioDAO extends GenericDAO {
         }
         usuario.setId(rs.getInt("id"));
         usuario.setSenha(rs.getString("senha"));
+        usuario.setCpf(rs.getString("cpf"));
         usuario.setNome(rs.getString("nome"));
         usuario.setEmail(rs.getString("email"));
         usuario.setPapel(rs.getString("papel"));
