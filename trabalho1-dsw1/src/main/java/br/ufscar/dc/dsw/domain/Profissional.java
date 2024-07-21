@@ -14,6 +14,10 @@ public class Profissional extends Usuario {
     }
 
 
+    public Profissional(Integer id) {
+        super(id);
+    }
+    
     public Profissional() {
 
     }
