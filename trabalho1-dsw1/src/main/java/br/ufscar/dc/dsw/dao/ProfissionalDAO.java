@@ -38,8 +38,8 @@ public class ProfissionalDAO extends GenericDAO {
         List<Profissional> listaProfissionais = new ArrayList<>();
 
         String sql = "SELECT u.*, p.* " +
-                     "FROM usuario u " +
-                     "JOIN profissionais p ON u.id = p.id_profissional";
+                     "FROM Usuario u " +
+                     "JOIN Profissionais p ON u.id = p.id_profissional";
 
         try {
             Connection conn = this.getConnection();

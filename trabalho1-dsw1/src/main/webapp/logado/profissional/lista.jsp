@@ -11,16 +11,18 @@
 	</head>
 
 	<body>
+		<% String contextPath = request.getContextPath().replace("/", ""); %>
+
 		<div align="center">
 			<h1>
-				<fmt:message key="publishers.welcome" />
+				<fmt:message key="profissionals.welcome" />
 			</h1>
 			<h2>
-				<a href="/${sessionScope.contextPath}/livros"> 
-					<fmt:message key="books.entity" />
+				<a href="/<%= contextPath %>/clientes"> 
+					<fmt:message key="clients.entity" />
 				</a> 
 				&nbsp;&nbsp;&nbsp;
-				<a href="/${sessionScope.contextPath}/usuarios"> 
+				<a href="/<%= contextPath %>/usuarios"> 
 					<fmt:message key="users.entity" />
 				</a> 
 				&nbsp;&nbsp;&nbsp;
@@ -29,37 +31,44 @@
 				</a>
 				<br/>
 				<br/>
-				<a href="/${sessionScope.contextPath}/editoras/cadastro">
-					<fmt:message key="publishers.create" />
+				<a href="/<%= contextPath %>/profissionais/cadastro">
+					<fmt:message key="profissionals.create" />
 				</a> 
 			</h2>
-			<h3><fmt:message key="publishers.list" /></h3>
+			<h3><fmt:message key="profissionals.list" /></h3>
 			<br/>
 		</div>
 		<div align="center">
 			<table border="1">
 				<tr>
-					<th><fmt:message key="publisher.ID" /></th>
-					<th><fmt:message key="publisher.CNPJ" /></th>
-					<th><fmt:message key="publisher.name" /></th>
-					<th><fmt:message key="actions.link" /></th>
+					<th><fmt:message key="profissionals.ID" /></th>
+					<th><fmt:message key="profissionals.name" /></th>
+					<th><fmt:message key="profissionals.email" /></th>
+					<th><fmt:message key="profissionals.password" /></th>
+					<th><fmt:message key="profissionals.cpf" /></th>
+					<th><fmt:message key="profissionals.role" /></th>
+					<th><fmt:message key="profissionals.speciality" /></th>
 				</tr>
-				<c:forEach var="editora" items="${requestScope.listaEditoras}">
+				<c:forEach var="profissional" items="${requestScope.listaProfissionais}">
 					<tr>
-						<td><c:out value="${editora.id}" /></td>
-						<td><c:out value="${editora.CNPJ}" /></td>
-						<td><c:out value="${editora.nome}" /></td>
+						<td><c:out value="${profissional.id}" /></td>
+						<td><c:out value="${profissional.nome}" /></td>
+						<td><c:out value="${profissional.email}" /></td>
+						<td><c:out value="${profissional.senha}" /></td>
+						<td><c:out value="${profissional.cpf}" /></td>
+						<td><c:out value="${profissional.papel}" /></td>
+						<td><c:out value="${profissional.especialidade}" /></td>
 						<td><a
-							href="/${sessionScope.contextPath}/editoras/edicao?id=<c:out value='${editora.id}' />">
-								<fmt:message key="publishers.update" />
-						</a> <c:if test="${editora.qtdeLivros == 0}">
-                                &nbsp;&nbsp;&nbsp;&nbsp;
+							href="/<%= contextPath %>/profissionais/edicao?id=<c:out value='${profissional.id}' />">
+								<fmt:message key="profissionals.update" />
+						</a>
+              							&nbsp;&nbsp;&nbsp;&nbsp;
                                 <a
-									href="/${sessionScope.contextPath}/editoras/remocao?id=<c:out value='${editora.id}' />"
+									href="/<%= contextPath %>/profissionais/remocao?id=<c:out value='${profissional.id}' />"
 									onclick="return confirm('<fmt:message key="confirm.link" />');">
-									<fmt:message key="publishers.delete" />
+									<fmt:message key="profissionals.delete" />
 								</a>
-							</c:if></td>
+							</td>
 					</tr>
 				</c:forEach>
 			</table>
