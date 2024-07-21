@@ -15,7 +15,7 @@
 		</c:choose>
 	</caption>
 	<c:if test="${profissional != null}">
-		<input type="hidden" name="id" value="<c:out value='${usuario.id}' />" />
+		<input type="hidden" name="id" value="<c:out value='${profissional.id}' />" />
 	</c:if>
 
 	<tr>

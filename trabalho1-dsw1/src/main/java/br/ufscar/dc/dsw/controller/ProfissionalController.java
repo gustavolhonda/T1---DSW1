@@ -106,7 +106,7 @@ public class ProfissionalController extends HttpServlet {
 		
 			private void insere(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				request.setCharacterEncoding("UTF-8");
-		
+				
 				String email = request.getParameter("email");
 				String senha = request.getParameter("senha");
 				String cpf = request.getParameter("cpf");
@@ -129,7 +129,7 @@ public class ProfissionalController extends HttpServlet {
 				String senha = request.getParameter("senha");
 				String cpf = request.getParameter("cpf");
 				String nome = request.getParameter("nome");
-				String papel = request.getParameter("papel");
+				String papel = "PROFISSIONAL";
 				String especialidade = request.getParameter("especialidade");
 				
 				Profissional profissional = new Profissional(id, nome, email, senha, cpf, papel, especialidade);

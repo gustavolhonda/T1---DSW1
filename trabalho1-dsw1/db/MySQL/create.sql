@@ -18,14 +18,14 @@ CREATE TABLE Clientes (
     telefone VARCHAR(15),
     sexo ENUM('M', 'F'),
     dataNasc DATE,
-    FOREIGN KEY (id_cliente) REFERENCES usuario(id)
+    FOREIGN KEY (id_cliente) REFERENCES usuario(id) 
 );
 
 CREATE TABLE Profissionais (
     id_profissional INT PRIMARY KEY,
     especialidade VARCHAR(100),
     curriculo TEXT,
-    FOREIGN KEY (id_profissional) REFERENCES usuario(id)
+    FOREIGN KEY (id_profissional) REFERENCES usuario(id) 
 );
 
 CREATE TABLE Agendamento (

@@ -80,7 +80,7 @@ public class ProfissionalDAO extends GenericDAO {
         return listaProfissionais;
     }
     public void delete(Profissional profissional) {
-        String sql = "DELETE FROM Profissionais where id = ?";
+        String sql = "DELETE FROM Profissionais where id_profissional = ?";
 
         try {
             Connection conn = this.getConnection();
@@ -96,7 +96,7 @@ public class ProfissionalDAO extends GenericDAO {
     }
 
     public void update(Profissional profissional) {
-        String sql = "UPDATE Profissional SET especialidade = ? WHERE id = ?";
+        String sql = "UPDATE Profissionais SET especialidade = ? WHERE id_profissional = ?";
 
         try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql);) {
 
@@ -112,7 +112,9 @@ public class ProfissionalDAO extends GenericDAO {
     public Profissional get(Integer id) {
         Profissional profissional = null;
 
-        String sql = "SELECT * from Profissionais WHERE id = ?";
+        String sql = "SELECT u.*, p.* " +
+                     "FROM Usuario u " +
+                     "JOIN Profissionais p ON u.id = ?";
 
         try {
             Connection conn = this.getConnection();
