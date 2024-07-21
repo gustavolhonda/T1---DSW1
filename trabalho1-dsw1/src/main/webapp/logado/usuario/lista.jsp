@@ -11,16 +11,18 @@
 	</head>
 
 	<body>
+		 <% String contextPath = request.getContextPath().replace("/", ""); %>
+
 		<div align="center">
 			<h1>
 				<fmt:message key="users.welcome" />
 			</h1>
 			<h2>
-			    <a href="/${sessionScope.contextPath}/profissionais"> 
+			    <a href="/<%= contextPath %>/profissionais"> 
 			    	<fmt:message key="profissionals.entity" />
 				</a> 
 				&nbsp;&nbsp;&nbsp;
-			    <a href="/${sessionScope.contextPath}/clientes"> 
+			    <a href="/<%= contextPath %>/clientes"> 
 			    	<fmt:message key="clients.entity" />
 				</a> 
 				&nbsp;&nbsp;&nbsp;
@@ -29,7 +31,7 @@
 				</a>
 				<br/>
 				<br/>
-				<a href="/${sessionScope.contextPath}/usuarios/cadastro"> 	
+				<a href="/<%= contextPath %>/usuarios/cadastro"> 	
 					<fmt:message key="users.create" />
 				</a> 
 			</h2>
@@ -56,12 +58,12 @@
 						<td><c:out value="${usuario.cpf}" /></td>
 						<td><c:out value="${usuario.papel}" /></td>
 						<td><a
-							href="/${sessionScope.contextPath}/usuarios/edicao?id=<c:out value='${usuario.id}' />">
+							href="/<%= contextPath %>/usuarios/edicao?id=<c:out value='${usuario.id}' />">
 								<fmt:message key="users.update" />
 						</a> 
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 <a
-									href="/${sessionScope.contextPath}/usuarios/remocao?id=<c:out value='${usuario.id}' />"
+									href="/<%= contextPath %>/usuarios/remocao?id=<c:out value='${usuario.id}' />"
 									onclick="return confirm('<fmt:message key="confirm.link" />');">
 									<fmt:message key="users.delete" />
 								</a>
