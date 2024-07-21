@@ -9,10 +9,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ufscar.dc.dsw.domain.Profissional;
+import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw.dao.UsuarioDAO;
 
 public class ProfissionalDAO extends GenericDAO {
 
     public void insert(Profissional profissional) {
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+        Integer userID = usuarioDAO.insert(new Usuario(
+            profissional.getNome(),
+            profissional.getEmail(),
+            profissional.getSenha(),
+            profissional.getCpf(),
+            "PROFISSIONAL"
+        ));
     
         String sql = "INSERT INTO Profissionais (id_profissional, especialidade) VALUES (?, ?)";
 
@@ -22,7 +33,7 @@ public class ProfissionalDAO extends GenericDAO {
 
             statement = conn.prepareStatement(sql);
             
-            statement.setInt(1, profissional.getId());  
+            statement.setInt(1, userID);
             statement.setString(2, profissional.getEspecialidade());
 
             statement.executeUpdate();

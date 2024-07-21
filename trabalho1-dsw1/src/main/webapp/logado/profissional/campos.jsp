@@ -6,30 +6,53 @@
 <table border="1">
 	<caption>
 		<c:choose>
-			<c:when test="${editora != null}">
-				<fmt:message key="publishers.update" />
+			<c:when test="${profissional != null}">
+				<fmt:message key="profissionals.update" />
 			</c:when>
 			<c:otherwise>
-				<fmt:message key="publishers.create" />
+				<fmt:message key="profissionals.create" />
 			</c:otherwise>
 		</c:choose>
 	</caption>
-	<c:if test="${editora != null}">
-		<input type="hidden" name="id" value="<c:out value='${editora.id}' />" />
+	<c:if test="${profissional != null}">
+		<input type="hidden" name="id" value="<c:out value='${usuario.id}' />" />
 	</c:if>
+
 	<tr>
-		<td><label for="CNPJ"> <fmt:message key="publisher.CNPJ" />
-		</label></td>
-		<td><input type="text" id="CNPJ" name="CNPJ" size="18" required
-			value="<c:out value='${editora.CNPJ}' />" /></td>
-	</tr>
-	<tr>
-		<td><label for="nome"><fmt:message key="publisher.name" />
+		<td><label for="nome"><fmt:message key="profissionals.name" />
 		</label></td>
 		<td><input type="text" name="nome" size="45" required
-			value="<c:out value='${editora.nome}' />" /></td>
+			value="<c:out value='${profissional.nome}' />" /></td>
 	</tr>
 
+	<tr>
+		<td><label for="email"><fmt:message key="profissionals.email" />
+		</label></td>
+		<td><input type="text" name="email" size="45" required
+			value="<c:out value='${profissional.email}' />" /></td>
+	</tr>
+
+	<tr>
+		<td><label for="senha"><fmt:message key="profissionals.password" />
+		</label></td>
+		<td><input type="text" name="senha" size="45" required
+			value="<c:out value='${profissional.senha}' />" /></td>
+	</tr>
+
+	<tr>
+		<td><label for="cpf"><fmt:message key="profissionals.cpf" />
+		</label></td>
+		<td><input type="text" name="cpf" size="45" required
+			value="<c:out value='${profissional.cpf}' />" /></td>
+	</tr>
+
+	<tr>
+		<td><label for="especialidade"><fmt:message key="profissionals.speciality" />
+		</label></td>
+		<td><input type="text" name="especialidade" size="45" required
+			value="<c:out value='${profissional.especialidade}' />" /></td>
+	</tr>
+	
 	<tr>
 		<td colspan="2" align="center"><input type="submit"
 			value="<fmt:message key="save.link" />" /></td>

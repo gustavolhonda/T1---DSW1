@@ -13,13 +13,16 @@ public class Profissional extends Usuario {
         this.especialidade = especialidade;
     }
 
-
     public Profissional(Integer id) {
         super(id);
     }
     
     public Profissional() {
 
+    }
+
+    public Integer getId() {
+        return super.getId();
     }
 
     public String getEspecialidade() {

@@ -85,7 +85,7 @@ public class UsuarioDAO extends GenericDAO {
         return listaProfissionais;
     }
 
-    public void insert(Usuario usuario) {
+    public Integer insert(Usuario usuario) {
         String sql = "INSERT INTO Usuario (nome, email, senha, cpf, papel) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = this.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);) {
@@ -114,6 +114,7 @@ public class UsuarioDAO extends GenericDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return usuario.getId();
     }
 
     private void insertCliente(Cliente cliente) {
