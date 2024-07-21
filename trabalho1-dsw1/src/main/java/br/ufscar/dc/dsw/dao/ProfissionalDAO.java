@@ -35,10 +35,11 @@ public class ProfissionalDAO extends GenericDAO {
     }
 
     public List<Profissional> getAll() {
-
         List<Profissional> listaProfissionais = new ArrayList<>();
 
-        String sql = "SELECT * from Profissionais u order by u.id";
+        String sql = "SELECT u.*, p.* " +
+                     "FROM usuario u " +
+                     "JOIN profissionais p ON u.id = p.id_profissional";
 
         try {
             Connection conn = this.getConnection();
@@ -47,12 +48,14 @@ public class ProfissionalDAO extends GenericDAO {
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 Integer id = resultSet.getInt("id");
+                String nome = resultSet.getString("nome");
                 String email = resultSet.getString("email");
                 String senha = resultSet.getString("senha");
                 String cpf = resultSet.getString("cpf");
-                String nome = resultSet.getString("nome");
                 String papel = resultSet.getString("papel");
                 String especialidade = resultSet.getString("especialidade");
+                
+
                 Profissional profissional = new Profissional(id, nome, email, senha, cpf, papel, especialidade);
                 listaProfissionais.add(profissional);
             }
@@ -65,7 +68,6 @@ public class ProfissionalDAO extends GenericDAO {
         }
         return listaProfissionais;
     }
-
     public void delete(Profissional profissional) {
         String sql = "DELETE FROM Profissionais where id = ?";
 

@@ -14,16 +14,18 @@
 		<div align="center">
 			<h3><fmt:message key="users.list" /></h3>
 			<table border="1">
-				<!-- <tr>
+				<tr>
 					<th><fmt:message key="user.ID" /></th>
 					<th><fmt:message key="user.login" /></th>
 					<th><fmt:message key="user.password" /></th>
 					<th><fmt:message key="user.name" /></th>
-					<th><fmt:message key="user.role" /></th>
 					<th><fmt:message key="actions.link" /></th>
-				</tr> -->
+				</tr> 
 				<c:forEach var="profissional" items="${requestScope.listaProfissionais}">
 					<tr>
+						<td><c:out value="${profissional.id}" /></td>
+						<td><c:out value="${profissional.email}" /></td>
+						<td><c:out value="${profissional.senha}" /></td>
 						<td><c:out value="${profissional.nome}" /></td>
 						<td><c:out value="${profissional.especialidade}" /></td>
 					</tr>
