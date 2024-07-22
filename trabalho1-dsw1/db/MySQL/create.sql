@@ -18,14 +18,14 @@ CREATE TABLE Clientes (
     telefone VARCHAR(15),
     sexo ENUM('M', 'F'),
     dataNasc DATE,
-    FOREIGN KEY (id_cliente) REFERENCES usuario(id) 
+    FOREIGN KEY (id_cliente) REFERENCES Usuario(id) 
 );
 
 CREATE TABLE Profissionais (
     id_profissional INT PRIMARY KEY,
     especialidade VARCHAR(100),
     curriculo TEXT,
-    FOREIGN KEY (id_profissional) REFERENCES usuario(id) 
+    FOREIGN KEY (id_profissional) REFERENCES Usuario(id) 
 );
 
 CREATE TABLE Agendamento (
@@ -44,13 +44,16 @@ CREATE TABLE Agendamento (
 INSERT INTO Usuario (nome, email, senha, cpf, papel) VALUES 
 ('João Silva', 'joao.silva@example.com', 'senha123', '12345678901', 'CLIENTE'),
 ('Maria Souza', 'maria.souza@example.com', 'senha456', '23456789012', 'PROFISSIONAL'),
-('Pedro Oliveira', 'pedro.oliveira@example.com', 'senha789', '34567890123', 'ADMIN');
+('Pedro Oliveira', 'pedro.oliveira@example.com', 'senha789', '34567890123', 'ADMIN'), 
+('Jorge Pereira', 'jorge.pereira@example.com', 'senha123', '26897635490', 'PROFISSIONAL');
+
 
 INSERT INTO Clientes (id_cliente, telefone, sexo, dataNasc) VALUES 
 ((SELECT id FROM Usuario WHERE cpf = '12345678901'), '1111-1111', 'M', '1980-01-01');
 
 INSERT INTO Profissionais (id_profissional, especialidade, curriculo) VALUES 
-((SELECT id FROM Usuario WHERE cpf = '23456789012'), 'Cardiologia', 'Currículo do Dr. Maria Souza');
+((SELECT id FROM Usuario WHERE cpf = '23456789012'), 'Cardiologia', 'Currículo do Dr. Maria Souza'), 
+((SELECT id FROM Usuario WHERE cpf = '26897635490'), 'Pediatria', 'Currículo do Dr. Jorge Pereira');
 
 INSERT INTO Agendamento (id_cliente, id_profissional, data, hora, link_videoconferencia) VALUES 
 ((SELECT id_cliente FROM Clientes WHERE id_cliente = (SELECT id FROM Usuario WHERE cpf = '12345678901')), 

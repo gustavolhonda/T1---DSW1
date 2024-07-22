@@ -15,7 +15,7 @@
 
 		<div align="center">
 			<h1>
-				<fmt:message key="profissionals.welcome" />
+				<fmt:message key="professionals.welcome" />
 			</h1>
 			<h2>
 				<a href="/<%= contextPath %>/clientes"> 
@@ -32,22 +32,22 @@
 				<br/>
 				<br/>
 				<a href="/<%= contextPath %>/profissionais/cadastro">
-					<fmt:message key="profissionals.create" />
+					<fmt:message key="professionals.create" />
 				</a> 
 			</h2>
-			<h3><fmt:message key="profissionals.list" /></h3>
+			<h3><fmt:message key="professionals.list" /></h3>
 			<br/>
 		</div>
 		<div align="center">
 			<table border="1">
 				<tr>
-					<th><fmt:message key="profissionals.ID" /></th>
-					<th><fmt:message key="profissionals.name" /></th>
-					<th><fmt:message key="profissionals.email" /></th>
-					<th><fmt:message key="profissionals.password" /></th>
-					<th><fmt:message key="profissionals.cpf" /></th>
-					<th><fmt:message key="profissionals.role" /></th>
-					<th><fmt:message key="profissionals.speciality" /></th>
+					<th><fmt:message key="professionals.ID" /></th>
+					<th><fmt:message key="professionals.name" /></th>
+					<th><fmt:message key="professionals.email" /></th>
+					<th><fmt:message key="professionals.password" /></th>
+					<th><fmt:message key="professionals.cpf" /></th>
+					<th><fmt:message key="professionals.role" /></th>
+					<th><fmt:message key="professionals.speciality" /></th>
 					<th><fmt:message key="actions.link" /></th>
 				</tr>
 				<c:forEach var="profissional" items="${requestScope.listaProfissionais}">
@@ -61,13 +61,13 @@
 						<td><c:out value="${profissional.especialidade}" /></td>
 						<td><a
 							href="/<%= contextPath %>/profissionais/edicao?id=<c:out value='${profissional.id}' />">
-								<fmt:message key="profissionals.update" />
+								<fmt:message key="professionals.update" />
 						</a>
               							&nbsp;&nbsp;&nbsp;&nbsp;
                                 <a
 									href="/<%= contextPath %>/profissionais/remocao?id=<c:out value='${profissional.id}' />"
 									onclick="return confirm('<fmt:message key="confirm.link" />');">
-									<fmt:message key="profissionals.delete" />
+									<fmt:message key="professionals.delete" />
 								</a>
 							</td>
 					</tr>

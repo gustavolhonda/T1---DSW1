@@ -3,7 +3,6 @@ package br.ufscar.dc.dsw.controller;
 import java.io.IOException;
 import java.util.List;
 
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,7 +39,7 @@ public class ProfissionalController extends HttpServlet {
 		Erro erros = new Erro();
 
 		if (usuario == null) {
-			listarProfissionais(request, response);
+			lista(request, response);
 			//response.sendRedirect(request.getContextPath());
 			//return;
 		} else if (!usuario.getPapel().equals("ADMIN")) {
@@ -74,6 +73,8 @@ public class ProfissionalController extends HttpServlet {
 					case "/atualizacao":
 						atualize(request, response);
 						break;
+					case "/filtrar":
+						listaPorEspecialidade(request, response);
 					default:
 						lista(request, response);
 						break;
@@ -89,14 +90,14 @@ public class ProfissionalController extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/profissional/lista.jsp");
 				dispatcher.forward(request, response);
 			}
-			
-			private void listarProfissionais(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				List<Profissional> listaProfissionais = dao.getAll();
+
+			private void listaPorEspecialidade(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+				List<Profissional> listaProfissionais = dao.getEspecialidade();
 				request.setAttribute("listaProfissionais", listaProfissionais);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/listar.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/profissional/lista.jsp");
 				dispatcher.forward(request, response);
 			}
-		
+			
 			private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
 					throws ServletException, IOException {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/profissional/formulario.jsp");

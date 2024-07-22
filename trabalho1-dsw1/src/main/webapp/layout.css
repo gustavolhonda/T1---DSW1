@@ -4,3 +4,52 @@
     border: 1px solid red;
     background-color: beige;
 }
+
+/* pagina de login */
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-style: none;
+    box-shadow: none;
+    gap: 20px;
+}
+
+.login-container .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 16px;
+    color: black;
+    background-color: orange;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: transform 0.1s ease-in;
+}
+
+.login-container .btn:hover {
+    transform: scale(1.01);
+}
+
+.login-container .form-group {
+    margin-bottom: 12px;
+}
+
+.login-container .form-group label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.login-container .form-group input[type="text"],
+.login-container .form-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}

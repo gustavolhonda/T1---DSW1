@@ -19,7 +19,7 @@
 			</h1>
 			<h2>
 				<a href="/<%= contextPath %>/profissionais">
-					<fmt:message key="profissionals.entity" />
+					<fmt:message key="professionals.entity" />
 				</a>
 				&nbsp;&nbsp;&nbsp;
 				<a href="/<%= contextPath %>/usuarios"> 

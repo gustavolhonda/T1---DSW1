@@ -10,7 +10,6 @@ import java.util.List;
 
 import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.domain.Usuario;
-import br.ufscar.dc.dsw.dao.UsuarioDAO;
 
 public class ProfissionalDAO extends GenericDAO {
 
@@ -79,6 +78,42 @@ public class ProfissionalDAO extends GenericDAO {
         }
         return listaProfissionais;
     }
+
+    public List<Profissional> getEspecialidade() {
+        List<Profissional> listaProfissionais = new ArrayList<>();
+
+        String sql = "SELECT u.*, p.* " +
+                     "FROM Usuario u " +
+                     "JOIN Profissionais p ON u.id = p.id_profissional";
+
+        try {
+            Connection conn = this.getConnection();
+            Statement statement = conn.createStatement();
+
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                Integer id = resultSet.getInt("id");
+                String nome = resultSet.getString("nome");
+                String email = resultSet.getString("email");
+                String senha = resultSet.getString("senha");
+                String cpf = resultSet.getString("cpf");
+                String papel = resultSet.getString("papel");
+                String especialidade = resultSet.getString("especialidade");
+                
+
+                Profissional profissional = new Profissional(id, nome, email, senha, cpf, papel, especialidade);
+                listaProfissionais.add(profissional);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaProfissionais;
+    }
+    
     public void delete(Profissional profissional) {
         String sql = "DELETE FROM Profissionais where id_profissional = ?";
 
