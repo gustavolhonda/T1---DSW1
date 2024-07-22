@@ -9,20 +9,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ufscar.dc.dsw.domain.Cliente;
+import br.ufscar.dc.dsw.dao.UsuarioDAO;
+import br.ufscar.dc.dsw.domain.Usuario;
 
 public class ClienteDAO extends GenericDAO {
 
     public void insert(Cliente cliente) {
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+            
+        Integer userID = usuarioDAO.insert(new Usuario(
+            cliente.getNome(),
+            cliente.getEmail(),
+            cliente.getSenha(),
+            cliente.getCpf(),
+            "CLIENTE"
+        ));
 
-        String sql = "INSERT INTO cliente (telefone, sexo, dataNasc) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Clientes (id_cliente, telefone, sexo, dataNasc) VALUES (?, ?, ?, ?)";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
  
-            statement.setString(1, cliente.getTelefone());
-            statement.setString(2, cliente.getSexo());
-            statement.setDate(3, java.sql.Date.valueOf(cliente.getDataNasc()));
+            statement.setInt(1, userID);
+            statement.setString(2, cliente.getTelefone());
+            statement.setString(3, cliente.getSexo());
+            statement.setDate(4, java.sql.Date.valueOf(cliente.getDataNasc()));
 
             statement.executeUpdate();
 
@@ -70,7 +82,7 @@ public class ClienteDAO extends GenericDAO {
     }
 
     public void delete(Cliente cliente) {
-        String sql = "DELETE FROM Clientes where id = ?";
+        String sql = "DELETE FROM Clientes where id_cliente = ?";
 
         try {
             Connection conn = this.getConnection();
@@ -87,7 +99,7 @@ public class ClienteDAO extends GenericDAO {
     }
 
     public void update(Cliente cliente) {
-        String sql = "UPDATE Cliente SET telefone = ?, sexo = ?, dataNasc= ? WHERE id = ?";
+        String sql = "UPDATE Clientes SET telefone = ?, sexo = ?, dataNasc= ? WHERE id_cliente = ?";
 
         try {
             Connection conn = this.getConnection();
@@ -109,7 +121,9 @@ public class ClienteDAO extends GenericDAO {
     public Cliente get(Integer id) {
         Cliente cliente = null;
 
-        String sql = "SELECT * from Clientes WHERE id = ?";
+        String sql = "SELECT u.*, c.* " +
+                     "FROM Usuario u " +
+                     "JOIN Clientes c ON u.id = ?";
 
         try {
             Connection conn = this.getConnection();

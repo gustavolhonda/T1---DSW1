@@ -11,16 +11,18 @@
 	</head>
 
 	<body>
+		<% String contextPath = request.getContextPath().replace("/", ""); %>
+		
 		<div align="center">
 			<h1>
-				<fmt:message key="books.welcome" />
+				<fmt:message key="clients.welcome" />
 			</h1>
 			<h2>
-				<a href="/${sessionScope.contextPath}/editoras">
-					<fmt:message key="publishers.entity" />
+				<a href="/<%= contextPath %>/profissionais">
+					<fmt:message key="profissionals.entity" />
 				</a>
 				&nbsp;&nbsp;&nbsp;
-				<a href="/${sessionScope.contextPath}/usuarios"> 
+				<a href="/$<%= contextPath %>/usuarios"> 
 					<fmt:message key="users.entity" />
 				</a> 
 				&nbsp;&nbsp;&nbsp;
@@ -29,13 +31,13 @@
 				<br/>
 				<br/>
 				<a href="lista"> 
-					<fmt:message key="books.list" />
+					<fmt:message key="clients.list" />
 				</a>
 			</h2>
 		</div>
 		<div align="center">
 			<c:choose>
-				<c:when test="${livro != null}">
+				<c:when test="${cliente != null}">
 					<form action="atualizacao" method="post">
 						<%@include file="campos.jsp"%>
 					</form>

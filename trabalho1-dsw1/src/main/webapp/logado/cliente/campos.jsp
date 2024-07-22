@@ -7,53 +7,74 @@
 <table border="1">
 	<caption>
 		<c:choose>
-			<c:when test="${livro != null}">
-				<fmt:message key="books.update" />
+			<c:when test="${cliente != null}">
+				<fmt:message key="clients.update" />
 			</c:when>
 			<c:otherwise>
-				<fmt:message key="books.create" />
+				<fmt:message key="clients.create" />
 			</c:otherwise>
 		</c:choose>
 	</caption>
-	<c:if test="${livro != null}">
-		<input type="hidden" name="id" value="${livro.id}" />
+	<c:if test="${cliente != null}">
+		<input type="hidden" name="id" value="${cliente.id}" />
 	</c:if>
+
+	<c:if test="${cliente == null}">
 	<tr>
-		<td><label for="titulo"> <fmt:message key="book.title" />
+		<td><label for="nome"> <fmt:message key="clients.name" />
 		</label></td>
-		<td><input type="text" id="titulo" name="titulo" size="45"
-			required value="${livro.titulo}" /></td>
+		<td><input type="text" id="nome" name="nome" size="45"
+			value="${cliente.nome}" /></td>
 	</tr>
+
 	<tr>
-		<td><label for="autor"> <fmt:message key="book.author" />
+		<td><label for="email"> <fmt:message key="clients.email" />
 		</label></td>
-		<td><input type="text" id="autor" name="autor" size="45" required
-			value="${livro.autor}" /></td>
+		<td><input type="text" id="email" name="email" size="45"
+			value="${cliente.email}" /></td>
 	</tr>
+
 	<tr>
-		<td><label for="editora"> <fmt:message
-					key="book.publisher" />
+		<td><label for="senha"> <fmt:message key="clients.password" />
 		</label></td>
-		<td><select name="editora">
-				<c:forEach items="${editoras}" var="editora">
-					<option value="${editora.key}"
-						${livro.editora.nome==editora.value ? 'selected' : '' }>
-						${editora.value}</option>
-				</c:forEach>
-		</select></td>
+		<td><input type="text" id="senha" name="senha" size="45"
+			value="${cliente.senha}" /></td>
 	</tr>
+
 	<tr>
-		<td><label for="ano"> <fmt:message key="book.year" />
+		<td><label for="cpf"> <fmt:message key="clients.cpf" />
 		</label></td>
-		<td><input type="number" id="ano" name="ano" size="5" required
-			min="1500" value="${livro.ano}" /></td>
+		<td><input type="text" id="cpf" name="cpf" size="45"
+			value="${cliente.cpf}" /></td>
 	</tr>
+</c:if>
+
 	<tr>
-		<td><label for="preco"> <fmt:message key="book.price" />
+		<td><label for="telefone"> <fmt:message key="clients.telephone" />
 		</label></td>
-		<td><input type="number" id="preco" name="preco" required
-			min="0.01" step="any" size="5" value="${livro.preco}" /></td>
+		<td><input type="text" id="telefone" name="telefone" size="45"
+			value="${cliente.telefone}" /></td>
 	</tr>
+
+	<tr>
+		<td><label for="sexo"><fmt:message key="clients.sex" />
+		</label></td>
+		<td>
+			<select name="sexo">
+				<option value="M" ${cliente.sexo == "M" ? 'selected="selected"' : ''}>M</option>
+				<option value="F" ${cliente.sexo == "F" ? 'selected="selected"' : ''}>F</option>
+			</select>			
+		</td>
+	</tr>
+
+	<tr>
+		<td><label for="dataNasc"> <fmt:message key="clients.birthDate" />
+		</label></td>
+		<td><input type="date" id="dataNasc" name="dataNasc" size="45"
+			value="${cliente.dataNasc}" /></td>
+	</tr>
+
+	
 	<tr>
 		<td colspan="2" align="center"><input type="submit"
 			value="<fmt:message key="save.link" />" /></td>

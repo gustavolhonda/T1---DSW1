@@ -11,16 +11,18 @@
 	</head>
 
 	<body>
+		<% String contextPath = request.getContextPath().replace("/", ""); %>
+
 		<div align="center">
 			<h1>
-				<fmt:message key="books.welcome" />
+				<fmt:message key="clients.welcome" />
 			</h1>
 			<h2>
-				<a href="/${sessionScope.contextPath}/editoras">
-					<fmt:message key="publishers.entity" />
+				<a href="/<%= contextPath %>/profissionais">
+					<fmt:message key="profissionals.entity" />
 				</a>
 				&nbsp;&nbsp;&nbsp;
-				<a href="/${sessionScope.contextPath}/usuarios"> 
+				<a href="/<%= contextPath %>/usuarios"> 
 					<fmt:message key="users.entity" />
 				</a> 
 				&nbsp;&nbsp;&nbsp;
@@ -29,38 +31,44 @@
 				</a>
 				<br/>
 				<br/>
-				<a href="/${sessionScope.contextPath}/livros/cadastro">
-					<fmt:message key="books.create" />
+				<a href="/<%= contextPath %>/clientes/cadastro">
+					<fmt:message key="clients.create" />
 				</a>
 			</h2>
-			<h3><fmt:message key="books.list" /></h3>
+			<h3><fmt:message key="clients.list" /></h3>
 			<br/>
 		</div>
 		<div align="center">
 			<table border="1">
 				<tr>
-					<th><fmt:message key="book.ID" /></th>
-					<th><fmt:message key="book.title" /></th>
-					<th><fmt:message key="book.publisher" /></th>
-					<th><fmt:message key="book.author" /></th>
-					<th><fmt:message key="book.year" /></th>
-					<th><fmt:message key="book.price" /></th>
+					<th><fmt:message key="clients.ID" /></th>
+					<th><fmt:message key="clients.name" /></th>
+					<th><fmt:message key="clients.email" /></th>
+					<th><fmt:message key="clients.password" /></th>
+					<th><fmt:message key="clients.cpf" /></th>
+					<th><fmt:message key="clients.role" /></th>
+					<th><fmt:message key="clients.telephone" /></th>
+					<th><fmt:message key="clients.sex" /></th>
+					<th><fmt:message key="clients.birthDate" /></th>
 					<th><fmt:message key="actions.link" /></th>
 				</tr>
-				<c:forEach var="livro" items="${requestScope.listaLivros}">
+				<c:forEach var="cliente" items="${requestScope.listaClientes}">
 					<tr>
-						<td>${livro.id}</td>
-						<td>${livro.titulo}</td>
-						<td>${livro.editora.nome}</td>
-						<td>${livro.autor}</td>
-						<td>${livro.ano}</td>
-						<td>${livro.preco}</td>
-						<td><a href="/${sessionScope.contextPath}/livros/edicao?id=${livro.id}">
-								<fmt:message key="books.update" />
+						<td>${cliente.id}</td>
+						<td>${cliente.nome}</td>
+						<td>${cliente.email}</td>
+						<td>${cliente.senha}</td>
+						<td>${cliente.cpf}</td>
+						<td>${cliente.papel}</td>
+						<td>${cliente.telefone}</td>
+						<td>${cliente.sexo}</td>
+						<td>${cliente.dataNasc}</td>
+						<td><a href="/<%= contextPath %>/clientes/edicao?id=${cliente.id}">
+								<fmt:message key="clients.update" />
 						</a> &nbsp;&nbsp;&nbsp;&nbsp; <a
-							href="/${sessionScope.contextPath}/livros/remocao?id=${livro.id}"
+							href="/<%= contextPath %>/clientes/remocao?id=${cliente.id}"
 							onclick="return confirm('<fmt:message key="confirm.link" />');">
-								<fmt:message key="books.delete" />
+								<fmt:message key="clients.delete" />
 						</a></td>
 					</tr>
 				</c:forEach>
