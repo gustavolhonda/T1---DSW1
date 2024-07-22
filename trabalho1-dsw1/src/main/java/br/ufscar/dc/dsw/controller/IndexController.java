@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.ufscar.dc.dsw.dao.ClienteDAO;
+import br.ufscar.dc.dsw.dao.ProfissionalDAO;
 import br.ufscar.dc.dsw.dao.UsuarioDAO;
 import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Profissional;
@@ -44,26 +46,22 @@ public class IndexController extends HttpServlet {
                                 response.sendRedirect("usuarios/");
                                 break;
                             case "CLIENTE":
+                                ClienteDAO clienteDAO = new ClienteDAO();
                                 Cliente cliente = new Cliente();
-                                cliente.setId(usuario.getId());
-                                cliente.setSenha(usuario.getSenha());
-                                cliente.setNome(usuario.getNome());
-                                cliente.setEmail(usuario.getEmail());
-                                cliente.setPapel(usuario.getPapel());
-                                // Set atributos específicos de Cliente, se houver
+
+                                cliente = clienteDAO.get(usuario.getId());
+                                
                                 request.getSession().setAttribute("usuarioLogado", cliente);
-                                response.sendRedirect("cliente/");
+                                response.sendRedirect("agendamentos/");
                                 break;
                             case "PROFISSIONAL":
+                                ProfissionalDAO profissionalDAO = new ProfissionalDAO();
                                 Profissional profissional = new Profissional();
-                                profissional.setId(usuario.getId());
-                                profissional.setSenha(usuario.getSenha());
-                                profissional.setNome(usuario.getNome());
-                                profissional.setEmail(usuario.getEmail());
-                                profissional.setPapel(usuario.getPapel());
-                                // Set atributos específicos de Profissional, se houver
+
+                                profissional = profissionalDAO.get(usuario.getId());
+                                
                                 request.getSession().setAttribute("usuarioLogado", profissional);
-                                response.sendRedirect("profissional/");
+                                response.sendRedirect("agendamentos/");
                                 break;
                             default:
                                 erros.add("Papel de usuário desconhecido!");
