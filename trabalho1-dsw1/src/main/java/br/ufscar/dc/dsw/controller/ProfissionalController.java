@@ -102,7 +102,7 @@ public class ProfissionalController extends HttpServlet {
 				request.setAttribute("listaProfissionais", listaProfissionais);
 			
 				// Encaminha a requisição para a página JSP de resultados
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/profissional/lista.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/listar.jsp");
 				dispatcher.forward(request, response);
 			}
 
