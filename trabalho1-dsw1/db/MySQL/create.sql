@@ -36,8 +36,8 @@ CREATE TABLE Agendamento (
     link_videoconferencia VARCHAR(255),
     FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (id_profissional) REFERENCES Profissionais(id_profissional) ON DELETE CASCADE ON UPDATE CASCADE,
-    UNIQUE (id_profissional, data, hora),
-    UNIQUE (id_cliente, data, hora)
+    UNIQUE (id_profissional, data_hora),
+    UNIQUE (id_cliente, data_hora)
 );
 
 INSERT INTO Usuario (nome, email, senha, cpf, papel) VALUES 
@@ -72,13 +72,13 @@ INSERT INTO Profissionais (id_profissional, especialidade, curriculo) VALUES
 ((SELECT id FROM Usuario WHERE cpf = '01234567890'), 'Oftalmologia', 'Currículo do Dr. Gabriel Silva');
 
 
-INSERT INTO Agendamento (id_cliente, id_profissional, data, hora, link_videoconferencia) VALUES 
+INSERT INTO Agendamento (id_cliente, id_profissional, data_hora, link_videoconferencia) VALUES 
 ((SELECT id_cliente FROM Clientes WHERE id_cliente = (SELECT id FROM Usuario WHERE cpf = '12345678901')), 
  (SELECT id_profissional FROM Profissionais WHERE id_profissional = (SELECT id FROM Usuario WHERE cpf = '23456789012')), 
- '2024-08-01', '10:00:00', 
+ '2024-08-01 10:00:00', 
  'https://videoconferencia.example.com/123'),
 
 ((SELECT id_cliente FROM Clientes WHERE id_cliente = (SELECT id FROM Usuario WHERE cpf = '12345678901')), 
  (SELECT id_profissional FROM Profissionais WHERE id_profissional = (SELECT id FROM Usuario WHERE cpf = '23456789012')), 
- '2024-08-01', '11:00:00', 
+ '2024-08-01 11:00:00', 
  'https://videoconferencia.example.com/124');
