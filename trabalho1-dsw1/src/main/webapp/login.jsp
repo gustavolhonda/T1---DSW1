@@ -23,7 +23,7 @@
         </c:if>
         
         <form method="post" action="/Consultas/profissionais" >
-            <input type="submit" name="listar" value="Listar_profissionais">
+            <input type="submit" name="listar" value="Listar profissionais">
         </form>
         
         <br/>

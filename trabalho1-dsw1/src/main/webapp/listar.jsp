@@ -11,6 +11,8 @@
 	</head>
 
 	<body>
+		<% String contextPath = request.getContextPath().replace("/", ""); %>
+
 		<div align="center">
 			<h3><fmt:message key="profissionals.list" /></h3>
 
@@ -34,6 +36,11 @@
 						<td><c:out value="${profissional.nome}" /></td>
 						<td><c:out value="${profissional.email}" /></td>
 						<td><c:out value="${profissional.especialidade}" /></td>
+						<td><a
+							href="/<%= contextPath %>/agendar/?id=<c:out value='${profissional.id}' />">
+								<fmt:message key="profissionals.schedule" />
+						</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>
