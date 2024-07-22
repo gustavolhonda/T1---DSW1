@@ -37,8 +37,8 @@ CREATE TABLE Agendamento (
     link_videoconferencia VARCHAR(255) NOT NULL,
     FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (id_profissional) REFERENCES Profissionais(id_profissional) ON DELETE CASCADE ON UPDATE CASCADE,
-    UNIQUE (id_profissional, data),
-    UNIQUE (id_cliente, data)
+    UNIQUE (id_profissional, data, hora),
+    UNIQUE (id_cliente, data, hora)
 );
 
 INSERT INTO Usuario (nome, email, senha, cpf, papel) VALUES 
