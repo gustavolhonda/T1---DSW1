@@ -8,44 +8,43 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><fmt:message key="page.title" /></title>
-        <link href="${pageContext.request.contextPath}/layout.css" rel="stylesheet" type="text/css"/>
+        <link href="./layout.css" rel="stylesheet" type="text/css"/>
+
     </head>
     <body>
-        <h1><fmt:message key="page.label" /></h1>
-        <c:if test="${mensagens.existeErros}">
-            <div id="erro">
-                <ul>
-                    <c:forEach var="erro" items="${mensagens.erros}">
-                        <li> ${erro} </li>
-                        </c:forEach>
-                </ul>
-            </div>
-        </c:if>
-        
-        <form method="post" action="/Consultas/profissionais" >
-            <input type="submit" name="listar" value="Listar profissionais">
-        </form>
-        
-        <br/>
+        <div class="login-container">
+            <h1><fmt:message key="page.label" /></h1>
+            <c:if test="${mensagens.existeErros}">
+                <div id="erro">
+                    <ul>
+                        <c:forEach var="erro" items="${mensagens.erros}">
+                            <li> ${erro} </li>
+                            </c:forEach>
+                    </ul>
+                </div>
+            </c:if>
+            
+            <br/>
+    
+            <form method="post" action="index.jsp" class="form-login">
+                <form method="post" action="index.jsp">
+                    <div class="form-group">
+                        <label for="login"><fmt:message key="user.email" /></label>
+                        <input type="text" id="login" name="login" value="${param.login}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="senha"><fmt:message key="user.password" /></label>
+                        <input type="password" id="senha" name="senha"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn" name="bOK" value="<fmt:message key="user.login"/>">
+                    </div>
+                </form>
+            </form>
 
-        <form method="post" action="index.jsp">
-            <table>
-                <tr>
-                    <th><fmt:message key="user.email" />:</th>
-                    <td><input type="text" name="login"
-                               value="${param.login}"/></td>
-                </tr>
-                <tr>
-                    <th><fmt:message key="user.password" />:</th>
-                    <td><input type="password" name="senha" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"> 
-                        <input type="submit" name="bOK" value="<fmt:message key="user.login"/>">
-                    </td>
-                </tr>
-            </table>
-        </form>
+            <a href="${pageContext.request.contextPath}/profissionais" class="btn"><fmt:message key="professionals.list" /></a>
+
+        </div>
 
     </body>
 </fmt:bundle>
