@@ -133,7 +133,7 @@ public class ClienteController extends HttpServlet {
 		String senha = request.getParameter("senha");
 		String cpf = request.getParameter("cpf");
 		String nome = request.getParameter("nome");
-		String papel = request.getParameter("papel");
+		String papel = "CLIENTE";
 		String telefone = request.getParameter("telefone");
 		String sexo = request.getParameter("sexo");
 		String dataNasc = request.getParameter("dataNasc");

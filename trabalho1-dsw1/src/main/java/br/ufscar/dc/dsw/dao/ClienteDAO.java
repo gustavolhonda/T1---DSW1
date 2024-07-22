@@ -14,16 +14,15 @@ public class ClienteDAO extends GenericDAO {
 
     public void insert(Cliente cliente) {
 
-        String sql = "INSERT INTO cliente (id_cliente, telefone, sexo, dataNasc) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO cliente (telefone, sexo, dataNasc) VALUES (?, ?, ?)";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
-
-            statement.setInt(1, cliente.getId());  
-            statement.setString(2, cliente.getTelefone());
-            statement.setString(3, cliente.getSexo());
-            statement.setDate(4, java.sql.Date.valueOf(cliente.getDataNasc()));
+ 
+            statement.setString(1, cliente.getTelefone());
+            statement.setString(2, cliente.getSexo());
+            statement.setDate(3, java.sql.Date.valueOf(cliente.getDataNasc()));
 
             statement.executeUpdate();
 
@@ -38,7 +37,9 @@ public class ClienteDAO extends GenericDAO {
 
         List<Cliente> listaClientes = new ArrayList<>();
 
-        String sql = "SELECT * from Cliente c order by c.id";
+        String sql = "SELECT u.*, c.* " +
+                     "FROM Usuario u " +
+                     "JOIN Clientes c ON u.id = c.id_cliente";
 
         try {
             Connection conn = this.getConnection();
@@ -108,7 +109,7 @@ public class ClienteDAO extends GenericDAO {
     public Cliente get(Integer id) {
         Cliente cliente = null;
 
-        String sql = "SELECT * from Clientes l where l.id = ?";
+        String sql = "SELECT * from Clientes WHERE id = ?";
 
         try {
             Connection conn = this.getConnection();
