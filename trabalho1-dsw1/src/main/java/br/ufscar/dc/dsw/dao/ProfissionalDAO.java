@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,18 +43,29 @@ public class ProfissionalDAO extends GenericDAO {
         }
     }
 
-    public List<Profissional> getAll() {
+    public List<Profissional> getAll(String especialidade) {
         List<Profissional> listaProfissionais = new ArrayList<>();
-
+    
+        // Inicia a consulta SQL base
         String sql = "SELECT u.*, p.* " +
                      "FROM Usuario u " +
                      "JOIN Profissionais p ON u.id = p.id_profissional";
-
+        
+        // Adiciona cláusula WHERE se a especialidade for fornecida
+        if (especialidade != null && !especialidade.isEmpty()) {
+            sql += " WHERE p.especialidade = ?";
+        }
+    
         try {
             Connection conn = this.getConnection();
-            Statement statement = conn.createStatement();
-
-            ResultSet resultSet = statement.executeQuery(sql);
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+    
+            // Define o valor do parâmetro se a especialidade for fornecida
+            if (especialidade != null && !especialidade.isEmpty()) {
+                preparedStatement.setString(1, especialidade);
+            }
+    
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Integer id = resultSet.getInt("id");
                 String nome = resultSet.getString("nome");
@@ -63,56 +73,22 @@ public class ProfissionalDAO extends GenericDAO {
                 String senha = resultSet.getString("senha");
                 String cpf = resultSet.getString("cpf");
                 String papel = resultSet.getString("papel");
-                String especialidade = resultSet.getString("especialidade");
-                
-
-                Profissional profissional = new Profissional(id, nome, email, senha, cpf, papel, especialidade);
+                String especialidadeResult = resultSet.getString("especialidade");
+    
+                Profissional profissional = new Profissional(id, nome, email, senha, cpf, papel, especialidadeResult);
                 listaProfissionais.add(profissional);
             }
-
+    
             resultSet.close();
-            statement.close();
+            preparedStatement.close();
             conn.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return listaProfissionais;
     }
+    
 
-    public List<Profissional> getEspecialidade() {
-        List<Profissional> listaProfissionais = new ArrayList<>();
-
-        String sql = "SELECT u.*, p.* " +
-                     "FROM Usuario u " +
-                     "JOIN Profissionais p ON u.id = p.id_profissional";
-
-        try {
-            Connection conn = this.getConnection();
-            Statement statement = conn.createStatement();
-
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                Integer id = resultSet.getInt("id");
-                String nome = resultSet.getString("nome");
-                String email = resultSet.getString("email");
-                String senha = resultSet.getString("senha");
-                String cpf = resultSet.getString("cpf");
-                String papel = resultSet.getString("papel");
-                String especialidade = resultSet.getString("especialidade");
-                
-
-                Profissional profissional = new Profissional(id, nome, email, senha, cpf, papel, especialidade);
-                listaProfissionais.add(profissional);
-            }
-
-            resultSet.close();
-            statement.close();
-            conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return listaProfissionais;
-    }
     
     public void delete(Profissional profissional) {
         String sql = "DELETE FROM Profissionais where id_profissional = ?";

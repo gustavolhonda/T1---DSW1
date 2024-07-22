@@ -73,7 +73,10 @@
 					</tr>
 				</c:forEach>
 			</table>
+
 		</div>
+
+
 	</body>
 </fmt:bundle>
 

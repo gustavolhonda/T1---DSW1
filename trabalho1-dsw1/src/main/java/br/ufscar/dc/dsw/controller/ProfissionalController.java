@@ -35,6 +35,7 @@ public class ProfissionalController extends HttpServlet {
 		@Override
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+			
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
 		Erro erros = new Erro();
 
@@ -73,8 +74,6 @@ public class ProfissionalController extends HttpServlet {
 					case "/atualizacao":
 						atualize(request, response);
 						break;
-					case "/filtrar":
-						listaPorEspecialidade(request, response);
 					default:
 						lista(request, response);
 						break;
@@ -85,18 +84,28 @@ public class ProfissionalController extends HttpServlet {
 			}
 		
 			private void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				List<Profissional> listaProfissionais = dao.getAll();
+				// Obtém o parâmetro de especialidade da requisição
+				String especialidade = request.getParameter("especialidade");
+			
+				// Se o parâmetro especialidade não estiver presente, será null
+				// Caso esteja presente, ele será usado para filtrar
+				List<Profissional> listaProfissionais;
+				if (especialidade != null && !especialidade.trim().isEmpty()) {
+					// Filtra a lista por especialidade
+					listaProfissionais = dao.getAll(especialidade);
+				} else {
+					// Caso contrário, lista todos os profissionais
+					listaProfissionais = dao.getAll(null);
+				}
+			
+				// Define a lista de profissionais como um atributo da requisição
 				request.setAttribute("listaProfissionais", listaProfissionais);
+			
+				// Encaminha a requisição para a página JSP de resultados
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/profissional/lista.jsp");
 				dispatcher.forward(request, response);
 			}
 
-			private void listaPorEspecialidade(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				List<Profissional> listaProfissionais = dao.getEspecialidade();
-				request.setAttribute("listaProfissionais", listaProfissionais);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/profissional/lista.jsp");
-				dispatcher.forward(request, response);
-			}
 			
 			private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
 					throws ServletException, IOException {
