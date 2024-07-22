@@ -44,7 +44,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
                 </table>
             </div>
 
-			<a href="${pageContext.request.contextPath}/filtrar.jsp"></a>
+			<a href="${pageContext.request.contextPath}/"></a>
         </body>
     </fmt:bundle>
 </html>
