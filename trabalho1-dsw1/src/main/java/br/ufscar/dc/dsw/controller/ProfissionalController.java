@@ -100,6 +100,7 @@ public class ProfissionalController extends HttpServlet {
 			
 				// Define a lista de profissionais como um atributo da requisição
 				request.setAttribute("listaProfissionais", listaProfissionais);
+				request.setAttribute("usuario", usuario); 
 			
 				// Encaminha a requisição para a página JSP de resultados
 				if ((usuario == null) || (!(usuario.getPapel().equals("ADMIN")))){

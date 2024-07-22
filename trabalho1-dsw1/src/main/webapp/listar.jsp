@@ -21,9 +21,10 @@ uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
                     <button type="submit">Buscar</button>
                 </form>    
 
+                <form action="profissionais" method="post"><button type="submit">Ver todos</button></form>
+
                 <table border="1">
                     <tr>
-                        <th><fmt:message key="professionals.ID" /></th>
                         <th><fmt:message key="professionals.name" /></th>
                         <th><fmt:message key="professionals.email" /></th>
                         <th><fmt:message key="professionals.speciality" /></th>
@@ -31,7 +32,6 @@ uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
                     </tr>
                     <c:forEach var="profissional" items="${requestScope.listaProfissionais}">
                         <tr>
-                            <td><c:out value="${profissional.id}" /></td>
                             <td><c:out value="${profissional.nome}" /></td>
                             <td><c:out value="${profissional.email}" /></td>
                             <td><c:out value="${profissional.especialidade}" /></td>
@@ -44,15 +44,15 @@ uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
                         </tr>
                     </c:forEach>
                 </table>
-                <c:if test="${usuario == null}">	
+                <c:if test="${usuario == null}">
                     <a href="${pageContext.request.contextPath}/login.jsp" class="btn">
-                            <fmt:message key="back.link" />
+                        <fmt:message key="back.link" />
                     </a>
                 </c:if>
 
-                <c:if test="${usuario != null}">	
+                <c:if test="${usuario != null}">
                     <a href="${pageContext.request.contextPath}/agendamentos" class="btn">
-                            <fmt:message key="back.link" />
+                        <fmt:message key="back.link" />
                     </a>
                 </c:if>
             </div>
