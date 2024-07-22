@@ -18,7 +18,7 @@
     gap: 20px;
 }
 
-.login-container .btn {
+.btn {
     display: inline-block;
     padding: 12px 24px;
     font-size: 16px;
@@ -31,7 +31,7 @@
     transition: transform 0.1s ease-in;
 }
 
-.login-container .btn:hover {
+.btn:hover {
     transform: scale(1.01);
 }
 
@@ -52,4 +52,19 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+/* listar */
+
+.list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.list-container .btn, .list-container table {
+    margin: 12px auto;
 }

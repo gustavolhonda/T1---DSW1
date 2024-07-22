@@ -42,7 +42,7 @@
                 </form>
             </form>
 
-            <a href="${pageContext.request.contextPath}/profissionais/" class="btn"><fmt:message key="professionals.list" /></a>
+            <a href="${pageContext.request.contextPath}/profissionais" class="btn"><fmt:message key="professionals.list" /></a>
 
         </div>
 

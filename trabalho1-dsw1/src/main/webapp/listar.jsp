@@ -5,28 +5,21 @@ uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
     <fmt:bundle basename="message">
         <head>
             <title><fmt:message key="page.title" /></title>
+            <link href="./layout.css" rel="stylesheet" type="text/css"/>
+
         </head>
 
         <body>
             <% String contextPath = request.getContextPath().replace("/", ""); %>
 
-            <div align="center">
+            <div align="center" class="list-container">
                 <h3><fmt:message key="professionals.list" /></h3>
-								 <c:if test="${usuario == null}">	
-									<a href="${pageContext.request.contextPath}/login.jsp">
-											<fmt:message key="back.link" />
-									</a>
-								 </c:if>
 
-								 <c:if test="${usuario != null}">	
-									<a href="${pageContext.request.contextPath}/agendamentos">
-											<fmt:message key="back.link" />
-									</a>
-								 </c:if>
-
-
-                <br />
-                <br />
+                <form action="profissionais" method="post">
+                    <label for="especialidade">Especialidade:</label>
+                    <input type="text" id="especialidade" name="especialidade">
+                    <button type="submit">Buscar</button>
+                </form>    
 
                 <table border="1">
                     <tr>
@@ -51,8 +44,17 @@ uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
                         </tr>
                     </c:forEach>
                 </table>
-								<br/>
-								<a href="${pageContext.request.contextPath}/filtrar.jsp">Filtrar por especialidade</a>
+                <c:if test="${usuario == null}">	
+                    <a href="${pageContext.request.contextPath}/login.jsp" class="btn">
+                            <fmt:message key="back.link" />
+                    </a>
+                </c:if>
+
+                <c:if test="${usuario != null}">	
+                    <a href="${pageContext.request.contextPath}/agendamentos" class="btn">
+                            <fmt:message key="back.link" />
+                    </a>
+                </c:if>
             </div>
         </body>
     </fmt:bundle>
