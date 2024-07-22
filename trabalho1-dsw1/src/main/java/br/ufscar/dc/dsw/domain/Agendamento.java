@@ -7,8 +7,7 @@ public class Agendamento {
 
     private Integer id_cliente;
     private Integer id_profissional;
-    private String data;
-    private String hora;
+    private String data_hora;
     private String linkVideoconferencia;
     private Integer id;
 
@@ -16,18 +15,17 @@ public class Agendamento {
         this.id = id;
     }
 
-    public Agendamento(Integer id_cliente, Integer id_profissional, String data, String hora) {
+    public Agendamento(Integer id_cliente, Integer id_profissional, String data_hora) {
         this.id_cliente = id_cliente;
         this.id_profissional = id_profissional;
-        this.data = data;
-        this.hora = hora;
+        this.data_hora = data_hora;
+        this.linkVideoconferencia = "https://videoconferencia.example.com/" + new java.util.Random().nextInt(1000000);
     }
 
-    public Agendamento(Integer id_cliente, Integer id_profissional, String data, String hora, String linkVideoconferencia, Integer id) {
+    public Agendamento(Integer id_cliente, Integer id_profissional, String data_hora, String linkVideoconferencia, Integer id) {
         this.id_cliente = id_cliente;
         this.id_profissional = id_profissional;
-        this.data = data;
-        this.hora = hora;
+        this.data_hora = data_hora;
         this.linkVideoconferencia = linkVideoconferencia;
         this.id = id;
     }
@@ -49,15 +47,7 @@ public class Agendamento {
     }
 
     public String getData() {
-        return data;
-    }
-
-     public String getHora() {
-        return hora;
-    }
-
-    public void setHora(String hora) {
-        this.hora = hora;
+        return data_hora;
     }
 
     public String getLinkVideoconferencia() {
@@ -68,8 +58,8 @@ public class Agendamento {
         return id;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setData(String data_hora) {
+        this.data_hora = data_hora;
     }
 
     public void setLinkVideoconferencia(String linkVideoconferencia) {

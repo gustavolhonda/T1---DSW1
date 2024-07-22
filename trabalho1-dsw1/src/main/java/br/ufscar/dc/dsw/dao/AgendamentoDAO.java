@@ -16,7 +16,7 @@ public class AgendamentoDAO extends GenericDAO {
 
     public void insert(Agendamento agendamento) {
 
-        String sql = "INSERT INTO Agendamento (id_cliente, id_profissional, data, hora, link_videoconferencia) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Agendamento (id_cliente, id_profissional, data_hora, link_videoconferencia) VALUES (?, ?, ?, ?)";
 
         try {
             try (Connection conn = this.getConnection()) {
@@ -26,10 +26,9 @@ public class AgendamentoDAO extends GenericDAO {
                 statement.setInt(1, agendamento.getId_cliente());
                 statement.setInt(2, agendamento.getId_profissional());
                 
-                statement.setDate(3, java.sql.Date.valueOf(agendamento.getData()));
-                statement.setTime(4, java.sql.Time.valueOf(agendamento.getHora()));
+                statement.setString(3, agendamento.getData());
                 
-                statement.setString(5, agendamento.getLinkVideoconferencia());
+                statement.setString(4, agendamento.getLinkVideoconferencia());
                 statement.executeUpdate();
                 
                 statement.close();
@@ -68,10 +67,9 @@ public class AgendamentoDAO extends GenericDAO {
                 Integer id_profissional = Integer.parseInt(resultSet.getString("id_profissional"));
                 String linkVideo = resultSet.getString("link_videoconferencia");
                 
-                String data = resultSet.getString("data");
-                String hora = resultSet.getString("hora");
+                String data_hora = resultSet.getString("data_hora");
 
-                Agendamento agendamento = new Agendamento(id_cliente, id_profissional,data, hora, linkVideo, id);         
+                Agendamento agendamento = new Agendamento(id_cliente, id_profissional,data_hora, linkVideo, id);         
                 listaAgendamentos.add(agendamento);
             }
 

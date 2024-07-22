@@ -18,7 +18,7 @@
 				<fmt:message key="appointments.welcome" />
 			</h1>
 			<h2>
-				<a href="/<%= contextPath %>/profissionais"> 
+				<a href="${pageContext.request.contextPath}/profissionais"> 
 					<fmt:message key="appointments.create" />
 				</a> 
 				&nbsp;&nbsp;&nbsp; 
@@ -37,7 +37,6 @@
 				<tr>
 					<th><fmt:message key="appointment.ID" /></th>
 					<th><fmt:message key="appointment.date" /></th>
-					<th><fmt:message key="appointment.time" /></th>
 					<th><fmt:message key="appointment.profissional_cpf" /></th>
 					<th><fmt:message key="appointment.client_cpf" /></th>
 					<th><fmt:message key="appointment.link" /></th>
@@ -46,7 +45,6 @@
 					<tr>
 						<td>${agendamento.id}</td>
 						<td>${agendamento.data}</td>
-						<td>${agendamento.hora}</td>
 						<td>${agendamento.id_profissional}</td>
 						<td>${agendamento.id_cliente}</td>
 						<td>${agendamento.linkVideoconferencia}</td>

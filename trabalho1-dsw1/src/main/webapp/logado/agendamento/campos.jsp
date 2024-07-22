@@ -6,16 +6,14 @@
 
 <table border="1" style="width: 400px; border: 1px solid black">
 
-	<tr>
-		<td><label for="data"> <fmt:message key="appointment.date" />
-		</label></td>
-		<td><input type="date" id="data" name="data" size="45"/></td>
-	</tr>
+	<input type="hidden" name="id_profissional" value="${id_profissional}" />
+	<input type="hidden" name="id_usuario" value="${id_usuario}" />
+
 
 	<tr>
-		<td><label for="hora"> <fmt:message key="appointment.time" />
+		<td><label for="data_hora"> <fmt:message key="appointment.date" />
 		</label></td>
-		<td><input type="time" id="hora" name="hora" size="45"/></td>
+		<td><input type="datetime-local" id="data_hora" name="data_hora" size="45"/></td>
 	</tr>
 
 </table>

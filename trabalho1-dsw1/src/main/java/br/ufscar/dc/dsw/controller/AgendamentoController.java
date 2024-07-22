@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.ufscar.dc.dsw.dao.AgendamentoDAO;
+import br.ufscar.dc.dsw.dao.UsuarioDAO;
 import br.ufscar.dc.dsw.domain.Agendamento;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.util.Erro;
@@ -84,23 +85,15 @@ public class AgendamentoController extends HttpServlet {
       RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/agendamento/lista.jsp");
       dispatcher.forward(request, response);
   }
-/* 
-  private Map<Long, Livro> getLivros() {
-      Map<Long, Livro> livros = new HashMap<>();
-      for (Livro livro: new LivroDAO().getAll()) {
-          livros.put(livro.getId(), livro);
-      }
-      return livros;
-  }
-*/
 
   private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException { 
-            Usuario usuario =  (Usuario) request.getSession().getAttribute("usuarioLogado");
             
+            Integer id_profissional =  Integer.parseInt(request.getParameter("id"));
+            request.setAttribute("id_profissional", id_profissional);
             
-            request.setAttribute("id_profissional", request.getParameter("id"));
-            
+            Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
+            request.setAttribute("id_usuario", usuario.getId());
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/agendamento/formulario.jsp");
             dispatcher.forward(request, response);
@@ -109,12 +102,13 @@ public class AgendamentoController extends HttpServlet {
   private void insere(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       request.setCharacterEncoding("UTF-8");
       
-      Usuario usuario =  (Usuario) request.getSession().getAttribute("usuarioLogado");
-      Integer id_profissional = Integer.parseInt(request.getParameter("id"));
-      String data = request.getParameter("data");
-      String hora = request.getParameter("hora");
-      
-      Agendamento agendamento = new Agendamento(usuario.getId(), id_profissional, data, hora);
+      Integer id_cliente=  Integer.parseInt(request.getParameter("id_usuario"));
+      Integer id_profissional = Integer.parseInt(request.getParameter("id_profissional"));
+      String data_hora = request.getParameter("data_hora");
+
+      data_hora = data_hora.replace('T', ' ');
+
+      Agendamento agendamento = new Agendamento(id_cliente, id_profissional, data_hora);
       dao.insert(agendamento);
       
       response.sendRedirect("lista");

@@ -37,7 +37,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
                             <td><c:out value="${profissional.especialidade}" /></td>
                             <td>
                                 <a
-                                    href="/<%= contextPath %>/agendamentos/cadastro?id=<c:out value='${profissional.id}' />">
+                                    href="${pageContext.request.contextPath}/agendamentos/cadastro?id=<c:out value='${profissional.id}' />">
                                     <fmt:message key="professionals.schedule" />
                                 </a>
                             </td>
