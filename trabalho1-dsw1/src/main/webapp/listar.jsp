@@ -35,16 +35,16 @@ uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
                             <td><c:out value="${profissional.especialidade}" /></td>
                             <td>
                                 <a
-                                    href="/<%= contextPath %>/agendar/?id=<c:out value='${profissional.id}' />">
+                                    href="/<%= contextPath %>/agendamentos/?id=<c:out value='${profissional.id}' />">
                                     <fmt:message key="professionals.schedule" />
                                 </a>
                             </td>
                         </tr>
                     </c:forEach>
                 </table>
+								<br/>
+								<a href="${pageContext.request.contextPath}/filtrar.jsp">Filtrar por especialidade</a>
             </div>
-
-			<a href="${pageContext.request.contextPath}/"></a>
         </body>
     </fmt:bundle>
 </html>

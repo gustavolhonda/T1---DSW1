@@ -41,9 +41,8 @@ public class ProfissionalController extends HttpServlet {
 
 		if (usuario == null) {
 			lista(request, response);
-			//response.sendRedirect(request.getContextPath());
-			//return;
-		} else if (!usuario.getPapel().equals("ADMIN")) {
+		}
+		else if (!usuario.getPapel().equals("ADMIN")) {
 			erros.add("Acesso não autorizado!");
 			erros.add("Apenas Papel [ADMIN] tem acesso a essa página");
 			request.setAttribute("mensagens", erros);
@@ -86,6 +85,7 @@ public class ProfissionalController extends HttpServlet {
 			private void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				// Obtém o parâmetro de especialidade da requisição
 				String especialidade = request.getParameter("especialidade");
+				Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
 			
 				// Se o parâmetro especialidade não estiver presente, será null
 				// Caso esteja presente, ele será usado para filtrar
@@ -102,8 +102,13 @@ public class ProfissionalController extends HttpServlet {
 				request.setAttribute("listaProfissionais", listaProfissionais);
 			
 				// Encaminha a requisição para a página JSP de resultados
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/listar.jsp");
-				dispatcher.forward(request, response);
+				if ((usuario == null) || (!(usuario.getPapel().equals("ADMIN")))){
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/listar.jsp");
+					dispatcher.forward(request, response);
+				} else if ((usuario.getPapel().equals("ADMIN"))) {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/profissional/lista.jsp");
+					dispatcher.forward(request, response);
+				}
 			}
 
 			

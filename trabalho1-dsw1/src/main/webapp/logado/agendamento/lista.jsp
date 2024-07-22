@@ -18,7 +18,7 @@
 				<fmt:message key="appointments.welcome" />
 			</h1>
 			<h2>
-				<a href="/<%= contextPath %>/agendamentos/cadastro"> 
+				<a href="/<%= contextPath %>/profissionais"> 
 					<fmt:message key="appointments.create" />
 				</a> 
 				&nbsp;&nbsp;&nbsp; 
