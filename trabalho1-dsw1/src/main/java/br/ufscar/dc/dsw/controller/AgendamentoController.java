@@ -15,12 +15,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.ufscar.dc.dsw.dao.AgendamentoDAO;
+import br.ufscar.dc.dsw.dao.ClienteDAO;
+import br.ufscar.dc.dsw.dao.ProfissionalDAO;
 import br.ufscar.dc.dsw.dao.UsuarioDAO;
 import br.ufscar.dc.dsw.domain.Agendamento;
+import br.ufscar.dc.dsw.domain.Profissional;
+import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.util.Erro;
 
+import java.io.File;
+import java.io.UnsupportedEncodingException;
 
+import javax.mail.internet.InternetAddress;
 
 @WebServlet(urlPatterns = "/agendamentos/*")
 public class AgendamentoController extends HttpServlet {
@@ -110,6 +117,28 @@ public class AgendamentoController extends HttpServlet {
 
       Agendamento agendamento = new Agendamento(id_cliente, id_profissional, data_hora);
       dao.insert(agendamento);
+
+      EmailService service = new EmailService();
+
+      ClienteDAO cliDAO = new ClienteDAO();
+      ProfissionalDAO profDAO = new ProfissionalDAO();
+      Cliente cli = cliDAO.get(id_cliente);
+      Profissional prof = profDAO.get(id_profissional);
+
+      String cliEmail = cli.getEmail();
+      String profEmail = prof.getEmail();
+
+      InternetAddress from = new InternetAddress("testedswt@gmail.com", "Fulano");
+      InternetAddress to1 = new InternetAddress(cliEmail, "Beltrano");
+      InternetAddress to2 = new InternetAddress(profEmail, "Beltrano");
+          
+      String subject1 = "link consulta online";
+
+      String body1 = agendamento.getLinkVideoconferencia();
+    
+      // Envio sem anexo
+      service.send(from, to1, subject1, body1);
+      service.send(from, to2, subject1, body1);
       
       response.sendRedirect("lista");
   }

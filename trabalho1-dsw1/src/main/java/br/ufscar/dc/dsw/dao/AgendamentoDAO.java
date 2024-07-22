@@ -17,7 +17,7 @@ public class AgendamentoDAO extends GenericDAO {
     public void insert(Agendamento agendamento) {
 
         String sql = "INSERT INTO Agendamento (id_cliente, id_profissional, data_hora, link_videoconferencia) VALUES (?, ?, ?, ?)";
-
+            
         try {
             try (Connection conn = this.getConnection()) {
                 PreparedStatement statement = conn.prepareStatement(sql);
@@ -81,6 +81,38 @@ public class AgendamentoDAO extends GenericDAO {
         }
         return listaAgendamentos;
     }
+/* 
+    public boolean verifica(Agendamento agendamento) {
+        
+        String sql = "select * from Agendamento where data_hora = ?";
+            
+        try {
+        	Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            
+            statement.setString(1, agendamento.getId());
+            
+            ResultSet resultSet = statement.executeQuery(); 
+            
+            while (resultSet.next()) {
+                Integer id = resultSet.getInt("id");
+                Integer id_cliente = Integer.parseInt(resultSet.getString("id_cliente"));
+                Integer id_profissional = Integer.parseInt(resultSet.getString("id_profissional"));
+                String linkVideo = resultSet.getString("link_videoconferencia");
+                
+                String data_hora = resultSet.getString("data_hora");
+
+                Agendamento agendamento = new Agendamento(id_cliente, id_profissional,data_hora, linkVideo, id);         
+                listaAgendamentos.add(agendamento);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    } */
 }
 
 
