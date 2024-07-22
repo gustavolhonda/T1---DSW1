@@ -18,14 +18,14 @@ CREATE TABLE Clientes (
     telefone VARCHAR(15),
     sexo ENUM('M', 'F'),
     dataNasc DATE,
-    FOREIGN KEY (id_cliente) REFERENCES Usuario(id) 
+    FOREIGN KEY (id_cliente) REFERENCES Usuario(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Profissionais (
     id_profissional INT PRIMARY KEY,
     especialidade VARCHAR(100),
     curriculo TEXT,
-    FOREIGN KEY (id_profissional) REFERENCES Usuario(id) 
+    FOREIGN KEY (id_profissional) REFERENCES Usuario(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Agendamento (
