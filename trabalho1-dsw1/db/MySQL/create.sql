@@ -45,7 +45,10 @@ INSERT INTO Usuario (nome, email, senha, cpf, papel) VALUES
 ('João Silva', 'joao.silva@example.com', 'senha123', '12345678901', 'CLIENTE'),
 ('Maria Souza', 'maria.souza@example.com', 'senha456', '23456789012', 'PROFISSIONAL'),
 ('Pedro Oliveira', 'pedro.oliveira@example.com', 'senha789', '34567890123', 'ADMIN'), 
-('Jorge Pereira', 'jorge.pereira@example.com', 'senha123', '26897635490', 'PROFISSIONAL');
+('Jorge Pereira', 'jorge.pereira@example.com', 'senha123', '26897635490', 'PROFISSIONAL'),
+('Administrador', 'admin', 'admin', '34589027890', 'ADMIN'),
+('Cliente', 'cliente', 'cliente', '45612398720', 'CLIENTE'),
+('Profissional', 'prof', 'prof', '39876434509', 'PROFISSIONAL');
 
 
 INSERT INTO Clientes (id_cliente, telefone, sexo, dataNasc) VALUES 
