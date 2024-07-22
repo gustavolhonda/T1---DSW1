@@ -12,21 +12,27 @@
 
 	<body>
 		<div align="center">
-			<h3><fmt:message key="users.list" /></h3>
+			<h3><fmt:message key="profissionals.list" /></h3>
+
+			<a href="${pageContext.request.contextPath}/login.jsp"> 
+					<fmt:message key="back.link" />
+			</a>
+			<br/>
+			<br/>
+			
 			<table border="1">
 				<tr>
-					<th><fmt:message key="user.ID" /></th>
-					<th><fmt:message key="user.login" /></th>
-					<th><fmt:message key="user.password" /></th>
-					<th><fmt:message key="user.name" /></th>
+					<th><fmt:message key="profissionals.ID" /></th>
+					<th><fmt:message key="profissionals.name" /></th>
+					<th><fmt:message key="profissionals.email" /></th>
+					<th><fmt:message key="profissionals.speciality" /></th>
 					<th><fmt:message key="actions.link" /></th>
 				</tr> 
 				<c:forEach var="profissional" items="${requestScope.listaProfissionais}">
 					<tr>
 						<td><c:out value="${profissional.id}" /></td>
-						<td><c:out value="${profissional.email}" /></td>
-						<td><c:out value="${profissional.senha}" /></td>
 						<td><c:out value="${profissional.nome}" /></td>
+						<td><c:out value="${profissional.email}" /></td>
 						<td><c:out value="${profissional.especialidade}" /></td>
 					</tr>
 				</c:forEach>

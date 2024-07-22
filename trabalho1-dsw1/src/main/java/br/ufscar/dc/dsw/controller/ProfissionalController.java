@@ -40,8 +40,9 @@ public class ProfissionalController extends HttpServlet {
 		Erro erros = new Erro();
 
 		if (usuario == null) {
-			response.sendRedirect(request.getContextPath());
-			return;
+			listarProfissionais(request, response);
+			//response.sendRedirect(request.getContextPath());
+			//return;
 		} else if (!usuario.getPapel().equals("ADMIN")) {
 			erros.add("Acesso não autorizado!");
 			erros.add("Apenas Papel [ADMIN] tem acesso a essa página");
@@ -86,6 +87,13 @@ public class ProfissionalController extends HttpServlet {
 				List<Profissional> listaProfissionais = dao.getAll();
 				request.setAttribute("listaProfissionais", listaProfissionais);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/profissional/lista.jsp");
+				dispatcher.forward(request, response);
+			}
+			
+			private void listarProfissionais(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+				List<Profissional> listaProfissionais = dao.getAll();
+				request.setAttribute("listaProfissionais", listaProfissionais);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/listar.jsp");
 				dispatcher.forward(request, response);
 			}
 		

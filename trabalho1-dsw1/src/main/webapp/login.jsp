@@ -22,7 +22,7 @@
             </div>
         </c:if>
         
-        <form action="lista.jsp" method="post">
+        <form method="post" action="/Consultas/profissionais" >
             <input type="submit" name="listar" value="Listar_profissionais">
         </form>
         
