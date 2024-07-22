@@ -43,6 +43,8 @@ uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
                     </c:forEach>
                 </table>
             </div>
+
+			<a href="${pageContext.request.contextPath}/filtrar.jsp"></a>
         </body>
     </fmt:bundle>
 </html>
