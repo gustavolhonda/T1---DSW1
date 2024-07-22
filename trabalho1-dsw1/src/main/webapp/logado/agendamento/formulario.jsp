@@ -24,7 +24,7 @@
 			</h2>
 		</div>
 		<div align="center">
-			<form action="insercao" method="post">
+			<form action="insercao" method="get">
 				<%@include file="campos.jsp"%>
 			</form>
 		</div>

@@ -19,6 +19,8 @@ import br.ufscar.dc.dsw.domain.Agendamento;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.util.Erro;
 
+
+
 @WebServlet(urlPatterns = "/agendamentos/*")
 public class AgendamentoController extends HttpServlet {
   private static final long serialVersionUID = 1L;
@@ -61,10 +63,10 @@ public class AgendamentoController extends HttpServlet {
         try {
             switch (action) {
                 case "/cadastro":
-                    //apresentaFormCadastro(request, response);
+                    apresentaFormCadastro(request, response);
                     break;
                 case "/insercao":
-                    //insere(request, response);
+                    insere(request, response);
                     break;
                 default:
                     lista(request, response);
@@ -76,7 +78,7 @@ public class AgendamentoController extends HttpServlet {
   }  
 
   private void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
+      Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
       List<Agendamento> listaAgendamentos = dao.getAll(usuario);
       request.setAttribute("listaAgendamentos", listaAgendamentos);
       RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/agendamento/lista.jsp");
@@ -90,30 +92,32 @@ public class AgendamentoController extends HttpServlet {
       }
       return livros;
   }
+*/
 
   private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-      request.setAttribute("livros", getLivros());
-      RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/compra/formulario.jsp");
-      dispatcher.forward(request, response);
+          throws ServletException, IOException { 
+            Usuario usuario =  (Usuario) request.getSession().getAttribute("usuarioLogado");
+            
+            
+            request.setAttribute("id_profissional", request.getParameter("id"));
+            
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/agendamento/formulario.jsp");
+            dispatcher.forward(request, response);
   }
 
   private void insere(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       request.setCharacterEncoding("UTF-8");
       
-      Long id = Long.parseLong(request.getParameter("livro"));
-
-      Livro livro = new LivroDAO().get(id);
-      Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
+      Usuario usuario =  (Usuario) request.getSession().getAttribute("usuarioLogado");
+      Integer id_profissional = Integer.parseInt(request.getParameter("id"));
+      String data = request.getParameter("data");
+      String hora = request.getParameter("hora");
       
-      String data = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
-      Compra compra = new Compra(data, livro.getPreco(), livro, usuario);
-      dao.insert(compra);
+      Agendamento agendamento = new Agendamento(usuario.getId(), id_profissional, data, hora);
+      dao.insert(agendamento);
       
       response.sendRedirect("lista");
   }
-
-*/
-
 
 }

@@ -12,10 +12,19 @@ uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
             <div align="center">
                 <h3><fmt:message key="professionals.list" /></h3>
+								 <c:if test="${usuario == null}">	
+									<a href="${pageContext.request.contextPath}/login.jsp">
+											<fmt:message key="back.link" />
+									</a>
+								 </c:if>
 
-                <a href="${pageContext.request.contextPath}/login.jsp">
-                    <fmt:message key="back.link" />
-                </a>
+								 <c:if test="${usuario != null}">	
+									<a href="${pageContext.request.contextPath}/agendamentos">
+											<fmt:message key="back.link" />
+									</a>
+								 </c:if>
+
+
                 <br />
                 <br />
 
@@ -35,7 +44,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
                             <td><c:out value="${profissional.especialidade}" /></td>
                             <td>
                                 <a
-                                    href="/<%= contextPath %>/agendamentos/?id=<c:out value='${profissional.id}' />">
+                                    href="/<%= contextPath %>/agendamentos/cadastro?id=<c:out value='${profissional.id}' />">
                                     <fmt:message key="professionals.schedule" />
                                 </a>
                             </td>

@@ -23,11 +23,11 @@ public class AgendamentoDAO extends GenericDAO {
                 PreparedStatement statement = conn.prepareStatement(sql);
                 
                 statement = conn.prepareStatement(sql);
-                statement.setString(1, agendamento.getId_cliente());
-                statement.setString(2, agendamento.getId_profissional());
+                statement.setInt(1, agendamento.getId_cliente());
+                statement.setInt(2, agendamento.getId_profissional());
                 
-                statement.setDate(3, agendamento.getData());
-                statement.setTime(4, agendamento.getHora());
+                statement.setDate(3, java.sql.Date.valueOf(agendamento.getData()));
+                statement.setTime(4, java.sql.Time.valueOf(agendamento.getHora()));
                 
                 statement.setString(5, agendamento.getLinkVideoconferencia());
                 statement.executeUpdate();
@@ -64,14 +64,14 @@ public class AgendamentoDAO extends GenericDAO {
             
             while (resultSet.next()) {
                 Integer id = resultSet.getInt("id");
-                String id_cliente = resultSet.getString("id_cliente");
-                String id_profissional = resultSet.getString("id_profissional");
+                Integer id_cliente = Integer.parseInt(resultSet.getString("id_cliente"));
+                Integer id_profissional = Integer.parseInt(resultSet.getString("id_profissional"));
                 String linkVideo = resultSet.getString("link_videoconferencia");
                 
-                Date data = resultSet.getDate("data");
-                Time hora = resultSet.getTime("hora");
+                String data = resultSet.getString("data");
+                String hora = resultSet.getString("hora");
 
-                Agendamento agendamento = new Agendamento(id_cliente, id_profissional,(java.sql.Date) data, hora, linkVideo, id);         
+                Agendamento agendamento = new Agendamento(id_cliente, id_profissional,data, hora, linkVideo, id);         
                 listaAgendamentos.add(agendamento);
             }
 

@@ -5,10 +5,10 @@ import java.sql.Time;
 
 public class Agendamento {
 
-    private String id_cliente;
-    private String id_profissional;
-    private Date data;
-    private Time hora;
+    private Integer id_cliente;
+    private Integer id_profissional;
+    private String data;
+    private String hora;
     private String linkVideoconferencia;
     private Integer id;
 
@@ -16,14 +16,14 @@ public class Agendamento {
         this.id = id;
     }
 
-    public Agendamento(String id_cliente, String id_profissional, Date data, Time hora, Integer id) {
+    public Agendamento(Integer id_cliente, Integer id_profissional, String data, String hora) {
         this.id_cliente = id_cliente;
         this.id_profissional = id_profissional;
         this.data = data;
         this.hora = hora;
     }
 
-    public Agendamento(String id_cliente, String id_profissional, Date data, Time hora, String linkVideoconferencia, Integer id) {
+    public Agendamento(Integer id_cliente, Integer id_profissional, String data, String hora, String linkVideoconferencia, Integer id) {
         this.id_cliente = id_cliente;
         this.id_profissional = id_profissional;
         this.data = data;
@@ -32,31 +32,31 @@ public class Agendamento {
         this.id = id;
     }
 
-    public String getId_cliente() {
+    public Integer getId_cliente() {
         return id_cliente;
     }
 
-    public void setId_cliente(String id_cliente) {
+    public void setId_cliente(Integer id_cliente) {
         this.id_cliente = id_cliente;
     }
 
-    public String getId_profissional() {
+    public Integer getId_profissional() {
         return id_profissional;
     }
 
-    public void setId_profissional(String id_profissional) {
+    public void setId_profissional(Integer id_profissional) {
         this.id_profissional = id_profissional;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-     public Time getHora() {
+     public String getHora() {
         return hora;
     }
 
-    public void setHora(Time hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
 
@@ -68,7 +68,7 @@ public class Agendamento {
         return id;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 

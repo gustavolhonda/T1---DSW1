@@ -42,7 +42,7 @@ public class ProfissionalController extends HttpServlet {
 		if (usuario == null) {
 			lista(request, response);
 		}
-		else if (!usuario.getPapel().equals("ADMIN")) {
+		else if ((!usuario.getPapel().equals("ADMIN")) && (!usuario.getPapel().equals("CLIENTE"))) {
 			erros.add("Acesso não autorizado!");
 			erros.add("Apenas Papel [ADMIN] tem acesso a essa página");
 			request.setAttribute("mensagens", erros);

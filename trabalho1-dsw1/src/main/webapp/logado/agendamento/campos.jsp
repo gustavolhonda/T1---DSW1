@@ -7,24 +7,17 @@
 <table border="1" style="width: 400px; border: 1px solid black">
 
 	<tr>
-		<th></th>
-		<th>Título</th>
-		<th>Editora</th>
-		<th>Autor</th>
-		<th>Ano</th>
-		<th>Preço</th>
+		<td><label for="data"> <fmt:message key="appointment.date" />
+		</label></td>
+		<td><input type="date" id="data" name="data" size="45"/></td>
 	</tr>
-	<c:forEach var="livro" items="${livros}">
-		<tr>
-			<td style="width: 10%; text-align: center"><input type="radio"
-				id="${livro.key}" name="livro" value="${livro.key}" required></td>
-			<td>${livro.value.titulo}</td>
-			<td>${livro.value.editora.nome}</td>
-			<td>${livro.value.autor}</td>
-			<td>${livro.value.ano}</td>
-			<td>${livro.value.preco}</td>
-		</tr>
-	</c:forEach>
+
+	<tr>
+		<td><label for="hora"> <fmt:message key="appointment.time" />
+		</label></td>
+		<td><input type="time" id="hora" name="hora" size="45"/></td>
+	</tr>
+
 </table>
 <br/>
 <br/>
