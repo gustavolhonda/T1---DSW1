@@ -13,10 +13,10 @@
 	<body>
 		<div align="center">
 			<h1>
-				<fmt:message key="purchases.welcome" />
+				<fmt:message key="appointments.welcome" />
 			</h1>
 			<h2>
-				<a href="lista"> <fmt:message key="purchases.list" /></a> 
+				<a href="lista"> <fmt:message key="appointments.list" /></a> 
 				&nbsp;&nbsp;&nbsp; 
 				<a href="${pageContext.request.contextPath}/logout.jsp"> <fmt:message
 						key="exit.link" />

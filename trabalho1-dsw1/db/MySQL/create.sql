@@ -32,12 +32,13 @@ CREATE TABLE Agendamento (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_cliente INT NOT NULL,
     id_profissional INT NOT NULL,
-    data_hora DATETIME NOT NULL,
+    data DATE NOT NULL,
+    hora Time NOT NULL,
     link_videoconferencia VARCHAR(255) NOT NULL,
     FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (id_profissional) REFERENCES Profissionais(id_profissional) ON DELETE CASCADE ON UPDATE CASCADE,
-    UNIQUE (id_profissional, data_hora),
-    UNIQUE (id_cliente, data_hora)
+    UNIQUE (id_profissional, data),
+    UNIQUE (id_cliente, data)
 );
 
 INSERT INTO Usuario (nome, email, senha, cpf, papel) VALUES 
@@ -51,13 +52,13 @@ INSERT INTO Clientes (id_cliente, telefone, sexo, dataNasc) VALUES
 INSERT INTO Profissionais (id_profissional, especialidade, curriculo) VALUES 
 ((SELECT id FROM Usuario WHERE cpf = '23456789012'), 'Cardiologia', 'Currículo do Dr. Maria Souza');
 
-INSERT INTO Agendamento (id_cliente, id_profissional, data_hora, link_videoconferencia) VALUES 
+INSERT INTO Agendamento (id_cliente, id_profissional, data, hora, link_videoconferencia) VALUES 
 ((SELECT id_cliente FROM Clientes WHERE id_cliente = (SELECT id FROM Usuario WHERE cpf = '12345678901')), 
  (SELECT id_profissional FROM Profissionais WHERE id_profissional = (SELECT id FROM Usuario WHERE cpf = '23456789012')), 
- '2024-08-01 10:00:00', 
+ '2024-08-01', '10:00:00', 
  'https://videoconferencia.example.com/123'),
 
 ((SELECT id_cliente FROM Clientes WHERE id_cliente = (SELECT id FROM Usuario WHERE cpf = '12345678901')), 
  (SELECT id_profissional FROM Profissionais WHERE id_profissional = (SELECT id FROM Usuario WHERE cpf = '23456789012')), 
- '2024-08-01 11:00:00', 
+ '2024-08-01', '11:00:00', 
  'https://videoconferencia.example.com/124');

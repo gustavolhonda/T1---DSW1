@@ -4,7 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
@@ -15,7 +16,7 @@ public class AgendamentoDAO extends GenericDAO {
 
     public void insert(Agendamento agendamento) {
 
-        String sql = "INSERT INTO Agendamento (id_cliente, id_profissional, data_hora, link_videoconferencia) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Agendamento (id_cliente, id_profissional, data, hora, link_videoconferencia) VALUES (?, ?, ?, ?, ?)";
 
         try {
             try (Connection conn = this.getConnection()) {
@@ -25,12 +26,10 @@ public class AgendamentoDAO extends GenericDAO {
                 statement.setString(1, agendamento.getId_cliente());
                 statement.setString(2, agendamento.getId_profissional());
                 
-                // Converter java.util.Date para java.sql.Date
-                java.util.Date utilDate = agendamento.getDataHora();
-                java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-                statement.setDate(3, sqlDate);
+                statement.setDate(3, agendamento.getData());
+                statement.setTime(4, agendamento.getHora());
                 
-                statement.setString(4, agendamento.getLinkVideoconferencia());
+                statement.setString(5, agendamento.getLinkVideoconferencia());
                 statement.executeUpdate();
                 
                 statement.close();
@@ -68,11 +67,11 @@ public class AgendamentoDAO extends GenericDAO {
                 String id_cliente = resultSet.getString("id_cliente");
                 String id_profissional = resultSet.getString("id_profissional");
                 String linkVideo = resultSet.getString("link_videoconferencia");
-                Date dataHora = resultSet.getDate("data_hora");
-                //Cliente cliente = new ClienteDAO().getbycpf(cpfCliente);
-                //Profissional profissional = new ProfissionalDAO().getbycpf(cpfProfissional);
+                
+                Date data = resultSet.getDate("data");
+                Time hora = resultSet.getTime("hora");
 
-                Agendamento agendamento = new Agendamento(id_cliente, id_profissional,dataHora, linkVideo, id);         
+                Agendamento agendamento = new Agendamento(id_cliente, id_profissional,(java.sql.Date) data, hora, linkVideo, id);         
                 listaAgendamentos.add(agendamento);
             }
 

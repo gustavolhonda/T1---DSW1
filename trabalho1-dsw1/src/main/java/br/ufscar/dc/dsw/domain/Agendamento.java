@@ -1,12 +1,14 @@
 package br.ufscar.dc.dsw.domain;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Time;
 
 public class Agendamento {
 
     private String id_cliente;
     private String id_profissional;
-    private Date dataHora;
+    private Date data;
+    private Time hora;
     private String linkVideoconferencia;
     private Integer id;
 
@@ -14,16 +16,18 @@ public class Agendamento {
         this.id = id;
     }
 
-    public Agendamento(String id_cliente, String id_profissional, Date dataHora, Integer id) {
+    public Agendamento(String id_cliente, String id_profissional, Date data, Time hora, Integer id) {
         this.id_cliente = id_cliente;
         this.id_profissional = id_profissional;
-        this.dataHora = dataHora;
+        this.data = data;
+        this.hora = hora;
     }
 
-    public Agendamento(String id_cliente, String id_profissional, Date dataHora, String linkVideoconferencia, Integer id) {
+    public Agendamento(String id_cliente, String id_profissional, Date data, Time hora, String linkVideoconferencia, Integer id) {
         this.id_cliente = id_cliente;
         this.id_profissional = id_profissional;
-        this.dataHora = dataHora;
+        this.data = data;
+        this.hora = hora;
         this.linkVideoconferencia = linkVideoconferencia;
         this.id = id;
     }
@@ -44,8 +48,16 @@ public class Agendamento {
         this.id_profissional = id_profissional;
     }
 
-    public Date getDataHora() {
-        return dataHora;
+    public Date getData() {
+        return data;
+    }
+
+     public Time getHora() {
+        return hora;
+    }
+
+    public void setHora(Time hora) {
+        this.hora = hora;
     }
 
     public String getLinkVideoconferencia() {
@@ -56,8 +68,8 @@ public class Agendamento {
         return id;
     }
 
-    public void setDataHora(Date dataHora) {
-        this.dataHora = dataHora;
+    public void setData(Date data) {
+        this.data = data;
     }
 
     public void setLinkVideoconferencia(String linkVideoconferencia) {
