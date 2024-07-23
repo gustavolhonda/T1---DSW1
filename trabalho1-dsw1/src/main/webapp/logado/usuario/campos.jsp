@@ -52,8 +52,6 @@
 		<td>
 			<select name="papel">
 				<option value="ADMIN" ${usuario.papel == "ADMIN" ? 'selected="selected"' : ''}>ADMIN</option>
-				<option value="PROFISSIONAL" ${usuario.papel == "PROFISSIONAL" ? 'selected="selected"' : ''}>PROFISSIONAL</option>
-				<option value="CLIENTE" ${usuario.papel == "CLIENTE" ? 'selected="selected"' : ''}>CLIENTE</option>
 			</select>			
 		</td>
 	</tr>
