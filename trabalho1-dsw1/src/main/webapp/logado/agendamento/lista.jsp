@@ -18,9 +18,12 @@
 				<fmt:message key="appointments.welcome" />
 			</h1>
 			<h2>
-				<a href="${pageContext.request.contextPath}/profissionais"> 
-					<fmt:message key="appointments.create" />
-				</a> 
+				<c:if test="${usuarioPapel == 'CLIENTE'}">
+					<a href="${pageContext.request.contextPath}/profissionais"> 
+						<fmt:message key="appointments.create" />
+					</a> 
+				</c:if>
+
 				&nbsp;&nbsp;&nbsp; 
 				<a href="${pageContext.request.contextPath}/logout.jsp"> 
 					<fmt:message key="exit.link" />

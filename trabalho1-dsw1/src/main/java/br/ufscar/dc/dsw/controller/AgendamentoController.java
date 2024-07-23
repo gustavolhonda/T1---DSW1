@@ -87,8 +87,10 @@ public class AgendamentoController extends HttpServlet {
 
   private void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
+      String usuarioPapel = usuario.getPapel();
       List<Agendamento> listaAgendamentos = dao.getAll(usuario);
       request.setAttribute("listaAgendamentos", listaAgendamentos);
+      request.setAttribute("usuarioPapel", usuarioPapel);
       RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/agendamento/lista.jsp");
       dispatcher.forward(request, response);
   }

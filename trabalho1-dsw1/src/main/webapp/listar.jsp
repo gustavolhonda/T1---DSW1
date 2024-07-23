@@ -28,19 +28,24 @@ uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
                         <th><fmt:message key="professionals.name" /></th>
                         <th><fmt:message key="professionals.email" /></th>
                         <th><fmt:message key="professionals.speciality" /></th>
-                        <th><fmt:message key="actions.link" /></th>
+                        <c:if test="${usuario != null}">
+                            <th><fmt:message key="actions.link" /></th>
+                        </c:if>
                     </tr>
                     <c:forEach var="profissional" items="${requestScope.listaProfissionais}">
                         <tr>
                             <td><c:out value="${profissional.nome}" /></td>
                             <td><c:out value="${profissional.email}" /></td>
                             <td><c:out value="${profissional.especialidade}" /></td>
-                            <td>
-                                <a
-                                    href="${pageContext.request.contextPath}/agendamentos/cadastro?id=<c:out value='${profissional.id}' />">
-                                    <fmt:message key="professionals.schedule" />
-                                </a>
-                            </td>
+                            <c:if test="${usuario != null}">
+                                <td>
+                                    <a
+                                        href="${pageContext.request.contextPath}/agendamentos/cadastro?id=<c:out value='${profissional.id}' />">
+                                        <fmt:message key="professionals.schedule" />
+                                    </a>
+                                </td>
+                            </c:if>
+
                         </tr>
                     </c:forEach>
                 </table>
