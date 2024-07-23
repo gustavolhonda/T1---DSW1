@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%@ page
 isELIgnored="false"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> <%@ taglib
-uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> <%@ page import="java.util.List" %>
+
 <html>
     <fmt:bundle basename="message">
         <head>
             <title><fmt:message key="page.title" /></title>
-            <link href="./layout.css" rel="stylesheet" type="text/css"/>
-
+            <link href="./layout.css" rel="stylesheet" type="text/css" />
         </head>
 
         <body>
@@ -17,11 +17,14 @@ uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
                 <form action="profissionais" method="post">
                     <label for="especialidade">Especialidade:</label>
-                    <input type="text" id="especialidade" name="especialidade">
+                    <select id="especialidade" name="especialidade">
+                        <option value="">Todas as Especialidades</option>
+                        <c:forEach var="especialidade" items="${requestScope.especialidades}">
+                            <option value="${especialidade}"><c:out value="${especialidade}"></c:out></option>
+                        </c:forEach>
+                    </select>
                     <button type="submit">Buscar</button>
-                </form>    
-
-                <form action="profissionais" method="post"><button type="submit">Ver todos</button></form>
+                </form>
 
                 <table border="1">
                     <tr>
@@ -45,7 +48,6 @@ uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
                                     </a>
                                 </td>
                             </c:if>
-
                         </tr>
                     </c:forEach>
                 </table>

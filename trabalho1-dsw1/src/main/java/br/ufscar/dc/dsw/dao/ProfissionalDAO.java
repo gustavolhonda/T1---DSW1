@@ -88,7 +88,30 @@ public class ProfissionalDAO extends GenericDAO {
         return listaProfissionais;
     }
     
-
+    public List<String> getEspecialidades() {
+        List<String> listaEspecialidades = new ArrayList<>();
+    
+        // Inicia a consulta SQL base
+        String sql = "SELECT DISTINCT especialidade FROM Profissionais";
+    
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+    
+            while (resultSet.next()) {
+                listaEspecialidades.add(resultSet.getString("especialidade"));
+            }
+    
+            resultSet.close();
+            preparedStatement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    
+        return listaEspecialidades;
+    }
     
     public void delete(Profissional profissional) {
         String sql = "DELETE FROM Profissionais where id_profissional = ?";
