@@ -1,4 +1,4 @@
-package br.ufscar.dc.dsw;
+package br.ufscar.dc.dsw.domain;
 
 public class Constants {
 

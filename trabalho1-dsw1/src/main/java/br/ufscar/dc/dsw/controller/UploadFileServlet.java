@@ -1,4 +1,4 @@
-package br.ufscar.dc.dsw;
+package br.ufscar.dc.dsw.controller;
 
 import java.io.File;
 import java.io.IOException;
