@@ -129,10 +129,12 @@ public class AgendamentoController extends HttpServlet {
 
       String cliEmail = cli.getEmail();
       String profEmail = prof.getEmail();
+      String cliNome = cli.getNome();
+      String profNome = prof.getNome();
 
-      InternetAddress from = new InternetAddress("testedswt@gmail.com", "Fulano");
-      InternetAddress to1 = new InternetAddress(cliEmail, "Beltrano");
-      InternetAddress to2 = new InternetAddress(profEmail, "Beltrano");
+      InternetAddress from = new InternetAddress("testedswt@gmail.com", "TesteDSW");
+      InternetAddress to1 = new InternetAddress(cliEmail, cliNome);
+      InternetAddress to2 = new InternetAddress(profEmail, profNome);
           
       String subject1 = "link consulta online";
 
