@@ -5,11 +5,6 @@
   - [ ] Parcialmente implementado
   - [ ] Não implementado
 
-- **Divisão na implementação da funcionalidade:**
-  - Gustavo: 33%
-  - João: 33%
-  - Vitor: 33%
-
 ### Requisito R2
 
 - **Status:**
