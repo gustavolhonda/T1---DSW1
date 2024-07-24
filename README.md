@@ -6,7 +6,7 @@
   - [ ] Não implementado
 
 - **Divisão na implementação da funcionalidade:**
-  - Membro1: 33%
-  - Membro2: 33%
-  - Membro3: 33%
+  - Gustavo: 33%
+  - João: 33%
+  - Vitor: 33%
 
