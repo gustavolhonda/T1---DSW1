@@ -10,11 +10,11 @@ import jakarta.validation.constraints.NotBlank;
 @Table(name = "Usuario")
 public class Usuario extends AbstractEntity<Long> {
   
-	@NotBlank
+		@NotBlank
     @Column(nullable = false, length = 20, unique = true)
     private String username;
     
-	@NotBlank
+		@NotBlank
     @Column(nullable = false, length = 64)
     private String password;
        
