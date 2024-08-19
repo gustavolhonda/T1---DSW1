@@ -52,8 +52,6 @@ public class ConsultasMvcApplication {
 			u3.setRole("ROLE_USER");
 			u3.setEnabled(true);
 			usuarioDAO.save(u3);
-			
-			
 		};
 	}
 }
