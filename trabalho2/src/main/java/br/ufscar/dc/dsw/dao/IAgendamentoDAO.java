@@ -5,14 +5,13 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 import br.ufscar.dc.dsw.domain.Agendamento;
-import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw.domain.Cliente;
+import br.ufscar.dc.dsw.domain.Profissional;
 
 @SuppressWarnings("unchecked")
 public interface IAgendamentoDAO extends CrudRepository<Agendamento, Long>{
 
 	Agendamento findById(long id);
-
-	List<Agendamento> findAllByUsuario(Usuario u);
 	
 	Agendamento save(Agendamento agendamento);
 }

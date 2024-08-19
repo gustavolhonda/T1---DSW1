@@ -25,6 +25,9 @@ public class Profissional extends Usuario {
 	@Column(columnDefinition = "TEXT")
 	private String curriculo;
 
+	@OneToMany(mappedBy = "profissional")
+	private List<Agendamento> agendamentos;
+
 	public String getEspecialidade() {
 			return especialidade;
 	}
@@ -39,5 +42,9 @@ public class Profissional extends Usuario {
 
 	public void setCurriculo(String curriculo) {
 			this.curriculo = curriculo;
+	}
+
+	public List<Agendamento> getAgendamentos() {
+			return agendamentos;
 	}
 }
