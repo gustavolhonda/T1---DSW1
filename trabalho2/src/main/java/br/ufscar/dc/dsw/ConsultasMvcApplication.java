@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import br.ufscar.dc.dsw.dao.IEditoraDAO;
-import br.ufscar.dc.dsw.dao.ILivroDAO;
+import br.ufscar.dc.dsw.dao.IProfissionalDAO;
+import br.ufscar.dc.dsw.dao.IClienteDAO;
 import br.ufscar.dc.dsw.dao.IUsuarioDAO;
 import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.domain.Cliente;
@@ -23,7 +23,7 @@ public class ConsultasMvcApplication {
 	}
 
 	@Bean //arrumar isso
-	public CommandLineRunner demo(IUsuarioDAO usuarioDAO, BCryptPasswordEncoder encoder, IEditoraDAO editoraDAO, ILivroDAO livroDAO) {
+	public CommandLineRunner demo(IUsuarioDAO usuarioDAO, BCryptPasswordEncoder encoder, IProfissionalDAO editoraDAO, IClienteDAO livroDAO) {
 		return (args) -> {
 			
 			Usuario u1 = new Usuario();

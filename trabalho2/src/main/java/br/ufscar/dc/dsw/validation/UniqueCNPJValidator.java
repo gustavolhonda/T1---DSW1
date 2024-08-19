@@ -6,14 +6,14 @@ import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.ufscar.dc.dsw.dao.IEditoraDAO;
+import br.ufscar.dc.dsw.dao.IProfissionalDAO;
 import br.ufscar.dc.dsw.domain.Profissional;
 
 @Component
 public class UniqueCNPJValidator implements ConstraintValidator<UniqueCNPJ, String> {
 
 	@Autowired
-	private IEditoraDAO dao;
+	private IProfissionalDAO dao;
 
 	@Override
 	public boolean isValid(String CNPJ, ConstraintValidatorContext context) {
