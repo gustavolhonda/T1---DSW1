@@ -15,12 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.ufscar.dc.dsw.domain.Profissional;
-import br.ufscar.dc.dsw.domain.Agendamento;
 import br.ufscar.dc.dsw.domain.Cliente;
-import br.ufscar.dc.dsw.service.spec.IProfissionalService;
 import br.ufscar.dc.dsw.service.spec.IClienteService;
-import br.ufscar.dc.dsw.service.spec.IAgendamentoService;
 
 @Controller
 @RequestMapping("/clientes")
@@ -28,12 +24,6 @@ public class ClienteController {
 
 	@Autowired
 	private IClienteService clienteService;
-
-	@Autowired
-	private IProfissionalService profissionalService;
-
-	@Autowired
-	private IAgendamentoService agendamentoService;
 
 	@GetMapping("/cadastrar")
 	public String cadastrar(Cliente cliente) {
