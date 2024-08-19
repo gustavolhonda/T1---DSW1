@@ -11,7 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import br.ufscar.dc.dsw.dao.IEditoraDAO;
 import br.ufscar.dc.dsw.dao.ILivroDAO;
 import br.ufscar.dc.dsw.dao.IUsuarioDAO;
-import br.ufscar.dc.dsw.domain.Editora;
+import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Usuario;
 
