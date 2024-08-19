@@ -10,11 +10,11 @@
 			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active"><i class="oi oi-caret-right"></i>
-						<span th:text="#{editora.cadastrar.label}"></span></li>
+						<span th:text="#{profissional.cadastrar.label}"></span></li>
 				</ul>
-				<a class="btn btn-primary btn-md" th:href="@{/editoras/listar}"
+				<a class="btn btn-primary btn-md" th:href="@{/profissionais/listar}"
 					role="button"> <span class="oi oi-spreadsheet" title="Listar"
-					aria-hidden="true"></span> <span th:text="#{editora.listar.label}"></span>
+					aria-hidden="true"></span> <span th:text="#{profissional.listar.label}"></span>
 				</a>
 			</div>
 		</nav>
@@ -24,14 +24,14 @@
 			<div th:replace="~{fragments/alert}"></div>
 
 			<form
-				th:action="${editora.id == null} ? @{/editoras/salvar} : @{/editoras/editar}"
-				th:object="${editora}" method="POST">
+				th:action="${profissional.id == null} ? @{/profissionais/salvar} : @{/profissionais/editar}"
+				th:object="${profissional}" method="POST">
 
 				<div class="form-row">
 					<div class="form-group col-md-6">
-						<label th:text="#{editora.nome.label}" for="nome"></label> 
+						<label th:text="#{profissional.nome.label}" for="nome"></label> 
 						<input type="text" class="form-control" id="nome" autofocus="autofocus"
-							th:field="*{nome}" th:placeholder="#{editora.nome.label}"
+							th:field="*{nome}" th:placeholder="#{profissional.nome.label}"
 							th:classappend="${#fields.hasErrors('nome')} ? is-invalid" />
 
 						<div class="invalid-feedback">
@@ -40,10 +40,10 @@
 					</div>
 
 					<div class="form-group col-md-6">
-						<label th:text="#{editora.cnpj.label}" for="CNPJ"></label> 
+						<label th:text="#{profissional.cnpj.label}" for="CNPJ"></label> 
 						<input type="text" class="form-control" id="CNPJ" autofocus="autofocus"
 							th:field="*{CNPJ}" placeholder="__.___.___/____-__"
-							th:readonly="${editora.id != null}"
+							th:readonly="${profissional.id != null}"
 							data-mask="00.000.000/0000-00" data-mask-reverse="true"
 							th:classappend="${#fields.hasErrors('CNPJ')} ? is-invalid" />
 							

@@ -11,12 +11,12 @@
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active">
 						<i class="oi oi-caret-right"></i>
-						<span th:text="#{editora.listar.label}"></span>
+						<span th:text="#{profissional.listar.label}"></span>
 					</li>
 				</ul>
-				<a class="btn btn-primary btn-md" th:href="@{/editoras/cadastrar}" role="button"> 
+				<a class="btn btn-primary btn-md" th:href="@{/profissionais/cadastrar}" role="button"> 
 					<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span> 
-					<span th:text="#{editora.cadastrar.label}"></span>
+					<span th:text="#{profissional.cadastrar.label}"></span>
 				</a>
 			</div>
 		</nav>
@@ -30,23 +30,23 @@
 					<thead>
 						<tr>
 							<th>#</th>
-							<th th:text="#{editora.cnpj.label}"></th>
-							<th th:text="#{editora.nome.label}"></th>
+							<th th:text="#{profissional.cnpj.label}"></th>
+							<th th:text="#{profissional.nome.label}"></th>
 							<th th:text="#{acao.label}"></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="editora : ${editoras}">
-							<td th:text="${editora.id}"></td>
-							<td th:text="${editora.CNPJ}"></td>
-							<td th:text="${editora.nome}"></td>
+						<tr th:each="profissional : ${profissionais}">
+							<td th:text="${profissional.id}"></td>
+							<td th:text="${profissional.CNPJ}"></td>
+							<td th:text="${profissional.nome}"></td>
 							<td colspan="2">
-								<a class="btn btn-info btn-sm" th:href="@{/editoras/editar/{id} (id=${editora.id}) }"
+								<a class="btn btn-info btn-sm" th:href="@{/profissionais/editar/{id} (id=${profissional.id}) }"
 									role="button"> 
 									<span class="oi oi-brush" th:title="#{link.editar.label}" aria-hidden="true"> </span>
 								</a>
 								<button
-									th:id="${'btn_editoras/excluir/' + editora.id}"
+									th:id="${'btn_profissionais/excluir/' + profissional.id}"
 									type="button" class="btn btn-danger btn-sm"
 									data-toggle="modal" data-target="#myModal">
 									<span class="oi oi-circle-x" th:title="#{link.excluir.label}" aria-hidden="true"></span>
