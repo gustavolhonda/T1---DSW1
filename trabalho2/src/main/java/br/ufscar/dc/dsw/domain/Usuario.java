@@ -2,12 +2,16 @@ package br.ufscar.dc.dsw.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Inheritance;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Usuario")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario extends AbstractEntity<Long> {
   
 		@NotBlank

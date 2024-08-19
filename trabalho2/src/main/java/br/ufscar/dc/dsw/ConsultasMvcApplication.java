@@ -12,7 +12,7 @@ import br.ufscar.dc.dsw.dao.IEditoraDAO;
 import br.ufscar.dc.dsw.dao.ILivroDAO;
 import br.ufscar.dc.dsw.dao.IUsuarioDAO;
 import br.ufscar.dc.dsw.domain.Editora;
-import br.ufscar.dc.dsw.domain.Livro;
+import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Usuario;
 
 @SpringBootApplication
