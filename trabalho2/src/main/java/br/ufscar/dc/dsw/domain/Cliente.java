@@ -54,7 +54,7 @@ public class Cliente extends Usuario {
 		this.sexo = sexo;
 	}
 
-	public String getDataNasce() {
+	public String getDataNasc() {
 		return dataNasc;
 	}
 
