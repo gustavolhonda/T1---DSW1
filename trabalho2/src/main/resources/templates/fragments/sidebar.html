@@ -13,7 +13,7 @@
 					class="oi oi-home"></i> <span th:text="#{sidebar.link.home}"></span>
 			</a></li>
 		</ul>
-		<div sec:authorize="hasRole('ROLE_PROFESSIONAL')"></div>
+		<div sec:authorize="hasRole('ROLE_PROFESSIONAL')">
 			<ul class="nav nav-pills">
 				<li class="nav-item"><span class="nav-link active"
 					th:text="#{sidebar.titulo.agendamento}"></span></li>
