@@ -84,7 +84,7 @@
 ### Requisito R4
 
 - **Status:**
-  - [] Implementado
+  - [ ] Implementado
   - [ ] Parcialmente implementado
   - [ ] Não implementado
 
@@ -105,7 +105,7 @@
 ### Requisito R7
 
 - **Status:**
-  - [] Implementado
+  - [ ] Implementado
   - [ ] Parcialmente implementado
   - [ ] Não implementado
 
