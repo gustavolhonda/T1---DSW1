@@ -40,7 +40,7 @@ public class ConsultasMvcApplication {
 			u2.setPassword(encoder.encode("123"));
 			u2.setCPF("985.849.614-10");
 			u2.setName("Beltrano Andrade");
-			u2.setRole("ROLE_USER");
+			u2.setRole("ROLE_CLIENT");
 			u2.setEnabled(true);
 			usuarioDAO.save(u2);
 			
@@ -49,7 +49,7 @@ public class ConsultasMvcApplication {
 			u3.setPassword(encoder.encode("123"));
 			u3.setCPF("367.318.380-04");
 			u3.setName("Fulano Silva");
-			u3.setRole("ROLE_USER");
+			u3.setRole("ROLE_PROFESSIONAL");
 			u3.setEnabled(true);
 			usuarioDAO.save(u3);
 		};
