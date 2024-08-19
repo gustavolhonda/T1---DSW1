@@ -44,12 +44,14 @@ public class ConsultasMvcApplication {
 			u2.setEnabled(true);
 			usuarioDAO.save(u2);
 			
-			Usuario u3 = new Usuario();
+			Profissional u3 = new Profissional();
 			u3.setUsername("fulano");
 			u3.setPassword(encoder.encode("123"));
 			u3.setCPF("367.318.380-04");
 			u3.setName("Fulano Silva");
 			u3.setRole("ROLE_PROFESSIONAL");
+			u3.setEspecialidade("otario");
+
 			u3.setEnabled(true);
 			usuarioDAO.save(u3);
 		};
