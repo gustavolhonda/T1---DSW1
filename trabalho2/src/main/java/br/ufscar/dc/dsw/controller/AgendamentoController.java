@@ -20,7 +20,8 @@ import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.service.spec.IAgendamentoService;
-import br.ufscar.dc.dsw.service.spec.IUsuarioService;
+import br.ufscar.dc.dsw.service.spec.IClienteService;
+import br.ufscar.dc.dsw.service.spec.IProfissionalService;
 
 
 @Controller
@@ -30,6 +31,12 @@ public class AgendamentoController {
     @Autowired
 	private IAgendamentoService agendamentoService;
 
+    @Autowired
+    private IClienteService clienteService;
+
+    @Autowired
+    private IProfissionalService profissionalService;
+
     @GetMapping("/cadastrar")
 	public String cadastrar(Agendamento agendamento) {
 		return "agendamento/cadastro";
@@ -38,11 +45,12 @@ public class AgendamentoController {
     @GetMapping("/listar")
 	public String listar(ModelMap model) {
     Usuario user = getUsuario();
+
 		if (user.getRole() == "ROLE_CLIENT") {
-			Cliente cliente = (Cliente) user;
+            Cliente cliente = clienteService.buscarPorId(user.getId());
 			model.addAttribute("agendamento", cliente.getAgendamentos());
 		} else {
-			Profissional profissional = (Profissional) user;
+			Profissional profissional = profissionalService.buscarPorId(user.getId());
 			model.addAttribute("agendamento", profissional.getAgendamentos());
 		}
 		return "agendamento/lista";
