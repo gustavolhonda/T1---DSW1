@@ -35,12 +35,15 @@ public class ConsultasMvcApplication {
 			u1.setEnabled(true);
 			usuarioDAO.save(u1);
 			
-			Usuario u2 = new Usuario();
+			Cliente u2 = new Cliente();
 			u2.setUsername("beltrano");
 			u2.setPassword(encoder.encode("123"));
 			u2.setCPF("985.849.614-10");
 			u2.setName("Beltrano Andrade");
 			u2.setRole("ROLE_CLIENT");
+			u2.setTelefone("17 99999-9999");
+			u2.setSexo("M");
+			u2.setDataNasc("1999-01-01");
 			u2.setEnabled(true);
 			usuarioDAO.save(u2);
 			
