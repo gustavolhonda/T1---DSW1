@@ -37,13 +37,14 @@ public class AgendamentoController {
 
     @GetMapping("/listar")
 	public String listar(ModelMap model) {
-        Usuario user = getUsuario();
-        if (user.getRole() == "ROLE_CLIENT") {
-            user = (Cliente) user; 
-        } else {
-            user = (Profissional) user;
-        }
-		model.addAttribute("agendamento", user.getAgendamentos());
+    Usuario user = getUsuario();
+		if (user.getRole() == "ROLE_CLIENT") {
+			Cliente cliente = (Cliente) user;
+			model.addAttribute("agendamento", cliente.getAgendamentos());
+		} else {
+			Profissional profissional = (Profissional) user;
+			model.addAttribute("agendamento", profissional.getAgendamentos());
+		}
 		return "agendamento/lista";
 	}
 
