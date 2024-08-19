@@ -63,7 +63,7 @@
 ### Requisito R1
 
 - **Status:**
-  - [] Implementado
+  - [ ] Implementado
   - [ ] Parcialmente implementado
   - [ ] Não implementado
 
@@ -71,13 +71,13 @@
 
 - **Status:**
   - [ ] Implementado
-  - [] Parcialmente implementado 
+  - [ ] Parcialmente implementado 
   - [ ] Não implementado
 
 ### Requisito R3
 
 - **Status:**
-  - [] Implementado
+  - [ ] Implementado
   - [ ] Parcialmente implementado 
   - [ ] Não implementado
 
@@ -92,13 +92,13 @@
 
 - **Status:**
   - [ ] Implementado
-  - [X] Parcialmente implementado
+  - [ ] Parcialmente implementado
   - [ ] Não implementado
 
 ### Requisito R6
 
 - **Status:**
-  - [] Implementado
+  - [ ] Implementado
   - [ ] Parcialmente implementado
   - [ ] Não implementado
 
@@ -112,6 +112,6 @@
 ### Requisito R8
 
 - **Status:**
-  - [] Implementado
+  - [ ] Implementado
   - [ ] Parcialmente implementado
   - [ ] Não implementado
