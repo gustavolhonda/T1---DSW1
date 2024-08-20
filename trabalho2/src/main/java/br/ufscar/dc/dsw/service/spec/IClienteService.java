@@ -10,7 +10,7 @@ public interface IClienteService {
 	
 	List<Cliente> buscarTodos();
 	
-	void salvar(Cliente livro);
+	void salvar(Cliente cliente);
 	
 	void excluir(Long id);
 	
