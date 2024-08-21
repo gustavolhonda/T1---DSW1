@@ -10,11 +10,11 @@
 			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active"><i class="oi oi-caret-right"></i>
-						<span th:text="#{usuario.cadastrar.label}"></span></li>
+						<span th:text="#{profissional.cadastrar.label}"></span></li>
 				</ul>
-				<a class="btn btn-primary btn-md" th:href="@{/usuarios/listar}"
+				<a class="btn btn-primary btn-md" th:href="@{/profissionais/listar}"
 					role="button"> <span class="oi oi-spreadsheet" title="Listar"
-					aria-hidden="true"></span> <span th:text="#{usuario.listar.label}"></span>
+					aria-hidden="true"></span> <span th:text="#{profissional.listar.label}"></span>
 				</a>
 			</div>
 		</nav>
@@ -24,8 +24,8 @@
 			<div th:replace="~{fragments/alert}"></div>
 
 			<form
-				th:action="${usuario.id == null} ? @{/usuarios/salvar} : @{/usuarios/editar}"
-				th:object="${usuario}" method="POST">
+				th:action="${profissional.id == null} ? @{/profissionais/salvar} : @{/profissionais/editar}"
+				th:object="${profissional}" method="POST">
 
 				<div class="form-row">
 					<div class="form-group col-md-6">
@@ -40,7 +40,7 @@
 						</div>
 					</div>
 
-					<div th:if="${usuario.id == null}" class="form-group col-md-6">
+					<div th:if="${profissional.id == null}" class="form-group col-md-6">
 						<label th:text="#{usuario.password.label}" for="password"></label> 
 						<input type="password" class="form-control" id="password"
 							th:placeholder="#{usuario.password.label}" autofocus="autofocus"
@@ -52,7 +52,7 @@
 						</div>
 					</div>
 
-					<div th:unless="${usuario.id == null}" class="form-group col-md-6">
+					<div th:unless="${profissional.id == null}" class="form-group col-md-6">
 						<label th:text="#{usuario.password.label}" for="password"></label> 
 						<input type="password" class="form-control" name="novoPassword"
 							th:placeholder="#{usuario.password.label}" autofocus="autofocus"
@@ -83,18 +83,15 @@
 							<span th:errors="*{CPF}"></span>
 						</div>
 					</div>
-					
-					<div class="form-group col-md-6">
-						<label th:text="#{usuario.role.label}" for="role"></label> 
-						<select id="role" class="form-control" th:field="*{role}"
-							th:classappend="${#fields.hasErrors('role')} ? is-invalid">
-							<option value="ROLE_ADMIN">ROLE_ADMIN</option>
-							<option value="ROLE_USER">ROLE_CLIENT</option>
-							<option value="ROLE_USER">ROLE_PROFESSIONAL</option>
-						</select>
 
+					<div class="form-group col-md-6">
+						<label th:text="#{profissional.especialidade.label}" for="especialidade"></label> 
+						<input type="text" class="form-control" id="especialidade" th:field="*{especialidade}"
+						 placeholder="#{profissional.especialidade.label}" autofocus="autofocus"
+							th:classappend="${#fields.hasErrors('especialidade')} ? is-invalid" />
+							
 						<div class="invalid-feedback">
-							<span th:errors="*{role}"></span>
+							<span th:errors="*{especialidade}"></span>
 						</div>
 					</div>
 				</div>

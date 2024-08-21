@@ -39,7 +39,10 @@ public class ProfissionalController {
 		if (result.hasErrors()) {
 			return "profissional/cadastro";
 		}
-		
+		System.out.println(profissional.getCPF());
+
+		profissional.setRole("ROLE_PROFISSIONAL");
+		profissional.setEnabled(true);
 		service.salvar(profissional);
 		attr.addFlashAttribute("sucess", "profissionais.create.sucess");
 		return "redirect:/profissionais/listar";
