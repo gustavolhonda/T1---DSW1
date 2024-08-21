@@ -43,10 +43,9 @@ public class WebSecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
 				.authorizeHttpRequests((authz) -> authz
-						.requestMatchers("/error", "/login/**", "/js/**").permitAll()
+						.requestMatchers("/error", "/login/**","/listar/**", "/js/**").permitAll()
 						.requestMatchers("/css/**", "/image/**", "/webjars/**").permitAll()
-						.requestMatchers("/agendamentos/**").hasRole("CLIENT") 
-						.requestMatchers("/agendamentos/**").hasRole("PROFESSIONAL") 
+						.requestMatchers("/agendamentos/**").hasAnyRole("CLIENT", "PROFESSIONAL") 
 						.requestMatchers("/profissionais/**", "/clientes/**", "/usuarios/**").hasRole("ADMIN")
 						.anyRequest().authenticated())
 				.formLogin((form) -> form

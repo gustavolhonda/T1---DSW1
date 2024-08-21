@@ -36,6 +36,18 @@
 						</div>
 					</div>
 				</form>
+
+				<form  th:action="@{/listar}" method="get">
+					<div class="form-group">
+						<div class="row">
+							<div class="col-sm-3 col-sm-offset-3">
+								<input type="submit" name="list-submit" id="list-submit"
+									class="form-control btn btn-info" th:value="#{list.button}">
+							</div>
+						</div>
+					</div>
+
+
 			</div>
 		</div>
 	</div>
