@@ -11,7 +11,7 @@
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active">
 						<i class="oi oi-caret-right"></i>
-						<span th:text="#{compra.listar.label}"></span>
+						<span th:text="#{agendamento.listar.label}"></span>
 					</li>
 				</ul>
 				<a class="btn btn-primary btn-md" th:href="@{/compras/cadastrar}" role="button"> 
@@ -30,12 +30,10 @@
 					<thead>
 						<tr>
 							<th class="bg-warning">#</th>
-							<th class="bg-warning" th:text="#{compra.data.label}"></th>
-							<th class="bg-warning" th:text="#{livro.titulo.label}"></th>
-							<th class="bg-warning" th:text="#{livro.autor.label}"></th>
-							<th class="bg-warning" th:text="#{livro.editora.label}"></th>
-							<th class="bg-warning" th:text="#{livro.ano.label}"></th>
-							<th class="bg-warning" th:text="#{compra.valor.label}"></th>
+							<th class="bg-warning" th:text="#{agendamento.listar.data_hora}"></th>
+							<th class="bg-warning" th:text="#{agendamento.listar.link}"></th>
+							<th class="bg-warning" th:text="#{agendamento.listar.cliente}"></th>
+							<th class="bg-warning" th:text="#{agendamento.listar.profissional}"></th>
 						</tr>
 					</thead>
 					<tbody>
