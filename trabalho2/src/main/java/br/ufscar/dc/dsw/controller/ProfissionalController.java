@@ -36,9 +36,9 @@ public class ProfissionalController {
 	@PostMapping("/salvar")
 	public String salvar(@Valid Profissional profissional, BindingResult result, RedirectAttributes attr) {
 		
-		if (result.hasErrors()) {
-			return "profissional/cadastro";
-		}
+		//if (result.hasErrors()) {
+		//	return "profissional/cadastro";
+		//}
 		System.out.println(profissional.getCPF());
 
 		profissional.setRole("ROLE_PROFISSIONAL");

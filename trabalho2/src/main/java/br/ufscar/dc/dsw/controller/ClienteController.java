@@ -40,16 +40,16 @@ public class ClienteController {
 	@PostMapping("/salvar")
 	public String salvar(@Valid Cliente cliente, BindingResult result, RedirectAttributes attr) {
 
-		if (result.hasErrors()) {
-			return "cliente/cadastro";
-		}
+		//if (result.hasErrors()) {
+		//	return "cliente/cadastro";
+		//}
 
 		cliente.setRole("ROLE_CLIENT");
 		cliente.setEnabled(true);
 
 		clienteService.salvar(cliente);
 		attr.addFlashAttribute("sucess", "cliente.create.sucess");
-		return "redirect:/cliente/listar";
+		return "redirect:/clientes/listar";
 	}
 
 	@GetMapping("/editar/{id}")
