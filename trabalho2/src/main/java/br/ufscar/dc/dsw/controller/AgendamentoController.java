@@ -20,6 +20,7 @@ import br.ufscar.dc.dsw.security.UsuarioDetails;
 import br.ufscar.dc.dsw.service.spec.IAgendamentoService;
 import br.ufscar.dc.dsw.service.spec.IClienteService;
 import br.ufscar.dc.dsw.service.spec.IProfissionalService;
+import jakarta.validation.Valid;
 
 
 @Controller
@@ -42,27 +43,23 @@ public class AgendamentoController {
 
     @GetMapping("/listar")
 	public String listar(ModelMap model) {
-    Usuario user = getUsuario();
+		Usuario user = getUsuario();
 
 		if ("ROLE_CLIENT".equals(user.getRole())) {
-            Cliente cliente = clienteService.buscarPorId(user.getId());
-			model.addAttribute("agendamento", cliente.getAgendamentos());
+			Cliente cliente = clienteService.buscarPorId(user.getId());
+			model.addAttribute("agendamentos", cliente.getAgendamentos());
 		} else {
 			Profissional profissional = profissionalService.buscarPorId(user.getId());
-			model.addAttribute("agendamento", profissional.getAgendamentos());
+			model.addAttribute("agendamentos", profissional.getAgendamentos());
 		}
 		return "agendamento/lista";
 	}
 
     @PostMapping("/salvar")
-	public String salvar(Agendamento agendamento, BindingResult result, RedirectAttributes attr) {
-		
-		if (result.hasErrors()) {
-			return "agendamento/cadastro";
-		}
-		
+	public String salvar(@Valid Agendamento agendamento, BindingResult result, RedirectAttributes attr) {
+
 		agendamentoService.salvar(agendamento);
-		attr.addFlashAttribute("sucess", "agendamentos.create.sucess");
+		attr.addFlashAttribute("sucess", "agendamento.create.sucess");
 		return "redirect:/agendamentos/listar";
 	}
 

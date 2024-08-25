@@ -14,4 +14,5 @@ public interface IAgendamentoDAO extends CrudRepository<Agendamento, Long>{
 	Agendamento findById(long id);
 	
 	Agendamento save(Agendamento agendamento);
+
 }

@@ -9,9 +9,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import br.ufscar.dc.dsw.dao.IProfissionalDAO;
+import br.ufscar.dc.dsw.dao.IAgendamentoDAO;
 import br.ufscar.dc.dsw.dao.IClienteDAO;
 import br.ufscar.dc.dsw.dao.IUsuarioDAO;
 import br.ufscar.dc.dsw.domain.Profissional;
+import br.ufscar.dc.dsw.domain.Agendamento;
 import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Usuario;
 
@@ -23,7 +25,7 @@ public class ConsultasMvcApplication {
 	}
 
 	@Bean //arrumar isso
-	public CommandLineRunner demo(IUsuarioDAO usuarioDAO, BCryptPasswordEncoder encoder, IProfissionalDAO editoraDAO, IClienteDAO livroDAO) {
+	public CommandLineRunner demo(IUsuarioDAO usuarioDAO, BCryptPasswordEncoder encoder, IAgendamentoDAO agendamentoDAO, IClienteDAO livroDAO) {
 		return (args) -> {
 			
 			Usuario u1 = new Usuario();
@@ -57,6 +59,13 @@ public class ConsultasMvcApplication {
 
 			u3.setEnabled(true);
 			usuarioDAO.save(u3);
+
+			Agendamento a2 = new Agendamento();
+			a2.setCliente(u2);
+			a2.setProfissional(u3);
+			a2.setDataHora("10-05-2025 13:00");
+			a2.setLinkVideoConferencia("Tome link");
+			agendamentoDAO.save(a2);
 		};
 	}
 }

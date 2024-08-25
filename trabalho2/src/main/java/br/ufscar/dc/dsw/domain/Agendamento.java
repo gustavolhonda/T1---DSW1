@@ -17,10 +17,10 @@ public class Agendamento extends AbstractEntity<Long> {
 
 	@NotNull (message = "{NotNull.agendamento.data}")
 	@Column(nullable = false, length = 30)
-	private String data_hora;
+	private String dataHora;
 	
 	@Column(nullable = false, length = 50)
-	private String linkVideoconferencia;
+	private String linkVideoConferencia;
 
 	@NotNull
 	@ManyToOne
@@ -32,20 +32,20 @@ public class Agendamento extends AbstractEntity<Long> {
 	@JoinColumn(name = "profissional_id")
 	private Profissional profissional;
 
-	public String getData_hora() {
-		return data_hora;
+	public String getDataHora() {
+		return dataHora;
 	}
 
-	public void setData_hora(String data_hora) {
-		this.data_hora = data_hora;
+	public void setDataHora(String dataHora) {
+		this.dataHora = dataHora;
 	}
 
-	public String getLinkVideoconferencia() {
-		return linkVideoconferencia;
+	public String getLinkVideoConferencia() {
+		return linkVideoConferencia;
 	}
 
-	public void setLinkVideoconferencia(String linkVideoconferencia) {
-		this.linkVideoconferencia = linkVideoconferencia;
+	public void setLinkVideoConferencia(String linkVideoConferencia) {
+		this.linkVideoConferencia = linkVideoConferencia;
 	}
 
 	public Cliente getCliente() {

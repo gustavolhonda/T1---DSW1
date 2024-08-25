@@ -14,9 +14,9 @@
 						<span th:text="#{agendamento.listar.label}"></span>
 					</li>
 				</ul>
-				<a class="btn btn-primary btn-md" th:href="@{/compras/cadastrar}" role="button"> 
+				<a class="btn btn-primary btn-md" th:href="@{/agendamentos/cadastrar}" role="button"> 
 					<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span> 
-					<span th:text="#{compra.cadastrar.label}"></span>
+					<span th:text="#{agendamento.cadastrar.label}"></span>
 				</a>
 			</div>
 		</nav>
@@ -37,14 +37,12 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="compra : ${compras}">
-							<td th:text="${compra.id}"></td>
-							<td th:text="${compra.data}"></td>
-							<td th:text="${compra.livro.titulo}"></td>
-							<td th:text="${compra.livro.autor}"></td>
-							<td th:text="${compra.livro.editora.nome}"></td>
-							<td th:text="${compra.livro.ano}"></td>
-							<td th:text="|R$ ${#numbers.formatDecimal(compra.valor,2,2,'COMMA')}|"></td>
+						<tr th:each="agendamento : ${agendamentos}">
+							<td th:text="${agendamento.id}"></td>
+							<td th:text="${agendamento.dataHora}"></td>
+							<td th:text="${agendamento.linkVideoConferencia}"></td>
+							<td th:text="${agendamento.cliente.name}"></td>
+							<td th:text="${agendamento.profissional.name}"></td>
 						</tr>
 					</tbody>
 				</table>
