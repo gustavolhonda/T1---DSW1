@@ -12,7 +12,7 @@ public interface IProfissionalService {
 
 	List<Profissional> buscarTodos();
 
-	void salvar(Profissional editora);
+	void salvar(Profissional profissional);
 
 	void excluir(Long id);
 }

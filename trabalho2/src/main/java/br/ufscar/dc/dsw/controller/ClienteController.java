@@ -61,10 +61,12 @@ public class ClienteController {
 	@PostMapping("/editar")
 	public String editar(@Valid Cliente cliente, BindingResult result, RedirectAttributes attr) {
 
-		if (result.hasErrors()) {
-			return "cliente/cadastro";
-		}
+		//if (result.hasErrors()) {
+		//	return "cliente/cadastro";
+		//}
 
+		cliente.setRole("ROLE_CLIENT");
+		cliente.setEnabled(true);
 		clienteService.salvar(cliente);
 		attr.addFlashAttribute("sucess", "cliente.edit.sucess");
 		return "redirect:/clientes/listar";

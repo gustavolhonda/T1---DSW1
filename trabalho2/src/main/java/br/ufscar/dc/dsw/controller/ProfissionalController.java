@@ -39,7 +39,7 @@ public class ProfissionalController {
 		//if (result.hasErrors()) {
 		//	return "profissional/cadastro";
 		//}
-		System.out.println(profissional.getCPF());
+		//System.out.println(profissional.getCPF());
 
 		profissional.setRole("ROLE_PROFISSIONAL");
 		profissional.setEnabled(true);
@@ -57,10 +57,12 @@ public class ProfissionalController {
 	@PostMapping("/editar")
 	public String editar(@Valid Profissional profissional, BindingResult result, RedirectAttributes attr) {
 		
-		if (result.hasErrors()) {
-			return "profissional/cadastro";
-		}
-
+		//if (result.hasErrors()) {
+		//	return "profissional/cadastro";
+		//}
+		
+		profissional.setRole("ROLE_PROFISSIONAL");
+		profissional.setEnabled(true);
 		service.salvar(profissional);
 		attr.addFlashAttribute("sucess", "profissionais.edit.sucess");
 		return "redirect:/profissionais/listar";
