@@ -39,7 +39,7 @@
 							<td th:text="${profissional.especialidade}"></td>
 							<td th:text="${profissional.CPF}"></td>
 							<td colspan="2">
-								<a class="btn btn-info btn-sm" th:href="@{'/agendamentos/cadastrar?profissionalId=' + ${profissional.id}}"
+								<a class="btn btn-info btn-sm" th:href="@{/agendamentos/adicionar/{id} (id=${profissional.id}) }"
 									role="button"> 
 									<span class="oi oi-brush" th:title="#{link.agendar.label}" aria-hidden="true"> </span>
 								</a>

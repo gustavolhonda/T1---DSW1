@@ -42,6 +42,12 @@ public class AgendamentoController {
 		return "agendamento/cadastro";
 	}
 
+    @GetMapping("/adicionar/{id}")
+	public String adicionar(Agendamento agendamento, ModelMap model) {
+		
+		return "agendamento/form";
+	}
+
     @GetMapping("/listar")
 	public String listar(ModelMap model) {
 		Usuario user = getUsuario();
