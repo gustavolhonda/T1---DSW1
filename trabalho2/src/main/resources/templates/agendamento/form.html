@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8" />
+    <title>Lista de Profissionais</title>
+</head>
+<body>
+    <section class="layout-content" layout:fragment="corpo">
+
+        <nav class="navbar navbar-expand-md bg-light">
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <i class="oi oi-caret-right"></i>
+                        <span>Cadastrar consulta</span>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+
+        <div align="center">
+			<form th:action="@{/agendamentos/salvar}"
+                  th:object="${agendamento}" method="post">
+                <table border="1" style="width: 400px; border: 1px solid black">
+                    <h2>Escolha um horário</h2>
+                    <tr>
+                        <th>
+                            <label for="dataHora" th:text="#{agendamento.dataHora.label}"></label>
+                        </th>
+                        </label></td>
+                        <td><input type="datetime-local" id="dataHora" name="dataHora" th:field="*{dataHora}" size="45"/></td>
+                    </tr>
+                
+                </table>
+                <input type="hidden" th:field="*{profissional.id}" />
+                <br/>
+                <br/>
+                
+                <tr>
+                    <td colspan="2" align="center"><input type="submit" 
+                        th:value="#{button.salvar.label}"
+                        class="btn btn-primary btn-sm"></td>
+                </tr>
+			</form>
+		</div>
+
+       
+        
+    </section>
+</body>
+</html>

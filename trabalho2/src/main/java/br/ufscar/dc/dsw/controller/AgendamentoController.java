@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -43,8 +44,9 @@ public class AgendamentoController {
 	}
 
     @GetMapping("/adicionar/{id}")
-	public String adicionar(Agendamento agendamento, ModelMap model) {
-		
+	public String adicionar(@PathVariable("id") Long id, ModelMap model, Agendamento agendamento) {
+		Profissional profissional = profissionalService.buscarPorId(id);
+		model.addAttribute("profissional", profissional);
 		return "agendamento/form";
 	}
 
@@ -63,7 +65,17 @@ public class AgendamentoController {
 	}
 
     @PostMapping("/salvar")
-	public String salvar(@Valid Agendamento agendamento, BindingResult result, RedirectAttributes attr) {
+	public String salvar(Agendamento agendamento,ModelMap model, BindingResult result, RedirectAttributes attr) {
+
+		Usuario user = getUsuario();
+
+		Cliente cliente = clienteService.buscarPorId(user.getId());
+		agendamento.setCliente(cliente);
+
+		Profissional profissional = profissionalService.buscarPorId(agendamento.getProfissional().getId());
+    agendamento.setProfissional(profissional);
+		
+		agendamento.setLinkVideoConferencia("https://videoconferencia.example.com/" + new java.util.Random().nextInt(1000000));
 
 		agendamentoService.salvar(agendamento);
 		attr.addFlashAttribute("sucess", "agendamento.create.sucess");
