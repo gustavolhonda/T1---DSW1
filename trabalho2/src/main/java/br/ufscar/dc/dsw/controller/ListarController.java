@@ -22,6 +22,7 @@ public class ListarController {
 	@Autowired
 	private IProfissionalService service;
 	
+	@GetMapping
 	public String listar(ModelMap model) {
 		model.addAttribute("profissionais",service.buscarTodos());
 		return "lista";

@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}">
 <head>
-<meta charset="UTF-8" />
+    <meta charset="UTF-8" />
+    <title>Lista de Profissionais</title>
 </head>
 <body>
-	<section class="layout-content" layout:fragment="corpo">
+    <section class="layout-content" layout:fragment="corpo">
 
-		<div class="container" id="listagem">
+        <nav class="navbar navbar-expand-md bg-light">
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <i class="oi oi-caret-right"></i>
+                        <span>Profissionais Disponíveis</span>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
-			<div th:replace="~{fragments/alert}"></div>
+        <div class="container" id="listagem">
+            <div th:replace="~{fragments/alert}"></div>
 
-			<div class="table-responsive">
+            <div class="table-responsive">
 				<table class="table table-striped table-hover table-sm">
 					<thead>
 						<tr>
@@ -28,24 +39,18 @@
 							<td th:text="${profissional.especialidade}"></td>
 							<td th:text="${profissional.CPF}"></td>
 							<td colspan="2">
-								<a class="btn btn-info btn-sm" th:href="@{/profissionais/editar/{id} (id=${profissional.id}) }"
+								<a class="btn btn-info btn-sm" th:href="@{'/agendamentos/cadastrar?profissionalId=' + ${profissional.id}}"
 									role="button"> 
-									<span class="oi oi-brush" th:title="#{link.editar.label}" aria-hidden="true"> </span>
+									<span class="oi oi-brush" th:title="#{link.agendar.label}" aria-hidden="true"> </span>
 								</a>
-								<button
-									th:id="${'btn_profissionais/excluir/' + profissional.id}"
-									type="button" class="btn btn-danger btn-sm"
-									data-toggle="modal" data-target="#myModal">
-									<span class="oi oi-circle-x" th:title="#{link.excluir.label}" aria-hidden="true"></span>
-								</button>
 							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
-		</div>
+        </div>
 
-		<div th:replace="~{fragments/modal::modal}"></div>
-	</section>
+        <div th:replace="~{fragments/modal::modal}"></div>
+    </section>
 </body>
 </html>
