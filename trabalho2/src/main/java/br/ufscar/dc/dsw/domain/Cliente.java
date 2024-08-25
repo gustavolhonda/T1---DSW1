@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -35,7 +36,7 @@ public class Cliente extends Usuario {
 	@Column(nullable = false)
 	private String dataNasc;
 
-	@OneToMany(mappedBy = "cliente")
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<Agendamento> agendamentos;
 
 	public String getTelefone() {

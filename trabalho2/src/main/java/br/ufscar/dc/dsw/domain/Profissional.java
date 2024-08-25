@@ -2,7 +2,7 @@ package br.ufscar.dc.dsw.domain;
 
 import java.util.List;
 
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -25,7 +25,7 @@ public class Profissional extends Usuario {
 	@Column(columnDefinition = "TEXT")
 	private String curriculo;
 
-	@OneToMany(mappedBy = "profissional")
+	@OneToMany(mappedBy = "profissional", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<Agendamento> agendamentos;
 
 	public String getEspecialidade() {
