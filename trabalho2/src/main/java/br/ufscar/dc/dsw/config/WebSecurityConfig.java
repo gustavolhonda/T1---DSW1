@@ -45,6 +45,7 @@ public class WebSecurityConfig {
 				.authorizeHttpRequests((authz) -> authz
 						.requestMatchers("/error", "/login/**","/listar/**", "/js/**").permitAll()
 						.requestMatchers("/css/**", "/image/**", "/webjars/**").permitAll()
+						.requestMatchers("agendamentos/cadastrar").permitAll()
 						.requestMatchers( "/agendamentos/**").hasAnyRole("CLIENT", "PROFESSIONAL") 
 						.requestMatchers("/profissionais/**", "/clientes/**", "/usuarios/**").hasRole("ADMIN")
 						.anyRequest().authenticated())
