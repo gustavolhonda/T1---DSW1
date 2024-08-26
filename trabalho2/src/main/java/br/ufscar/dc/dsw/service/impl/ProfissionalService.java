@@ -1,7 +1,6 @@
 package br.ufscar.dc.dsw.service.impl;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,14 +37,12 @@ public class ProfissionalService implements IProfissionalService {
 	
 	@Transactional(readOnly = true)
 	public List<Profissional> buscarPorEspecialidade(String especialidade) {
-		return dao.findByEspecialidade(especialidade);
+		return dao.findAllByEspecialidade(especialidade);
 	}
-	
-	public List<String> listarEspecialidades() {
-        return dao.findAll()
-                .stream()
-                .map(Profissional::getEspecialidade)
-                .distinct()
-                .collect(Collectors.toList());
+
+	@Transactional(readOnly = true)
+    public List<String> listarEspecialidadesDistintas() {
+        return dao.findDistinctEspecialidades();
     }
+
 }

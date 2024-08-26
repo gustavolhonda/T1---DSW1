@@ -1,20 +1,17 @@
 package br.ufscar.dc.dsw;
 
-import java.math.BigDecimal;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import br.ufscar.dc.dsw.dao.IProfissionalDAO;
 import br.ufscar.dc.dsw.dao.IAgendamentoDAO;
 import br.ufscar.dc.dsw.dao.IClienteDAO;
 import br.ufscar.dc.dsw.dao.IUsuarioDAO;
-import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.domain.Agendamento;
 import br.ufscar.dc.dsw.domain.Cliente;
+import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.domain.Usuario;
 
 @SpringBootApplication
@@ -55,10 +52,61 @@ public class ConsultasMvcApplication {
 			u3.setCPF("367.318.380-04");
 			u3.setName("Fulano Silva");
 			u3.setRole("ROLE_PROFESSIONAL");
-			u3.setEspecialidade("otario");
+			u3.setEspecialidade("Ortopedista");
 
 			u3.setEnabled(true);
 			usuarioDAO.save(u3);
+
+			Profissional u4 = new Profissional();
+			u4.setUsername("joaodasilva");
+			u4.setPassword(encoder.encode("456"));
+			u4.setCPF("789.456.123-00");
+			u4.setName("João da Silva");
+			u4.setRole("ROLE_PROFESSIONAL");
+			u4.setEspecialidade("Advogado");
+			u4.setEnabled(true);
+			usuarioDAO.save(u4);
+
+			Profissional u5 = new Profissional();
+			u5.setUsername("mariaribeiro");
+			u5.setPassword(encoder.encode("789"));
+			u5.setCPF("123.789.456-00");
+			u5.setName("Maria Ribeiro");
+			u5.setRole("ROLE_PROFESSIONAL");
+			u5.setEspecialidade("Engenheira");
+			u5.setEnabled(true);
+			usuarioDAO.save(u5);
+
+			Profissional u6 = new Profissional();
+			u6.setUsername("carlosalmeida");
+			u6.setPassword(encoder.encode("101112"));
+			u6.setCPF("654.321.987-00");
+			u6.setName("Carlos Almeida");
+			u6.setRole("ROLE_PROFESSIONAL");
+			u6.setEspecialidade("Médico");
+			u6.setEnabled(true);
+			usuarioDAO.save(u6);
+
+			Profissional u7 = new Profissional();
+			u7.setUsername("anacarvalho");
+			u7.setPassword(encoder.encode("131415"));
+			u7.setCPF("987.654.321-00");
+			u7.setName("Ana Carvalho");
+			u7.setRole("ROLE_PROFESSIONAL");
+			u7.setEspecialidade("Psicóloga");
+			u7.setEnabled(true);
+			usuarioDAO.save(u7);
+
+			Profissional u8 = new Profissional();
+			u8.setUsername("pedroramos");
+			u8.setPassword(encoder.encode("161718"));
+			u8.setCPF("321.654.987-00");
+			u8.setName("Pedro Ramos");
+			u8.setRole("ROLE_PROFESSIONAL");
+			u8.setEspecialidade("Dentista");
+			u8.setEnabled(true);
+			usuarioDAO.save(u8);
+
 
 			Agendamento a2 = new Agendamento();
 			a2.setCliente(u2);

@@ -46,6 +46,7 @@ public class AgendamentoController {
     @GetMapping("/cadastrar")
 	public String cadastrar(Agendamento agendamento, ModelMap model) {
 		model.addAttribute("profissionais",profissionalService.buscarTodos());
+		model.addAttribute("especialidades", profissionalService.listarEspecialidadesDistintas());
 		return "agendamento/cadastro";
 	}
 

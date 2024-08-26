@@ -16,5 +16,6 @@ public interface IProfissionalService {
 
 	void excluir(Long id);
 
-	public List<String> listarEspecialidades();
+	List<String> listarEspecialidadesDistintas();
+
 }

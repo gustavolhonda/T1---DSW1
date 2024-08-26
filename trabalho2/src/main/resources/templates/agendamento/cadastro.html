@@ -22,7 +22,7 @@
             <div th:replace="~{fragments/alert}"></div>
             
             <!-- Filtro de Especialidade -->
-            <form method="get" action="#" id="filterForm">
+            <form method="post" action="/cadastrar" id="filterForm">
                 <div class="form-group">
                     <label for="especialidade" th:text="#{profissional.especialidade.label}">Especialidade</label>
                     <select class="form-control" id="especialidade" name="especialidade" onchange="document.getElementById('filterForm').submit();">
