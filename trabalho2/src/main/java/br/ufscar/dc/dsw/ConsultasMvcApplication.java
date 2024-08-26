@@ -40,7 +40,7 @@ public class ConsultasMvcApplication {
 			u2.setCPF("985.849.614-10");
 			u2.setName("Beltrano Andrade");
 			u2.setRole("ROLE_CLIENT");
-			u2.setTelefone("17 99999-9999");
+			u2.setTelefone("(17) 99999-9999");
 			u2.setSexo("M");
 			u2.setDataNasc("1999-01-01");
 			u2.setEnabled(true);
@@ -107,12 +107,33 @@ public class ConsultasMvcApplication {
 			u8.setEnabled(true);
 			usuarioDAO.save(u8);
 
+			Cliente u9 = new Cliente();
+			u9.setUsername("vitorvechin@gmail.com");
+			u9.setPassword(encoder.encode("123"));
+			u9.setCPF("416.849.614-10");
+			u9.setName("Vitor Vechin");
+			u9.setRole("ROLE_CLIENT");
+			u9.setTelefone("(19) 99166-9388");
+			u9.setSexo("M");
+			u9.setDataNasc("2003-06-10");
+			u9.setEnabled(true);
+			usuarioDAO.save(u9);
+
+			Profissional u10 = new Profissional();
+			u10.setUsername("joao.migliatti@gmail.com");
+			u10.setPassword(encoder.encode("123"));
+			u10.setCPF("321.654.917-00");
+			u10.setName("João Paulo");
+			u10.setRole("ROLE_PROFESSIONAL");
+			u10.setEspecialidade("Computação");
+			u10.setEnabled(true);
+			usuarioDAO.save(u10);
 
 			Agendamento a2 = new Agendamento();
 			a2.setCliente(u2);
 			a2.setProfissional(u3);
 			a2.setDataHora("10-05-2025 13:00");
-			a2.setLinkVideoConferencia("Tome link");
+			a2.setLinkVideoConferencia("https://videoconferencia.example.com/307132");
 			agendamentoDAO.save(a2);
 		};
 	}
