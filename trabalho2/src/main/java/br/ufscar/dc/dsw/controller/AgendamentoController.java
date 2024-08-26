@@ -1,11 +1,13 @@
 package br.ufscar.dc.dsw.controller;
 
-
-
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+import jakarta.mail.internet.AddressException;
+import jakarta.mail.internet.InternetAddress;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -26,11 +28,13 @@ import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.security.UsuarioDetails;
+import br.ufscar.dc.dsw.service.impl.EmailService;
 import br.ufscar.dc.dsw.service.spec.IAgendamentoService;
 import br.ufscar.dc.dsw.service.spec.IClienteService;
 import br.ufscar.dc.dsw.service.spec.IProfissionalService;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
 
 @Controller
 @RequestMapping("/agendamentos")
@@ -44,6 +48,10 @@ public class AgendamentoController {
 
     @Autowired
     private IProfissionalService profissionalService;
+
+		@Autowired
+		private EmailService emailService;
+
 
 	@GetMapping("/cadastrar")
 	public String cadastrar(@RequestParam(value = "especialidade", required = false) String especialidade, ModelMap model) {
@@ -88,7 +96,7 @@ public class AgendamentoController {
 
     @PostMapping("/salvar")
 	public String salvar(@RequestParam("dataHora") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) String dataHoraString,
-        @ModelAttribute Agendamento agendamento,ModelMap model, BindingResult result, RedirectAttributes attr) {
+        @ModelAttribute Agendamento agendamento,ModelMap model, BindingResult result, RedirectAttributes attr) throws UnsupportedEncodingException, AddressException {
 
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
@@ -137,8 +145,21 @@ public class AgendamentoController {
 			return "agendamento/form";
 		}
 
-		
-		agendamento.setLinkVideoConferencia("https://videoconferencia.example.com/" + new java.util.Random().nextInt(1000000));
+		String linkConferencia = "https://videoconferencia.example.com/" + new java.util.Random().nextInt(1000000);
+		agendamento.setLinkVideoConferencia(linkConferencia);
+	
+		InternetAddress from = new InternetAddress("testedswt@gmail.com", "TesteDSW");
+
+		InternetAddress to1 = new InternetAddress(cliente.getUsername());
+	
+		InternetAddress to2 = new InternetAddress(profissional.getUsername());
+	
+		String subject = "Link para a videoconferência de Consultas Online";
+		String body = linkConferencia;
+
+		// Call the send method of the EmailService
+		emailService.send(from, to1, subject, body);
+		emailService.send(from, to2, subject, body);
 
 		agendamentoService.salvar(agendamento);
 		attr.addFlashAttribute("sucess", "agendamento.create.sucess");
