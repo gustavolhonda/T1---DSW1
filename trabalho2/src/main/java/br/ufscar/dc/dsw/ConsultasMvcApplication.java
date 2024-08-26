@@ -52,7 +52,7 @@ public class ConsultasMvcApplication {
 			u3.setCPF("367.318.380-04");
 			u3.setName("Fulano Silva");
 			u3.setRole("ROLE_PROFESSIONAL");
-			u3.setEspecialidade("Ortopedista");
+			u3.setEspecialidade("Ortopedia");
 
 			u3.setEnabled(true);
 			usuarioDAO.save(u3);
@@ -63,7 +63,7 @@ public class ConsultasMvcApplication {
 			u4.setCPF("789.456.123-00");
 			u4.setName("João da Silva");
 			u4.setRole("ROLE_PROFESSIONAL");
-			u4.setEspecialidade("Advogado");
+			u4.setEspecialidade("Advocacia");
 			u4.setEnabled(true);
 			usuarioDAO.save(u4);
 
@@ -73,7 +73,7 @@ public class ConsultasMvcApplication {
 			u5.setCPF("123.789.456-00");
 			u5.setName("Maria Ribeiro");
 			u5.setRole("ROLE_PROFESSIONAL");
-			u5.setEspecialidade("Engenheira");
+			u5.setEspecialidade("Engenharia Civil");
 			u5.setEnabled(true);
 			usuarioDAO.save(u5);
 
@@ -83,7 +83,7 @@ public class ConsultasMvcApplication {
 			u6.setCPF("654.321.987-00");
 			u6.setName("Carlos Almeida");
 			u6.setRole("ROLE_PROFESSIONAL");
-			u6.setEspecialidade("Médico");
+			u6.setEspecialidade("Cardiologia");
 			u6.setEnabled(true);
 			usuarioDAO.save(u6);
 
@@ -93,7 +93,7 @@ public class ConsultasMvcApplication {
 			u7.setCPF("987.654.321-00");
 			u7.setName("Ana Carvalho");
 			u7.setRole("ROLE_PROFESSIONAL");
-			u7.setEspecialidade("Psicóloga");
+			u7.setEspecialidade("Psicologia");
 			u7.setEnabled(true);
 			usuarioDAO.save(u7);
 
@@ -103,7 +103,7 @@ public class ConsultasMvcApplication {
 			u8.setCPF("321.654.987-00");
 			u8.setName("Pedro Ramos");
 			u8.setRole("ROLE_PROFESSIONAL");
-			u8.setEspecialidade("Dentista");
+			u8.setEspecialidade("Odontologia");
 			u8.setEnabled(true);
 			usuarioDAO.save(u8);
 
