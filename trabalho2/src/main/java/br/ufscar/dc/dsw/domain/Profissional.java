@@ -25,7 +25,7 @@ public class Profissional extends Usuario {
 	@Column(columnDefinition = "TEXT")
 	private String curriculo;
 
-	@OneToMany(mappedBy = "profissional", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OneToMany(mappedBy = "profissional")
 	private List<Agendamento> agendamentos;
 
 	public String getEspecialidade() {

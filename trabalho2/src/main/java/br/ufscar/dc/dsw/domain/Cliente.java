@@ -36,7 +36,7 @@ public class Cliente extends Usuario {
 	@Column(nullable = false)
 	private String dataNasc;
 
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OneToMany(mappedBy = "cliente")
 	private List<Agendamento> agendamentos;
 
 	public String getTelefone() {
