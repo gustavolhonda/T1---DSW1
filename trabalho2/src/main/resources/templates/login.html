@@ -29,7 +29,7 @@
 					</div>
 					<div class="form-group">
 						<div class="row">
-							<div class="col-sm-3 col-sm-offset-3">
+							<div class="col-sm-5 col-sm-offset-3">
 								<input type="submit" name="login-submit" id="login-submit"
 									class="form-control btn btn-info" th:value="#{login.button}">
 							</div>
@@ -37,17 +37,14 @@
 					</div>
 				</form>
 
-				<form  th:action="@{/agendamentos/cadastrar}" method="get">
-					<div class="form-group">
-						<div class="row">
-							<div class="col-sm-3 col-sm-offset-3">
-								<input type="submit" name="list-submit" id="list-submit"
-									class="form-control btn btn-info" th:value="#{list.button}">
-							</div>
-						</div>
+				<div class="row">
+					<div class="col-sm-5 col-sm-offset-3">
+						<a class="form-control btn btn-info" th:href="@{/agendamentos/cadastrar}" role="button"> 
+							Listar profissionais
+						</a>	
 					</div>
-
-
+				</div>
+			</div>
 			</div>
 		</div>
 	</div>
