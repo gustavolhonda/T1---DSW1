@@ -22,15 +22,17 @@
             <div th:replace="~{fragments/alert}"></div>
             
             <!-- Filtro de Especialidade -->
-            <form method="post" action="/cadastrar" id="filterForm">
+            <form method="get" action="cadastrar" id="filterForm">
                 <div class="form-group">
                     <label for="especialidade" th:text="#{profissional.especialidade.label}">Especialidade</label>
                     <select class="form-control" id="especialidade" name="especialidade" onchange="document.getElementById('filterForm').submit();">
-                        <option value="">-- Todos --</option>
+                        <option value="" th:selected="${especialidadeSelecionada == null or especialidadeSelecionada.isEmpty()}">-- Todos --</option>
                         <option th:each="especialidade : ${especialidades}" 
                                 th:value="${especialidade}" 
-                                th:text="${especialidade}"></option>
+                                th:text="${especialidade}"
+                                th:selected="${especialidade} == ${especialidadeSelecionada}"></option>
                     </select>
+                    
                 </div>
             </form>
 

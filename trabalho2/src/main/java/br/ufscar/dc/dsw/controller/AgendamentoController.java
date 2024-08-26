@@ -2,6 +2,11 @@ package br.ufscar.dc.dsw.controller;
 
 
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,10 +29,6 @@ import br.ufscar.dc.dsw.security.UsuarioDetails;
 import br.ufscar.dc.dsw.service.spec.IAgendamentoService;
 import br.ufscar.dc.dsw.service.spec.IClienteService;
 import br.ufscar.dc.dsw.service.spec.IProfissionalService;
-import jakarta.validation.Valid;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 
 @Controller
@@ -43,12 +44,23 @@ public class AgendamentoController {
     @Autowired
     private IProfissionalService profissionalService;
 
-    @GetMapping("/cadastrar")
-	public String cadastrar(Agendamento agendamento, ModelMap model) {
-		model.addAttribute("profissionais",profissionalService.buscarTodos());
+	@GetMapping("/cadastrar")
+	public String cadastrar(@RequestParam(value = "especialidade", required = false) String especialidade, ModelMap model) {
+		List<Profissional> profissionais;
+	
+		if (especialidade == null || especialidade.isEmpty()) {
+			profissionais = profissionalService.buscarTodos(); // Carrega todos os profissionais na primeira visita
+		} else {
+			profissionais = profissionalService.buscarPorEspecialidade(especialidade); // Filtra profissionais pela especialidade
+		}
+	
+		model.addAttribute("profissionais", profissionais);
 		model.addAttribute("especialidades", profissionalService.listarEspecialidadesDistintas());
+		model.addAttribute("especialidadeSelecionada", especialidade); // Retém a especialidade selecionada, se houver
+	
 		return "agendamento/cadastro";
 	}
+	
 
     @GetMapping("/adicionar/{id}")
 	public String adicionar(@PathVariable("id") Long id, ModelMap model, Agendamento agendamento) {
