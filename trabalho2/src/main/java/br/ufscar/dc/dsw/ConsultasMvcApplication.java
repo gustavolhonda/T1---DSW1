@@ -26,7 +26,7 @@ public class ConsultasMvcApplication {
 		return (args) -> {
 			
 			Usuario u1 = new Usuario();
-			u1.setUsername("admin@gmai.com");
+			u1.setUsername("admin@gmail.com");
 			u1.setPassword(encoder.encode("admin"));
 			u1.setCPF("012.345.678-90");
 			u1.setName("Administrador");
