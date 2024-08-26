@@ -26,7 +26,7 @@ public class ConsultasMvcApplication {
 		return (args) -> {
 			
 			Usuario u1 = new Usuario();
-			u1.setUsername("admin");
+			u1.setUsername("admin@gmai.com");
 			u1.setPassword(encoder.encode("admin"));
 			u1.setCPF("012.345.678-90");
 			u1.setName("Administrador");
@@ -35,7 +35,7 @@ public class ConsultasMvcApplication {
 			usuarioDAO.save(u1);
 			
 			Cliente u2 = new Cliente();
-			u2.setUsername("beltrano");
+			u2.setUsername("beltrano@gmail.com");
 			u2.setPassword(encoder.encode("123"));
 			u2.setCPF("985.849.614-10");
 			u2.setName("Beltrano Andrade");
@@ -47,7 +47,7 @@ public class ConsultasMvcApplication {
 			usuarioDAO.save(u2);
 			
 			Profissional u3 = new Profissional();
-			u3.setUsername("fulano");
+			u3.setUsername("fulano@yahoo.com");
 			u3.setPassword(encoder.encode("123"));
 			u3.setCPF("367.318.380-04");
 			u3.setName("Fulano Silva");
@@ -58,7 +58,7 @@ public class ConsultasMvcApplication {
 			usuarioDAO.save(u3);
 
 			Profissional u4 = new Profissional();
-			u4.setUsername("joaodasilva");
+			u4.setUsername("joaodasilva@gmail.com");
 			u4.setPassword(encoder.encode("456"));
 			u4.setCPF("789.456.123-00");
 			u4.setName("João da Silva");
@@ -68,7 +68,7 @@ public class ConsultasMvcApplication {
 			usuarioDAO.save(u4);
 
 			Profissional u5 = new Profissional();
-			u5.setUsername("mariaribeiro");
+			u5.setUsername("mariaribeiro@gmail.com");
 			u5.setPassword(encoder.encode("789"));
 			u5.setCPF("123.789.456-00");
 			u5.setName("Maria Ribeiro");
@@ -78,7 +78,7 @@ public class ConsultasMvcApplication {
 			usuarioDAO.save(u5);
 
 			Profissional u6 = new Profissional();
-			u6.setUsername("carlosalmeida");
+			u6.setUsername("carlosalmeida@hotmail.com");
 			u6.setPassword(encoder.encode("101112"));
 			u6.setCPF("654.321.987-00");
 			u6.setName("Carlos Almeida");
@@ -88,7 +88,7 @@ public class ConsultasMvcApplication {
 			usuarioDAO.save(u6);
 
 			Profissional u7 = new Profissional();
-			u7.setUsername("anacarvalho");
+			u7.setUsername("anacarvalho@terra.com");
 			u7.setPassword(encoder.encode("131415"));
 			u7.setCPF("987.654.321-00");
 			u7.setName("Ana Carvalho");
@@ -98,7 +98,7 @@ public class ConsultasMvcApplication {
 			usuarioDAO.save(u7);
 
 			Profissional u8 = new Profissional();
-			u8.setUsername("pedroramos");
+			u8.setUsername("pedroramos@icloud.com");
 			u8.setPassword(encoder.encode("161718"));
 			u8.setCPF("321.654.987-00");
 			u8.setName("Pedro Ramos");

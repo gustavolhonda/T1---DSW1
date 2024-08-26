@@ -3,10 +3,9 @@ package br.ufscar.dc.dsw.domain;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
 
 @SuppressWarnings("serial")
 @Entity
@@ -15,7 +14,7 @@ import jakarta.persistence.InheritanceType;
 public class Usuario extends AbstractEntity<Long> {
   
 		@NotBlank
-    @Column(nullable = false, length = 20, unique = true)
+    @Column(nullable = false, length = 50, unique = true)
     private String username;
     
 		@NotBlank
