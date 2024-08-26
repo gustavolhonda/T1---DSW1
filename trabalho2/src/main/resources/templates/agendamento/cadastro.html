@@ -12,7 +12,7 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                         <i class="oi oi-caret-right"></i>
-                        <span>Profissionais Disponíveis</span>
+                        <span th:text="#{profissional.disp.label}"></span>
                     </li>
                 </ul>
             </div>
@@ -44,7 +44,7 @@
                             <th th:text="#{profissional.nome.label}"></th>
                             <th th:text="#{profissional.especialidade.label}"></th>
                             <th th:text="#{profissional.CPF.label}"></th>
-                            <th th:text="#{acao.label}" sec:authorize="hasRole('ROLE_CLIENT')"></th>
+                            <th th:text="#{agendar.label}" sec:authorize="hasRole('ROLE_CLIENT')"></th>
                         </tr>
                     </thead>
                     <tbody>

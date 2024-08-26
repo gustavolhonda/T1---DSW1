@@ -98,9 +98,10 @@ public class AgendamentoController {
 	public String salvar(@RequestParam("dataHora") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) String dataHoraString,
         @ModelAttribute Agendamento agendamento,ModelMap model, BindingResult result, RedirectAttributes attr) throws UnsupportedEncodingException, AddressException {
 
-
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-    	LocalDateTime dataHora = LocalDateTime.parse(dataHoraString, formatter);
+    LocalDateTime dataHora = LocalDateTime.parse(dataHoraString, formatter);
+		
+		agendamento.setDataHora(dataHoraString.replace('T', ' '));
 
 		if (dataHora.isBefore(LocalDateTime.now())) {
 			result.rejectValue("dataHora", "error.agendamento", "A data deve ser futura.");
@@ -157,7 +158,6 @@ public class AgendamentoController {
 		String subject = "Link para a videoconferência de Consultas Online";
 		String body = linkConferencia;
 
-		// Call the send method of the EmailService
 		emailService.send(from, to1, subject, body);
 		emailService.send(from, to2, subject, body);
 

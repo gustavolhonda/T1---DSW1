@@ -12,7 +12,7 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                         <i class="oi oi-caret-right"></i>
-                        <span>Cadastrar consulta</span>
+                        <span th:text="#{agendamento.cadastrar.label}"></span>
                     </li>
                 </ul>
             </div>
@@ -26,7 +26,7 @@
                     <p th:each="err : ${#fields.errors('dataHora')}" th:text="${err}"></p>
                   </div>
                 <table border="1" style="width: 400px; border: 1px solid black">
-                    <h2>Escolha um horário</h2>
+                    <h2 th:text="#{horario.label}"></h2>
                     <tr>
                         <th>
                             <label for="dataHora" th:text="#{agendamento.dataHora.label}"></label>
