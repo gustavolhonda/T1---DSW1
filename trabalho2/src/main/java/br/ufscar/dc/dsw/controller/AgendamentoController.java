@@ -29,6 +29,7 @@ import br.ufscar.dc.dsw.security.UsuarioDetails;
 import br.ufscar.dc.dsw.service.spec.IAgendamentoService;
 import br.ufscar.dc.dsw.service.spec.IClienteService;
 import br.ufscar.dc.dsw.service.spec.IProfissionalService;
+import java.util.List;
 
 
 @Controller
@@ -106,11 +107,6 @@ public class AgendamentoController {
 		if (hora.getMinute() != 0) {
 			result.rejectValue("dataHora", "error.agendamento", "O horário deve terminar em 00.");
 		}
-		
-		if (result.hasErrors()) {
-			model.addAttribute("agendamento", agendamento);
-			return "agendamento/form";
-		}
 
 		Usuario user = getUsuario();
 
@@ -118,7 +114,29 @@ public class AgendamentoController {
 		agendamento.setCliente(cliente);
 
 		Profissional profissional = profissionalService.buscarPorId(agendamento.getProfissional().getId());
-    agendamento.setProfissional(profissional);
+    	agendamento.setProfissional(profissional);
+		
+		List<Agendamento> agendamentos = cliente.getAgendamentos();
+        
+        for (Agendamento agendamentoCliente : agendamentos) {
+            if (agendamentoCliente.getDataHora().equals(dataHoraString)) {
+                result.rejectValue("dataHora", "error.agendamento", "Já possui um agendamento neste horário.");
+            }
+        }
+
+		agendamentos = profissional.getAgendamentos();
+
+		for (Agendamento agendamentoProfissional : agendamentos) {
+            if (agendamentoProfissional.getDataHora().equals(dataHoraString)) {
+                result.rejectValue("dataHora", "error.agendamento", "Horário não disponível.");
+            }
+        }
+		
+		if (result.hasErrors()) {
+			model.addAttribute("agendamento", agendamento);
+			return "agendamento/form";
+		}
+
 		
 		agendamento.setLinkVideoConferencia("https://videoconferencia.example.com/" + new java.util.Random().nextInt(1000000));
 
