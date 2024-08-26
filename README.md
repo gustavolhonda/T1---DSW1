@@ -58,7 +58,7 @@
 
   ---
 
-  ## Requisitos Trabalho 2
+## Requisitos Trabalho 2
 
 ### Requisito R1
 
@@ -90,8 +90,8 @@
 
 #### Agendamento de horário de consulta com um profissional (requer login do cliente via email + senha). O profissional e cliente devem ser informado (via e-mail) sobre o agendamento da consulta -- o link da videoconferência (google meet, zoom, etc) deve estar presente no corpo da mensagem enviada
 - **Status:**
-  - [ ] Implementado
-  - [x] Parcialmente implementado
+  - [x] Implementado
+  - [ ] Parcialmente implementado
   - [ ] Não implementado
 
 ### Requisito R5
