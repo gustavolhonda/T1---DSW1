@@ -8,11 +8,13 @@ public interface IProfissionalService {
 
 	Profissional buscarPorId(Long id);
 
-	Profissional buscarPorEspecialidade(String especialidade);
+	List<Profissional> buscarPorEspecialidade(String especialidade);
 
 	List<Profissional> buscarTodos();
 
 	void salvar(Profissional profissional);
 
 	void excluir(Long id);
+
+	public List<String> listarEspecialidades();
 }
