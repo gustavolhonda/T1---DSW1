@@ -54,7 +54,7 @@ public class ProfissionalController {
 		//}
 		//System.out.println(profissional.getCPF());
 
-		profissional.setRole("ROLE_PROFISSIONAL");
+		profissional.setRole("ROLE_PROFESSIONAL");
 		profissional.setEnabled(true);
 		profissional.setPassword(encoder.encode(profissional.getPassword()));
 		service.salvar(profissional);
@@ -69,7 +69,7 @@ public class ProfissionalController {
 	}
 	
 	@PostMapping("/editar")
-	public String editar(@Valid Profissional profissional, String novoPassword, BindingResult result, RedirectAttributes attr) {
+	public String editar(Profissional profissional, String novoPassword, BindingResult result, RedirectAttributes attr) {
 		
 		//if (result.hasErrors()) {
 		//	return "profissional/cadastro";
@@ -81,7 +81,7 @@ public class ProfissionalController {
 			System.out.println("Senha não foi editada");
 		}
 		
-		profissional.setRole("ROLE_PROFISSIONAL");
+		profissional.setRole("ROLE_PROFESSIONAL");
 		profissional.setEnabled(true);
 		service.salvar(profissional);
 		attr.addFlashAttribute("success", "profissionais.edit.success");

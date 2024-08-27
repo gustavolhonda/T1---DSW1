@@ -58,7 +58,7 @@ public class ClienteController {
 	}
 
 	@PostMapping("/editar")
-	public String editar(@Valid Cliente cliente, String novoPassword, BindingResult result, RedirectAttributes attr) {
+	public String editar(Cliente cliente, String novoPassword, BindingResult result, RedirectAttributes attr) {
 
 		//if (result.hasErrors()) {
 		//	return "cliente/cadastro";
