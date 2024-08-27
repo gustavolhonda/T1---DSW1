@@ -13,4 +13,5 @@
 **Sistema para agendamento de consultas online com profissionais**
 
 **Arquitetura:** Modelo-Visão-Controlador
+
 **Tecnologias:** Spring MVC, Spring Data JPA, Spring Security & Thymeleaf (Lado Servidor), Javascript & CSS (Lado Cliente)
