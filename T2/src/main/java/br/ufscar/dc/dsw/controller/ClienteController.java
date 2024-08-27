@@ -44,9 +44,6 @@ public class ClienteController {
 		//	return "cliente/cadastro";
 		//}
 
-		cliente.setRole("ROLE_CLIENT");
-		cliente.setEnabled(true);
-
 		clienteService.salvar(cliente);
 		attr.addFlashAttribute("sucess", "cliente.create.sucess");
 		return "redirect:/clientes/listar";
