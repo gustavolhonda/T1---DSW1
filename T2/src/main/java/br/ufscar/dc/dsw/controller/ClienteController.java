@@ -62,7 +62,7 @@ public class ClienteController {
 		cliente.setRole("ROLE_CLIENT");
 		cliente.setEnabled(true);
 		clienteService.salvar(cliente);
-		attr.addFlashAttribute("success", "cliente.edit.suscess");
+		attr.addFlashAttribute("success", "cliente.edit.success");
 		return "redirect:/clientes/listar";
 	}
 
