@@ -37,7 +37,9 @@
                                 th:placeholder="#{usuario.username.label}"
                                 autofocus="autofocus"
                                 th:field="*{username}"
-                                th:classappend="${#fields.hasErrors('username')} ? is-invalid" />
+                                th:classappend="${#fields.hasErrors('username')} ? is-invalid"
+                                required
+                                autocomplete="off" />
 
                             <div class="invalid-feedback">
                                 <span th:errors="*{username}"></span>
@@ -53,7 +55,8 @@
                                 th:placeholder="#{usuario.password.label}"
                                 autofocus="autofocus"
                                 th:field="*{password}"
-                                th:classappend="${#fields.hasErrors('password')} ? is-invalid" />
+                                th:classappend="${#fields.hasErrors('password')} ? is-invalid"
+                                required />
 
                             <div class="invalid-feedback">
                                 <span th:errors="*{password}"></span>
@@ -82,7 +85,8 @@
                                 th:field="*{name}"
                                 th:placeholder="#{usuario.name.label}"
                                 autofocus="autofocus"
-                                th:classappend="${#fields.hasErrors('name')} ? is-invalid" />
+                                th:classappend="${#fields.hasErrors('name')} ? is-invalid"
+                                required />
 
                             <div class="invalid-feedback">
                                 <span th:errors="*{name}"></span>
@@ -100,7 +104,8 @@
                                 placeholder="___.___.___-__"
                                 th:classappend="${#fields.hasErrors('CPF')} ? is-invalid"
                                 data-mask="000.000.000-00"
-                                data-mask-reverse="true" />
+                                data-mask-reverse="true"
+                                required />
 
                             <div class="invalid-feedback">
                                 <span th:errors="*{CPF}"></span>
@@ -113,12 +118,13 @@
                                 type="tel"
                                 class="form-control"
                                 id="telefone"
-                                pattern="\([0-9]{2}\) [0-9]{5}-[0-9]{4}" 	
+                                pattern="\([0-9]{2}\) [0-9]{5}-[0-9]{4}"
                                 placeholder="(__) _____-____"
                                 data-mask="(00) 00000-0000"
                                 autofocus="autofocus"
                                 th:field="*{telefone}"
-                                th:classappend="${#fields.hasErrors('telefone')} ? is-invalid" />
+                                th:classappend="${#fields.hasErrors('telefone')} ? is-invalid"
+                                required />
 
                             <div class="invalid-feedback">
                                 <span th:errors="*{telefone}"></span>
@@ -131,7 +137,8 @@
                                 id="sexo"
                                 class="form-control"
                                 th:field="*{sexo}"
-                                th:classappend="${#fields.hasErrors('sexo')} ? is-invalid">
+                                th:classappend="${#fields.hasErrors('sexo')} ? is-invalid"
+                                required>
                                 <option value="M">M</option>
                                 <option value="F">F</option>
                             </select>
@@ -150,7 +157,8 @@
                                 th:placeholder="#{cliente.dataNasc.label}"
                                 autofocus="autofocus"
                                 th:field="*{dataNasc}"
-                                th:classappend="${#fields.hasErrors('dataNasc')} ? is-invalid" />
+                                th:classappend="${#fields.hasErrors('dataNasc')} ? is-invalid"
+                                required />
 
                             <div class="invalid-feedback">
                                 <span th:errors="*{dataNasc}"></span>
