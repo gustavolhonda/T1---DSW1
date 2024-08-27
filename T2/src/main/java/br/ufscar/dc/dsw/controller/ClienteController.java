@@ -1,6 +1,7 @@
 package br.ufscar.dc.dsw.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -20,6 +21,9 @@ public class ClienteController {
 
 	@Autowired
 	private IClienteService clienteService;
+
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 
 	@GetMapping("/cadastrar")
 	public String cadastrar(Cliente cliente) {
@@ -41,6 +45,7 @@ public class ClienteController {
 
 		cliente.setRole("ROLE_CLIENT");
 		cliente.setEnabled(true);
+		cliente.setPassword(encoder.encode(cliente.getPassword()));
 		clienteService.salvar(cliente);
 		attr.addFlashAttribute("success", "cliente.create.success");
 		return "redirect:/clientes/listar";
@@ -53,11 +58,17 @@ public class ClienteController {
 	}
 
 	@PostMapping("/editar")
-	public String editar(@Valid Cliente cliente, BindingResult result, RedirectAttributes attr) {
+	public String editar(@Valid Cliente cliente, String novoPassword, BindingResult result, RedirectAttributes attr) {
 
 		//if (result.hasErrors()) {
 		//	return "cliente/cadastro";
 		//}
+
+		if (novoPassword != null && !novoPassword.trim().isEmpty()) {
+			cliente.setPassword(encoder.encode(novoPassword));
+		} else {
+			System.out.println("Senha não foi editada");
+		}
 
 		cliente.setRole("ROLE_CLIENT");
 		cliente.setEnabled(true);

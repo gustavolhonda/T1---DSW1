@@ -3,6 +3,7 @@ package br.ufscar.dc.dsw.controller;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
@@ -31,6 +32,9 @@ public class ProfissionalController {
 	@Autowired
 	private IFileService fileService;
 	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+
 	@GetMapping("/cadastrar")
 	public String cadastrar(Profissional profissional) {
 		return "profissional/cadastro";
@@ -52,6 +56,7 @@ public class ProfissionalController {
 
 		profissional.setRole("ROLE_PROFISSIONAL");
 		profissional.setEnabled(true);
+		profissional.setPassword(encoder.encode(profissional.getPassword()));
 		service.salvar(profissional);
 		attr.addFlashAttribute("success", "profissionais.create.success");
 		return "redirect:/profissionais/listar";
@@ -64,11 +69,17 @@ public class ProfissionalController {
 	}
 	
 	@PostMapping("/editar")
-	public String editar(@Valid Profissional profissional, BindingResult result, RedirectAttributes attr) {
+	public String editar(@Valid Profissional profissional, String novoPassword, BindingResult result, RedirectAttributes attr) {
 		
 		//if (result.hasErrors()) {
 		//	return "profissional/cadastro";
 		//}
+
+		if (novoPassword != null && !novoPassword.trim().isEmpty()) {
+			profissional.setPassword(encoder.encode(novoPassword));
+		} else {
+			System.out.println("Senha não foi editada");
+		}
 		
 		profissional.setRole("ROLE_PROFISSIONAL");
 		profissional.setEnabled(true);
