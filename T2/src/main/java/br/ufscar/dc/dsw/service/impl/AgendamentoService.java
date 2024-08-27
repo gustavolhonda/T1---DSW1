@@ -28,4 +28,8 @@ public class AgendamentoService implements IAgendamentoService {
 	public Agendamento buscarPorId(Long id) {
 		return dao.findById(id.longValue());
 	}
+
+	public void excluir(Long id) {
+		dao.deleteById(id.longValue());
+	}
 }

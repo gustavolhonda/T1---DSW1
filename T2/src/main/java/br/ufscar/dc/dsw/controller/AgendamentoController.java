@@ -6,9 +6,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import jakarta.mail.internet.AddressException;
-import jakarta.mail.internet.InternetAddress;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,9 +29,8 @@ import br.ufscar.dc.dsw.service.impl.EmailService;
 import br.ufscar.dc.dsw.service.spec.IAgendamentoService;
 import br.ufscar.dc.dsw.service.spec.IClienteService;
 import br.ufscar.dc.dsw.service.spec.IProfissionalService;
-import java.util.List;
-
-import org.springframework.stereotype.Component;
+import jakarta.mail.internet.AddressException;
+import jakarta.mail.internet.InternetAddress;
 
 @Controller
 @RequestMapping("/agendamentos")
@@ -99,7 +95,7 @@ public class AgendamentoController {
         @ModelAttribute Agendamento agendamento,ModelMap model, BindingResult result, RedirectAttributes attr) throws UnsupportedEncodingException, AddressException {
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-    LocalDateTime dataHora = LocalDateTime.parse(dataHoraString, formatter);
+    	LocalDateTime dataHora = LocalDateTime.parse(dataHoraString, formatter);
 		
 		agendamento.setDataHora(dataHoraString.replace('T', ' '));
 
@@ -169,6 +165,14 @@ public class AgendamentoController {
     private Usuario getUsuario() {
 		UsuarioDetails usuarioDetails = (UsuarioDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		return usuarioDetails.getUsuario();
+	}
+
+	@GetMapping("/excluir/{id}")
+	public String excluir(@PathVariable("id") Long id, RedirectAttributes attr) {
+				
+		agendamentoService.excluir(id);
+		attr.addFlashAttribute("success", "agendamento.delete.success");
+		return "redirect:/agendamentos/listar";
 	}
 
 }

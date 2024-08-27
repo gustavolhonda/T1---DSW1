@@ -34,6 +34,7 @@
 							<th class="bg-warning" th:text="#{agendamento.listar.link}"></th>
 							<th class="bg-warning" th:text="#{agendamento.listar.cliente}"></th>
 							<th class="bg-warning" th:text="#{agendamento.listar.profissional}"></th>
+							<th class="bg-warning" th:text="#{acao.label}"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -43,6 +44,12 @@
 							<td th:text="${agendamento.linkVideoConferencia}"></td>
 							<td th:text="${agendamento.cliente.name}"></td>
 							<td th:text="${agendamento.profissional.name}"></td>
+							<td>
+								<button th:id="${#strings.concat('btn_agendamentos/excluir/', agendamento.id)}" 
+								type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">
+								<span class="oi oi-circle-x" th:title="#{link.excluir.label}" aria-hidden="true"></span>
+							</button>
+							</td>
 						</tr>
 					</tbody>
 				</table>

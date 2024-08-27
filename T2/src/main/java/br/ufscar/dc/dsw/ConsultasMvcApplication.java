@@ -135,6 +135,13 @@ public class ConsultasMvcApplication {
 			a2.setDataHora("10-05-2025 13:00");
 			a2.setLinkVideoConferencia("https://videoconferencia.example.com/307132");
 			agendamentoDAO.save(a2);
+
+			Agendamento a3 = new Agendamento();
+			a3.setCliente(u9);
+			a3.setProfissional(u3);
+			a3.setDataHora("10-05-2025 13:00");
+			a3.setLinkVideoConferencia("https://videoconferencia.example.com/307132");
+			agendamentoDAO.save(a3);
 		};
 	}
 }
