@@ -1,4 +1,4 @@
-### Trabalho 1: 
+## Trabalho 1: 
 
 **Sistema para agendamento de consultas online com profissionais**
 
@@ -6,7 +6,9 @@
 
 **Tecnologias:** Servlet, JSP, JSTL & JDBC (Lado Servidor), Javascript & CSS (Lado Cliente)
 
-### Trabalho 2: 
+---
+
+## Trabalho 2: 
 
 **Sistema para agendamento de consultas online com profissionais**
 
