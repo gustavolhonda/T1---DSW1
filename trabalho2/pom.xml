@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.ufscar.dc</groupId>
-	<artifactId>LivrariaMVC</artifactId>
+	<artifactId>Consultas</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Livraria MVC (v3)</name>
+	<name>Consultas T2</name>
 
 	<properties>
 		<java.version>17</java.version>

@@ -3,14 +3,21 @@ package br.ufscar.dc.dsw.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
+
+import br.ufscar.dc.dsw.domain.FileEntity;
 import br.ufscar.dc.dsw.domain.Profissional;
+import br.ufscar.dc.dsw.service.spec.IFileService;
 import br.ufscar.dc.dsw.service.spec.IProfissionalService;
 import jakarta.validation.Valid;
 
@@ -20,6 +27,9 @@ public class ProfissionalController {
 	
 	@Autowired
 	private IProfissionalService service;
+
+	@Autowired
+	private IFileService fileService;
 	
 	@GetMapping("/cadastrar")
 	public String cadastrar(Profissional profissional) {
@@ -65,6 +75,18 @@ public class ProfissionalController {
 		service.salvar(profissional);
 		attr.addFlashAttribute("sucess", "profissionais.edit.sucess");
 		return "redirect:/profissionais/listar";
+	}
+
+	@PostMapping("/uploadFile")
+	public String uploadFile(@RequestParam("file") MultipartFile file, RedirectAttributes attr) throws IOException {
+				
+		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+		FileEntity entity = new FileEntity(fileName, file.getContentType(), file.getBytes());
+		
+		fileService.salvar(entity);
+		
+		attr.addFlashAttribute("sucess", "File " + fileName + " has uploaded successfully!");
+		return "redirect:/";
 	}
 	
 	@GetMapping("/excluir/{id}")
