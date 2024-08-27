@@ -1,5 +1,7 @@
 package br.ufscar.dc.dsw.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.io.IOException;
 
 import br.ufscar.dc.dsw.domain.FileEntity;
 import br.ufscar.dc.dsw.domain.Profissional;
@@ -53,7 +53,7 @@ public class ProfissionalController {
 		profissional.setRole("ROLE_PROFISSIONAL");
 		profissional.setEnabled(true);
 		service.salvar(profissional);
-		attr.addFlashAttribute("sucess", "profissionais.create.sucess");
+		attr.addFlashAttribute("success", "profissionais.create.success");
 		return "redirect:/profissionais/listar";
 	}
 	
@@ -73,7 +73,7 @@ public class ProfissionalController {
 		profissional.setRole("ROLE_PROFISSIONAL");
 		profissional.setEnabled(true);
 		service.salvar(profissional);
-		attr.addFlashAttribute("sucess", "profissionais.edit.sucess");
+		attr.addFlashAttribute("success", "profissionais.edit.success");
 		return "redirect:/profissionais/listar";
 	}
 
@@ -85,14 +85,24 @@ public class ProfissionalController {
 		
 		fileService.salvar(entity);
 		
-		attr.addFlashAttribute("sucess", "File " + fileName + " has uploaded successfully!");
+		attr.addFlashAttribute("success", "File " + fileName + " has uploaded successfully!");
 		return "redirect:/";
 	}
-	
+
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, RedirectAttributes attr) {
+		Profissional profissional = service.buscarPorId(id);
+		
+		// Verifica se o cliente tem agendamentos
+		if (profissional.getAgendamentos() != null && !profissional.getAgendamentos().isEmpty()) {
+			// Adiciona uma mensagem de erro se houver agendamentos
+			attr.addFlashAttribute("fail", "profissionais.delete.fail");
+			return "redirect:/profissionais/listar";
+		}
+	
+		// Se não houver agendamentos, procede com a exclusão
 		service.excluir(id);
-		attr.addFlashAttribute("sucess", "profissionais.delete.sucess");
+		attr.addFlashAttribute("success", "profissionais.delete.success");
 		return "redirect:/profissionais/listar";
 	}
 }

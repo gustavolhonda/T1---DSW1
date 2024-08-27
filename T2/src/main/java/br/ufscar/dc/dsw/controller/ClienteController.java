@@ -1,15 +1,10 @@
 package br.ufscar.dc.dsw.controller;
 
-import java.util.List;
-
-import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.service.spec.IClienteService;
-import br.ufscar.dc.dsw.service.spec.IAgendamentoService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/clientes")
@@ -44,8 +39,10 @@ public class ClienteController {
 		//	return "cliente/cadastro";
 		//}
 
+		cliente.setRole("ROLE_CLIENT");
+		cliente.setEnabled(true);
 		clienteService.salvar(cliente);
-		attr.addFlashAttribute("sucess", "cliente.create.sucess");
+		attr.addFlashAttribute("success", "cliente.create.success");
 		return "redirect:/clientes/listar";
 	}
 
@@ -65,14 +62,25 @@ public class ClienteController {
 		cliente.setRole("ROLE_CLIENT");
 		cliente.setEnabled(true);
 		clienteService.salvar(cliente);
-		attr.addFlashAttribute("sucess", "cliente.edit.sucess");
+		attr.addFlashAttribute("success", "cliente.edit.suscess");
 		return "redirect:/clientes/listar";
 	}
 
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, RedirectAttributes attr) {
+		Cliente cliente = clienteService.buscarPorId(id);
+		
+		// Verifica se o cliente tem agendamentos
+		if (cliente.getAgendamentos() != null && !cliente.getAgendamentos().isEmpty()) {
+			// Adiciona uma mensagem de erro se houver agendamentos
+			attr.addFlashAttribute("fail", "cliente.delete.fail");
+			return "redirect:/clientes/listar";
+		}
+	
+		// Se não houver agendamentos, procede com a exclusão
 		clienteService.excluir(id);
-		attr.addFlashAttribute("sucess", "cliente.delete.sucess");
+		attr.addFlashAttribute("success", "cliente.delete.success");
 		return "redirect:/clientes/listar";
 	}
+	
 }
