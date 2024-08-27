@@ -25,7 +25,7 @@
 
 			<form
 				th:action="${profissional.id == null} ? @{/profissionais/salvar} : @{/profissionais/editar}"
-				th:object="${profissional}" method="POST">
+				th:object="${profissional}" method="POST" enctype="multipart/form-data">
 
 				<div class="form-row">
 					<div class="form-group col-md-6">
@@ -96,14 +96,13 @@
 					</div>
 				</div>
 
+				<input type="file" name="file" />
+
 				<input type="hidden" id="id" th:field="*{id}" />
 				<button type="submit" th:text="#{button.salvar.label}"
 					class="btn btn-primary btn-sm"></button>
 			</form>
 			<br	/>
-			<form method="POST" action="/uploadFile" enctype="multipart/form-data">
-				Anexe o currículo <input type="file" name="file" /><input 	type="submit" value="Upload" />
-			</form>
 		</div>
 	</section>
 </body>
