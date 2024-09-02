@@ -8,9 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.dc.dsw.dao.IAgendamentoDAO;
 import br.ufscar.dc.dsw.domain.Agendamento;
-import br.ufscar.dc.dsw.domain.Cliente;
-import br.ufscar.dc.dsw.domain.Profissional;
-import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.service.spec.IAgendamentoService;
 
 @Service
@@ -20,16 +17,25 @@ public class AgendamentoService implements IAgendamentoService {
 	@Autowired
 	IAgendamentoDAO dao;
 	
+    @Override
 	public void salvar(Agendamento agendamento) {
 		dao.save(agendamento);
 	}
 
 	@Transactional(readOnly = true)
+	@Override
 	public Agendamento buscarPorId(Long id) {
 		return dao.findById(id.longValue());
 	}
 
+    @Override
 	public void excluir(Long id) {
 		dao.deleteById(id.longValue());
+	}
+
+	@Transactional(readOnly = true)
+    @Override
+	public List<Agendamento> buscarTodos(){
+		return dao.findAll();
 	}
 }
