@@ -1,5 +1,6 @@
 package br.ufscar.dc.dsw.controller;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -31,6 +32,8 @@ import br.ufscar.dc.dsw.service.spec.IClienteService;
 import br.ufscar.dc.dsw.service.spec.IProfissionalService;
 import jakarta.mail.internet.AddressException;
 import jakarta.mail.internet.InternetAddress;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/agendamentos")
@@ -88,6 +91,27 @@ public class AgendamentoController {
 			model.addAttribute("agendamentos", profissional.getAgendamentos());
 		}
 		return "agendamento/lista";
+	}
+
+	@GetMapping(value = "/download/{id}")
+	public void download(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") Long id) {
+		Profissional entity = profissionalService.buscarPorId(id);
+
+		// set content type
+		response.setContentType("application/pdf");
+		
+		// add response header (caso queira forçar o download)
+		// response.addHeader("Content-Disposition", "attachment; filename=" + entity.getName());
+
+		try {
+			// copies all bytes to an output stream
+			response.getOutputStream().write(entity.getData());
+
+			// flushes output stream
+			response.getOutputStream().flush();
+		} catch (IOException e) {
+			System.out.println("Error :- " + e.getMessage());
+		}
 	}
 
     @PostMapping("/salvar")

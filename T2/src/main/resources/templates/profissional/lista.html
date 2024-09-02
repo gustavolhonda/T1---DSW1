@@ -33,7 +33,7 @@
 							<th th:text="#{profissional.nome.label}"></th>
 							<th th:text="#{profissional.especialidade.label}"></th>
 							<th th:text="#{profissional.CPF.label}"></th>
-							<th>PDF</th>
+							<th th:text="#{profissional.curriculum.label}"></th>
 							<th th:text="#{acao.label}"></th>
 						</tr>
 					</thead>
@@ -45,7 +45,7 @@
 							<td th:text="${profissional.CPF}"></td>
 							<td style="text-align: center">
 								<span th:if="${profissional.data}">
-									<a th:href="@{download/{id} (id=${profissional.id})}">PDF</a>
+									<a th:href="@{download/{id} (id=${profissional.id})}">Download</a>
 								</span>
 								<span th:unless="${profissional.data}">-</span>
 							</td>

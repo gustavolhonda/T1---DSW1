@@ -46,6 +46,7 @@ public class WebSecurityConfig {
 						.requestMatchers("/error", "/login/**","/listar/**", "/js/**").permitAll()
 						.requestMatchers("/css/**", "/image/**", "/webjars/**").permitAll()
 						.requestMatchers("agendamentos/cadastrar").permitAll()
+						.requestMatchers("agendamentos/download/**").permitAll()
 						.requestMatchers("/api/**").permitAll()
 						.requestMatchers( "/agendamentos/**").hasAnyRole("CLIENT", "PROFESSIONAL") 
 						.requestMatchers("/profissionais/**", "/clientes/**", "/usuarios/**").hasRole("ADMIN")
