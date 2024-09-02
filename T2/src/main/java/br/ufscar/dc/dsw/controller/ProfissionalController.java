@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.ufscar.dc.dsw.domain.FileEntity;
+
 import br.ufscar.dc.dsw.domain.Profissional;
-import br.ufscar.dc.dsw.service.spec.IFileService;
+
 import br.ufscar.dc.dsw.service.spec.IProfissionalService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
 @Controller
@@ -28,9 +30,6 @@ public class ProfissionalController {
 	
 	@Autowired
 	private IProfissionalService service;
-
-	@Autowired
-	private IFileService fileService;
 	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
@@ -47,12 +46,14 @@ public class ProfissionalController {
 	}
 	
 	@PostMapping("/salvar")
-	public String salvar(@Valid Profissional profissional, BindingResult result, RedirectAttributes attr) {
+	public String salvar(@Valid Profissional profissional, @RequestParam("file") MultipartFile file, BindingResult result, RedirectAttributes attr) throws IOException {
 		
 		//if (result.hasErrors()) {
 		//	return "profissional/cadastro";
 		//}
 		//System.out.println(profissional.getCPF());
+
+		profissional.setData(file.getBytes());
 
 		profissional.setRole("ROLE_PROFESSIONAL");
 		profissional.setEnabled(true);
@@ -60,6 +61,27 @@ public class ProfissionalController {
 		service.salvar(profissional);
 		attr.addFlashAttribute("success", "profissionais.create.success");
 		return "redirect:/profissionais/listar";
+	}
+
+	@GetMapping(value = "/download/{id}")
+	public void download(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") Long id) {
+		Profissional entity = service.buscarPorId(id);
+
+		// set content type
+		response.setContentType("application/pdf");
+		
+		// add response header (caso queira forçar o download)
+		// response.addHeader("Content-Disposition", "attachment; filename=" + entity.getName());
+
+		try {
+			// copies all bytes to an output stream
+			response.getOutputStream().write(entity.getData());
+
+			// flushes output stream
+			response.getOutputStream().flush();
+		} catch (IOException e) {
+			System.out.println("Error :- " + e.getMessage());
+		}
 	}
 	
 	@GetMapping("/editar/{id}")
@@ -86,18 +108,6 @@ public class ProfissionalController {
 		service.salvar(profissional);
 		attr.addFlashAttribute("success", "profissionais.edit.success");
 		return "redirect:/profissionais/listar";
-	}
-
-	@PostMapping("/uploadFile")
-	public String uploadFile(@RequestParam("file") MultipartFile file, RedirectAttributes attr) throws IOException {
-				
-		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-		FileEntity entity = new FileEntity(fileName, file.getContentType(), file.getBytes());
-		
-		fileService.salvar(entity);
-		
-		attr.addFlashAttribute("success", "File " + fileName + " has uploaded successfully!");
-		return "redirect:/";
 	}
 
 	@GetMapping("/excluir/{id}")

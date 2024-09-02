@@ -2,10 +2,13 @@ package br.ufscar.dc.dsw.domain;
 
 import java.util.List;
 
+import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -28,6 +31,11 @@ public class Profissional extends Usuario {
 	@OneToMany(mappedBy = "profissional")
 	private List<Agendamento> agendamentos;
 
+	@Lob
+	@Basic
+	@Column(length=10485760) // 10MB
+	private byte[] data;
+
 	public String getEspecialidade() {
 			return especialidade;
 	}
@@ -46,5 +54,13 @@ public class Profissional extends Usuario {
 
 	public List<Agendamento> getAgendamentos() {
 			return agendamentos;
+	}
+
+	public void setData(byte[] data) {
+			this.data = data;
+	}
+
+	public byte[] getData() {
+		return data;
 	}
 }

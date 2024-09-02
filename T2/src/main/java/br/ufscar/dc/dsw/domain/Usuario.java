@@ -29,7 +29,6 @@ public class Usuario extends AbstractEntity<Long> {
     @Column(nullable = false, length = 14, unique = true)
     private String CPF;
     
-    @NotBlank
     @Column(nullable = false, length = 20)
     private String role;
     
