@@ -32,4 +32,9 @@ public class AgendamentoService implements IAgendamentoService {
 	public void excluir(Long id) {
 		dao.deleteById(id.longValue());
 	}
+
+	@Transactional(readOnly = true)
+	public List<Agendamento> buscarTodos(){
+		return dao.findAll();
+	}
 }

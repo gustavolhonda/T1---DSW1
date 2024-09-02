@@ -13,4 +13,6 @@ public interface IAgendamentoDAO extends CrudRepository<Agendamento, Long>{
 
 	Agendamento deleteById(long id);
 
+	List<Agendamento> findAll();
+
 }
