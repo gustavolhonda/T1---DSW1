@@ -6,6 +6,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -51,6 +52,7 @@ public class WebSecurityConfig {
 						.requestMatchers( "/agendamentos/**").hasAnyRole("CLIENT", "PROFESSIONAL") 
 						.requestMatchers("/profissionais/**", "/clientes/**", "/usuarios/**").hasRole("ADMIN")
 						.anyRequest().authenticated())
+				.csrf(AbstractHttpConfigurer::disable)
 				.formLogin((form) -> form
 						.loginPage("/login")
 						.permitAll())

@@ -17,7 +17,7 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Table(name = "Cliente")
 @PrimaryKeyJoinColumn(name = "id_cliente") 
-@JsonIgnoreProperties(value = { "agendamentos", "password" })
+@JsonIgnoreProperties(value = { "agendamentos"})
 public class Cliente extends Usuario {
 
 	@NotBlank(message = "{NotBlank.cliente.telefone}")

@@ -18,7 +18,7 @@ import jakarta.validation.constraints.NotBlank;
 @Entity
 @Table(name = "Profissional")
 @PrimaryKeyJoinColumn(name = "id_profissional") 
-@JsonIgnoreProperties(value = { "agendamentos", "data", "password"})
+@JsonIgnoreProperties(value = { "agendamentos", "data"})
 public class Profissional extends Usuario {
 	
 	@NotBlank(message = "{NotBlank.profissional.especialidade}")
