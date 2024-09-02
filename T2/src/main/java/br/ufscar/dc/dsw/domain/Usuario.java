@@ -13,11 +13,11 @@ import jakarta.validation.constraints.NotBlank;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario extends AbstractEntity<Long> {
   
-		@NotBlank
+	@NotBlank
     @Column(nullable = false, length = 50, unique = true)
     private String username;
     
-		@NotBlank
+	@NotBlank
     @Column(nullable = false, length = 64)
     private String password;
        

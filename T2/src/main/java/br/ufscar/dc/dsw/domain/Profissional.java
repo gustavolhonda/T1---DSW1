@@ -2,12 +2,13 @@ package br.ufscar.dc.dsw.domain;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -17,6 +18,7 @@ import jakarta.validation.constraints.NotBlank;
 @Entity
 @Table(name = "Profissional")
 @PrimaryKeyJoinColumn(name = "id_profissional") 
+@JsonIgnoreProperties(value = { "agendamentos", "data", "password"})
 public class Profissional extends Usuario {
 	
 	@NotBlank(message = "{NotBlank.profissional.especialidade}")

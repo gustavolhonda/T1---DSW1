@@ -2,6 +2,8 @@ package br.ufscar.dc.dsw.domain;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -15,6 +17,7 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Table(name = "Cliente")
 @PrimaryKeyJoinColumn(name = "id_cliente") 
+@JsonIgnoreProperties(value = { "agendamentos", "password" })
 public class Cliente extends Usuario {
 
 	@NotBlank(message = "{NotBlank.cliente.telefone}")

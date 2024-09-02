@@ -28,7 +28,7 @@ public class AgendamentoRestController {
     @Autowired
     private IProfissionalService profissionalService;
 	
-	@GetMapping(path = "/api/consultas/")
+	@GetMapping(path = "/api/consultas")
 	public ResponseEntity<List<Agendamento>> lista() {
 		List<Agendamento> lista = service.buscarTodos();
 		if (lista.isEmpty()) {
