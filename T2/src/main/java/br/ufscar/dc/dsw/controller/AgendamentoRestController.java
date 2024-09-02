@@ -40,7 +40,7 @@ public class AgendamentoRestController {
     @GetMapping(path = "/api/consultas/{id}")
 	public ResponseEntity<Agendamento> listaPorId(@PathVariable("id") long id) {
 		Agendamento agendamento = service.buscarPorId(id);
-		if (agendamento.isEmpty()) {
+		if (agendamento == null) {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(agendamento);
