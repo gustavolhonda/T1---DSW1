@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.ufscar.dc.dsw.domain.Agendamento;
 import br.ufscar.dc.dsw.domain.Cliente;
-import br.ufscar.dc.dsw.domain.Clientes;
 import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.service.spec.IAgendamentoService;
 import br.ufscar.dc.dsw.service.spec.IClienteService;
@@ -47,7 +46,16 @@ public class AgendamentoRestController {
 		return ResponseEntity.ok(agendamento);
 	}
 
-    @GetMapping(path = "/api/consultas/profissional/{id}")
+    @GetMapping(path = "/api/consultas/clientes/{id}")
+	public ResponseEntity<List<Agendamento>> listaClientesPorId(@PathVariable("id") long id) {
+		Cliente cliente = clienteService.buscarPorId(id);
+		if (cliente.getAgendamentos().isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(cliente.getAgendamentos());
+	}
+
+    @GetMapping(path = "/api/consultas/profissionais/{id}")
 	public ResponseEntity<List<Agendamento>> listaProfissionaisPorId(@PathVariable("id") long id) {
 		Profissional profissional = profissionalService.buscarPorId(id);
 		if (profissional.getAgendamentos().isEmpty()) {
