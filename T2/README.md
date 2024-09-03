@@ -68,8 +68,8 @@
 #### O sistema deve ser internacionalizado em pelo menos dois idiomas: português + outro de sua escolha.
 
 - **Status:**
-  - [ ] Implementado
-  - [x] Parcialmente implementado
+  - [X] Implementado
+  - [ ] Parcialmente implementado
   - [ ] Não implementado
 
 ### Requisito R9
@@ -77,6 +77,6 @@
 #### O sistema deve validar (tamanho, formato, etc) todas as informações (campos nos formulários) cadastradas e/ou editadas.
 
 - **Status:**
-  - [ ] Implementado
-  - [x] Parcialmente implementado
+  - [X] Implementado
+  - [ ] Parcialmente implementado
   - [ ] Não implementado
